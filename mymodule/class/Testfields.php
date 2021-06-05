@@ -42,34 +42,34 @@ class Testfields extends \XoopsObject
 	 */
 	public function __construct()
 	{
-		$this->initVar('tf_id', XOBJ_DTYPE_INT);
-		$this->initVar('tf_text', XOBJ_DTYPE_TXTBOX);
-		$this->initVar('tf_textarea', XOBJ_DTYPE_TXTAREA);
-		$this->initVar('tf_dhtml', XOBJ_DTYPE_OTHER);
-		$this->initVar('tf_checkbox', XOBJ_DTYPE_INT);
-		$this->initVar('tf_yesno', XOBJ_DTYPE_INT);
-		$this->initVar('tf_selectbox', XOBJ_DTYPE_INT);
-		$this->initVar('tf_user', XOBJ_DTYPE_INT);
-		$this->initVar('tf_color', XOBJ_DTYPE_TXTBOX);
-		$this->initVar('tf_imagelist', XOBJ_DTYPE_TXTBOX);
-		$this->initVar('tf_urlfile', XOBJ_DTYPE_TXTBOX);
-		$this->initVar('tf_uplimage', XOBJ_DTYPE_TXTBOX);
-		$this->initVar('tf_uplfile', XOBJ_DTYPE_TXTBOX);
-		$this->initVar('tf_textdateselect', XOBJ_DTYPE_INT);
-		$this->initVar('tf_selectfile', XOBJ_DTYPE_TXTBOX);
-		$this->initVar('tf_password', XOBJ_DTYPE_TXTBOX);
-		$this->initVar('tf_country_list', XOBJ_DTYPE_TXTBOX);
-		$this->initVar('tf_language', XOBJ_DTYPE_TXTBOX);
-		$this->initVar('tf_radio', XOBJ_DTYPE_INT);
-		$this->initVar('tf_status', XOBJ_DTYPE_INT);
-		$this->initVar('tf_datetime', XOBJ_DTYPE_INT);
-		$this->initVar('tf_combobox', XOBJ_DTYPE_INT);
-		$this->initVar('tf_comments', XOBJ_DTYPE_INT);
-		$this->initVar('tf_ratings', XOBJ_DTYPE_DECIMAL);
-		$this->initVar('tf_votes', XOBJ_DTYPE_INT);
-		$this->initVar('tf_uuid', XOBJ_DTYPE_TXTBOX);
-		$this->initVar('tf_ip', XOBJ_DTYPE_TXTBOX);
-		$this->initVar('tf_reads', XOBJ_DTYPE_INT);
+		$this->initVar('tf_id', \XOBJ_DTYPE_INT);
+		$this->initVar('tf_text', \XOBJ_DTYPE_TXTBOX);
+		$this->initVar('tf_textarea', \XOBJ_DTYPE_TXTAREA);
+		$this->initVar('tf_dhtml', \XOBJ_DTYPE_OTHER);
+		$this->initVar('tf_checkbox', \XOBJ_DTYPE_INT);
+		$this->initVar('tf_yesno', \XOBJ_DTYPE_INT);
+		$this->initVar('tf_selectbox', \XOBJ_DTYPE_INT);
+		$this->initVar('tf_user', \XOBJ_DTYPE_INT);
+		$this->initVar('tf_color', \XOBJ_DTYPE_TXTBOX);
+		$this->initVar('tf_imagelist', \XOBJ_DTYPE_TXTBOX);
+		$this->initVar('tf_urlfile', \XOBJ_DTYPE_TXTBOX);
+		$this->initVar('tf_uplimage', \XOBJ_DTYPE_TXTBOX);
+		$this->initVar('tf_uplfile', \XOBJ_DTYPE_TXTBOX);
+		$this->initVar('tf_textdateselect', \XOBJ_DTYPE_INT);
+		$this->initVar('tf_selectfile', \XOBJ_DTYPE_TXTBOX);
+		$this->initVar('tf_password', \XOBJ_DTYPE_TXTBOX);
+		$this->initVar('tf_country_list', \XOBJ_DTYPE_TXTBOX);
+		$this->initVar('tf_language', \XOBJ_DTYPE_TXTBOX);
+		$this->initVar('tf_radio', \XOBJ_DTYPE_INT);
+		$this->initVar('tf_status', \XOBJ_DTYPE_INT);
+		$this->initVar('tf_datetime', \XOBJ_DTYPE_INT);
+		$this->initVar('tf_combobox', \XOBJ_DTYPE_INT);
+		$this->initVar('tf_comments', \XOBJ_DTYPE_INT);
+		$this->initVar('tf_ratings', \XOBJ_DTYPE_DECIMAL);
+		$this->initVar('tf_votes', \XOBJ_DTYPE_INT);
+		$this->initVar('tf_uuid', \XOBJ_DTYPE_TXTBOX);
+		$this->initVar('tf_ip', \XOBJ_DTYPE_TXTBOX);
+		$this->initVar('tf_reads', \XOBJ_DTYPE_INT);
 	}
 
 	/**
@@ -224,7 +224,7 @@ class Testfields extends \XoopsObject
 			$form->addElement(new \XoopsFormHidden('tf_uplfile', $tfUplfile));
 		}
 		// Form Text Date Select tfTextdateselect
-		$tfTextdateselect = $this->isNew() ? time() : $this->getVar('tf_textdateselect');
+		$tfTextdateselect = $this->isNew() ? \time() : $this->getVar('tf_textdateselect');
 		$form->addElement(new \XoopsFormTextDateSelect(_AM_MYMODULE_TESTFIELD_TEXTDATESELECT, 'tf_textdateselect', '', $tfTextdateselect));
 		// Form File tfSelectfile
 		// Form File tfSelectfile: Select Uploaded File 
@@ -281,7 +281,7 @@ class Testfields extends \XoopsObject
 		$tfStatusSelect->addOption(Constants::STATUS_BROKEN, _AM_MYMODULE_STATUS_BROKEN);
 		$form->addElement($tfStatusSelect, true);
 		// Form Text Date Select tfDatetime
-		$tfDatetime = $this->isNew() ? time() : $this->getVar('tf_datetime');
+		$tfDatetime = $this->isNew() ? \time() : $this->getVar('tf_datetime');
 		$form->addElement(new \XoopsFormDateTime(_AM_MYMODULE_TESTFIELD_DATETIME, 'tf_datetime', '', $tfDatetime));
 		// Testfields Handler
 		$testfieldsHandler = $helper->getHandler('Testfields');

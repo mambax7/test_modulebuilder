@@ -85,7 +85,7 @@ class RatingsHandler extends \XoopsPersistableObjectHandler
         $ItemRating['nb_ratings'] = 0;
         $uid                      = \is_object($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser']->getVar('uid') : 0;
         $voted                    = false;
-        $ip                       = getenv('REMOTE_ADDR');
+        $ip                       = \getenv('REMOTE_ADDR');
         $current_rating           = 0;
 
         if (Constants::RATING_5STARS === (int)$helper->getConfig('ratingbars')
@@ -118,7 +118,7 @@ class RatingsHandler extends \XoopsPersistableObjectHandler
 
             $ItemRating['avg_rate_value'] = 0;
             if ($count > 0) {
-                $ItemRating['avg_rate_value'] = number_format($current_rating / $count, 2);
+                $ItemRating['avg_rate_value'] = \number_format($current_rating / $count, 2);
             }
             if (1 == $count) {
                 $text      = \str_replace('%c', $ItemRating['avg_rate_value'], _MA_MYMODULE_RATING_CURRENT_1);

@@ -42,17 +42,17 @@ class Articles extends \XoopsObject
 	 */
 	public function __construct()
 	{
-		$this->initVar('art_id', XOBJ_DTYPE_INT);
-		$this->initVar('art_cat', XOBJ_DTYPE_INT);
-		$this->initVar('art_title', XOBJ_DTYPE_TXTBOX);
-		$this->initVar('art_descr', XOBJ_DTYPE_OTHER);
-		$this->initVar('art_img', XOBJ_DTYPE_TXTBOX);
-		$this->initVar('art_online', XOBJ_DTYPE_INT);
-		$this->initVar('art_file', XOBJ_DTYPE_TXTBOX);
-		$this->initVar('art_ratings', XOBJ_DTYPE_DECIMAL);
-		$this->initVar('art_votes', XOBJ_DTYPE_INT);
-		$this->initVar('art_created', XOBJ_DTYPE_INT);
-		$this->initVar('art_submitter', XOBJ_DTYPE_INT);
+		$this->initVar('art_id', \XOBJ_DTYPE_INT);
+		$this->initVar('art_cat', \XOBJ_DTYPE_INT);
+		$this->initVar('art_title', \XOBJ_DTYPE_TXTBOX);
+		$this->initVar('art_descr', \XOBJ_DTYPE_OTHER);
+		$this->initVar('art_img', \XOBJ_DTYPE_TXTBOX);
+		$this->initVar('art_online', \XOBJ_DTYPE_INT);
+		$this->initVar('art_file', \XOBJ_DTYPE_TXTBOX);
+		$this->initVar('art_ratings', \XOBJ_DTYPE_DECIMAL);
+		$this->initVar('art_votes', \XOBJ_DTYPE_INT);
+		$this->initVar('art_created', \XOBJ_DTYPE_INT);
+		$this->initVar('art_submitter', \XOBJ_DTYPE_INT);
 	}
 
 	/**
@@ -175,7 +175,7 @@ class Articles extends \XoopsObject
 		$artVotes = $this->isNew() ? '0' : $this->getVar('art_votes');
 		$form->addElement(new \XoopsFormText(_AM_MYMODULE_ARTICLE_VOTES, 'art_votes', 20, 150, $artVotes));
 		// Form Text Date Select artCreated
-		$artCreated = $this->isNew() ? time() : $this->getVar('art_created');
+		$artCreated = $this->isNew() ? \time() : $this->getVar('art_created');
 		$form->addElement(new \XoopsFormTextDateSelect(_AM_MYMODULE_ARTICLE_CREATED, 'art_created', '', $artCreated));
 		// Form Select User artSubmitter
 		$artSubmitter = $this->isNew() ? $GLOBALS['xoopsUser']->uid() : $this->getVar('art_submitter');
