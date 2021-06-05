@@ -22,7 +22,7 @@ declare(strict_types=1);
  * @min_xoops      2.5.9
  * @author         TDM XOOPS - Email:<info@email.com> - Website:<http://xoops.org>
  */
-include \dirname(\dirname(__DIR__)) . '/mainfile.php';
+include dirname(__DIR__, 2) . '/mainfile.php';
 require __DIR__ . '/include/common.php';
 $moduleDirName = \basename(__DIR__);
 // Breadcrumbs
