@@ -112,7 +112,7 @@ switch ($op) {
 		} else {
 			$testfieldsObj->setVar('tf_imagelist', Request::getString('tf_imagelist'));
 		}
-		$testfieldsObj->setVar('tf_urlfile', formatUrl($_REQUEST['tf_urlfile']));
+		$testfieldsObj->setVar('tf_urlfile', formatURL($_REQUEST['tf_urlfile']));
 		// Set Var tf_urlfile
 		require_once XOOPS_ROOT_PATH . '/class/uploader.php';
 		$filename       = $_FILES['tf_urlfile']['name'];
