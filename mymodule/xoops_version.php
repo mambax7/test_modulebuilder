@@ -20,7 +20,7 @@ declare(strict_types=1);
  * @package        mymodule
  * @since          1.0
  * @min_xoops      2.5.9
- * @author         TDM XOOPS - Email:<info@email.com> - Website:<http://xoops.org>
+ * @author         TDM XOOPS - Email:<info@email.com> - Website:<https://xoops.org>
  */
 
 // 
@@ -33,7 +33,7 @@ $modversion = [
 	'description'         => _MI_MYMODULE_DESC,
 	'author'              => 'TDM XOOPS',
 	'author_mail'         => 'info@email.com',
-	'author_website_url'  => 'http://xoops.org',
+	'author_website_url'  => 'https://xoops.org',
 	'author_website_name' => 'XOOPS Project',
 	'credits'             => 'XOOPS Development Team',
 	'license'             => 'GPL 2.0 or later',

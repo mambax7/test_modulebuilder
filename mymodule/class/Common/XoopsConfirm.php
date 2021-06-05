@@ -20,7 +20,7 @@ namespace XoopsModules\Mymodule\Common;
  * @package        Mymodule
  * @since          1.0
  * @min_xoops      2.5.9
- * @author         Goffy - Email:<goffy@myxoops.org> - Website:<http://xoops.org>
+ * @author         Goffy - Email:<goffy@myxoops.org> - Website:<https://xoops.org>
  */
 
 use XoopsModules\Mymodule;
