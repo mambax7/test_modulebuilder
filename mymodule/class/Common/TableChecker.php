@@ -138,11 +138,11 @@ class TableChecker extends \XoopsObject
                             $needle2 = 'primary key';
                             $needle3 = 'unique key';
                             $needle4 = 'key';
-                            if ($needle2 == \mb_strtolower(\substr(\trim($line), 0, \strlen($needle2)))) {
+                            if (0 === \stripos(\trim($line), $needle2)) {
                                 $tabledefs[$countTable][$needle2] = $line;
-                            } elseif ($needle3 == \mb_strtolower(\substr(\trim($line), 0, \strlen($needle3)))) {
+                            } elseif (0 === \stripos(\trim($line), $needle3)) {
                                 $tabledefs[$countTable][$needle3] = $line;
-                            } elseif ($needle4 == \mb_strtolower(\substr(\trim($line), 0, \strlen($needle4)))) {
+                            } elseif (0 === \stripos(\trim($line), $needle4)) {
                                 $tabledefs[$countTable][$needle4] = $line;
                             } else {
                                 if (\strpos($line, '`') > 0) {
