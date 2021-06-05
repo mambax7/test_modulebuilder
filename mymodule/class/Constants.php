@@ -32,9 +32,9 @@ namespace XoopsModules\Mymodule;
 interface Constants
 {
 	// Constants for tables
-	const TABLE_CATEGORIES = 0;
-	const TABLE_ARTICLES = 1;
-	const TABLE_TESTFIELDS = 2;
+    public const TABLE_CATEGORIES = 0;
+    public const TABLE_ARTICLES = 1;
+    public const TABLE_TESTFIELDS = 2;
 
 	// Constants for status
 	public const STATUS_NONE      = 0;
