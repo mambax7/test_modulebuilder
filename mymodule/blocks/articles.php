@@ -93,7 +93,7 @@ function b_mymodule_articles_show($options)
 		foreach (\array_keys($articlesAll) as $i) {
 			$block[$i]['id'] = $articlesAll[$i]->getVar('art_id');
 			$block[$i]['cat'] = $articlesAll[$i]->getVar('art_cat');
-			$block[$i]['title'] = htmlspecialchars($articlesAll[$i]->getVar('art_title'));
+			$block[$i]['title'] = htmlspecialchars($articlesAll[$i]->getVar('art_title'), ENT_QUOTES | ENT_HTML5);
 			$block[$i]['descr'] = \strip_tags($articlesAll[$i]->getVar('art_descr'));
 			$block[$i]['img'] = $articlesAll[$i]->getVar('art_img');
 			$block[$i]['file'] = $articlesAll[$i]->getVar('art_file');

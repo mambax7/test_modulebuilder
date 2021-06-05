@@ -92,7 +92,7 @@ function b_mymodule_testfields_show($options)
 	if (\count($testfieldsAll) > 0) {
 		foreach (\array_keys($testfieldsAll) as $i) {
 			$block[$i]['id'] = $testfieldsAll[$i]->getVar('tf_id');
-			$block[$i]['text'] = htmlspecialchars($testfieldsAll[$i]->getVar('tf_text'));
+			$block[$i]['text'] = htmlspecialchars($testfieldsAll[$i]->getVar('tf_text'), ENT_QUOTES | ENT_HTML5);
 		}
 	}
 
