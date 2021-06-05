@@ -56,7 +56,7 @@ switch ($op) {
 		$formTitle = _AM_MYMODULE_PERMISSIONS_GLOBAL;
 		$permName = 'mymodule_ac';
 		$permDesc = _AM_MYMODULE_PERMISSIONS_GLOBAL_DESC;
-		$globalPerms = array( '4' => _AM_MYMODULE_PERMISSIONS_GLOBAL_4, '8' => _AM_MYMODULE_PERMISSIONS_GLOBAL_8, '16' => _AM_MYMODULE_PERMISSIONS_GLOBAL_16 );
+		$globalPerms = ['4' => _AM_MYMODULE_PERMISSIONS_GLOBAL_4, '8' => _AM_MYMODULE_PERMISSIONS_GLOBAL_8, '16' => _AM_MYMODULE_PERMISSIONS_GLOBAL_16];
 		break;
 	case 'approve_articles':
 		$formTitle = _AM_MYMODULE_PERMISSIONS_APPROVE;

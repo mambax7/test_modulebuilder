@@ -93,11 +93,13 @@ if (!$tpl->is_cached('db:mymodule_rss.tpl', $cid)) {
         } else {
             $description_short = \substr($description,0,\strpos($description,'[pagebreak]'));
         }
-        $tpl->append('items', array('title' => htmlspecialchars($testfieldsArr[$i]->getVar('tf_reads'), ENT_QUOTES),
-                                    'link' => XOOPS_URL . '/modules/mymodule/single.php?cid=' . $testfieldsArr[$i]->getVar('cid') . '&amp;tf_id=' . $testfieldsArr[$i]->getVar('tf_id'),
-                                    'guid' => XOOPS_URL . '/modules/mymodule/single.php?cid=' . $testfieldsArr[$i]->getVar('cid') . '&amp;tf_id=' . $testfieldsArr[$i]->getVar('tf_id'),
-                                    'pubdate' => \formatTimestamp($testfieldsArr[$i]->getVar('date'), 'rss'),
-                                    'description' => htmlspecialchars($description_short, ENT_QUOTES)));
+        $tpl->append('items', [
+            'title'       => htmlspecialchars($testfieldsArr[$i]->getVar('tf_reads'), ENT_QUOTES),
+            'link'        => XOOPS_URL . '/modules/mymodule/single.php?cid=' . $testfieldsArr[$i]->getVar('cid') . '&amp;tf_id=' . $testfieldsArr[$i]->getVar('tf_id'),
+            'guid'        => XOOPS_URL . '/modules/mymodule/single.php?cid=' . $testfieldsArr[$i]->getVar('cid') . '&amp;tf_id=' . $testfieldsArr[$i]->getVar('tf_id'),
+            'pubdate'     => \formatTimestamp($testfieldsArr[$i]->getVar('date'), 'rss'),
+            'description' => htmlspecialchars($description_short, ENT_QUOTES)
+        ]);
     }
 }
 header('Content-Type:text/xml; charset=' . _CHARSET);
