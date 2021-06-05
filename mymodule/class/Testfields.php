@@ -165,7 +165,7 @@ class Testfields extends \XoopsObject
 		$imageSelect = new \XoopsFormSelect(\sprintf(_AM_MYMODULE_TESTFIELD_IMAGELIST_UPLOADS, ".{$imageDirectory}/"), 'tf_imagelist', $tfImagelist, 5);
 		$imageArray = \XoopsLists::getImgListAsArray( XOOPS_ROOT_PATH . $imageDirectory );
 		foreach ($imageArray as $image1) {
-			$imageSelect->addOption((string)($image1), $image1);
+			$imageSelect->addOption(($image1), $image1);
 		}
 		$imageSelect->setExtra("onchange='showImgSelected(\"imglabel_tf_imagelist\", \"tf_imagelist\", \"" . $imageDirectory . '", "", "' . XOOPS_URL . "\")'");
 		$imageTray->addElement($imageSelect, false);
@@ -192,7 +192,7 @@ class Testfields extends \XoopsObject
 		$imageSelect = new \XoopsFormSelect(\sprintf(_AM_MYMODULE_TESTFIELD_UPLIMAGE_UPLOADS, ".{$imageDirectory}/"), 'tf_uplimage', $tfUplimage, 5);
 		$imageArray = \XoopsLists::getImgListAsArray( XOOPS_ROOT_PATH . $imageDirectory );
 		foreach ($imageArray as $image1) {
-			$imageSelect->addOption((string)($image1), $image1);
+			$imageSelect->addOption(($image1), $image1);
 		}
 		$imageSelect->setExtra("onchange='showImgSelected(\"imglabel_tf_uplimage\", \"tf_uplimage\", \"" . $imageDirectory . '", "", "' . XOOPS_URL . "\")'");
 		$imageTray->addElement($imageSelect, false);
@@ -235,7 +235,7 @@ class Testfields extends \XoopsObject
 		$fileSelect = new \XoopsFormSelect(\sprintf(_AM_MYMODULE_TESTFIELD_SELECTFILE_UPLOADS, ".{$fileDirectory}/"), 'tf_selectfile', $tfSelectfile, 5);
 		$fileArray = \XoopsLists::getImgListAsArray( XOOPS_ROOT_PATH . $fileDirectory );
 		foreach ($fileArray as $file1) {
-			$fileSelect->addOption((string)($file1), $file1);
+			$fileSelect->addOption(($file1), $file1);
 		}
 		$fileTray->addElement($fileSelect, false);
 		// Form File tfSelectfile: Upload new file

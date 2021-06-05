@@ -126,7 +126,7 @@ class Articles extends \XoopsObject
 		$imageSelect = new \XoopsFormSelect(\sprintf(_AM_MYMODULE_ARTICLE_IMG_UPLOADS, ".{$imageDirectory}/"), 'art_img', $artImg, 5);
 		$imageArray = \XoopsLists::getImgListAsArray( XOOPS_ROOT_PATH . $imageDirectory );
 		foreach ($imageArray as $image1) {
-			$imageSelect->addOption((string)($image1), $image1);
+			$imageSelect->addOption(($image1), $image1);
 		}
 		$imageSelect->setExtra("onchange='showImgSelected(\"imglabel_art_img\", \"art_img\", \"" . $imageDirectory . '", "", "' . XOOPS_URL . "\")'");
 		$imageTray->addElement($imageSelect, false);
