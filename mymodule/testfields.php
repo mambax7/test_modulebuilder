@@ -141,11 +141,11 @@ switch ($op) {
 		if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
 			//$uploader->setPrefix(tf_imagelist_);
 			//$uploader->fetchMedia($_POST['xoops_upload_file'][0]);
-			if (!$uploader->upload()) {
+			if ($uploader->upload()) {
+				$testfieldsObj->setVar('tf_imagelist', $uploader->getSavedFileName());
+			} else {
 				$errors = $uploader->getErrors();
 				\redirect_header('javascript:history.go(-1).php', 3, $errors);
-			} else {
-				$testfieldsObj->setVar('tf_imagelist', $uploader->getSavedFileName());
 			}
 		} else {
 			$testfieldsObj->setVar('tf_imagelist', Request::getString('tf_imagelist'));
@@ -163,10 +163,10 @@ switch ($op) {
 			$imgName = \str_replace(' ', '', $imgNameDef) . '.' . $extension;
 			$uploader->setPrefix($imgName);
 			$uploader->fetchMedia($_POST['xoops_upload_file'][1]);
-			if (!$uploader->upload()) {
-				$errors = $uploader->getErrors();
-			} else {
+			if ($uploader->upload()) {
 				$testfieldsObj->setVar('tf_urlfile', $uploader->getSavedFileName());
+			} else {
+				$errors = $uploader->getErrors();
 			}
 		} else {
 			if ($filename > '') {
@@ -188,9 +188,7 @@ switch ($op) {
 			$imgName = \str_replace(' ', '', $imgNameDef) . '.' . $extension;
 			$uploader->setPrefix($imgName);
 			$uploader->fetchMedia($_POST['xoops_upload_file'][2]);
-			if (!$uploader->upload()) {
-				$uploaderErrors = $uploader->getErrors();
-			} else {
+			if ($uploader->upload()) {
 				$savedFilename = $uploader->getSavedFileName();
 				$maxwidth  = (int)$helper->getConfig('maxwidth_image');
 				$maxheight = (int)$helper->getConfig('maxheight_image');
@@ -205,6 +203,8 @@ switch ($op) {
 					$result                    = $imgHandler->resizeImage();
 				}
 				$testfieldsObj->setVar('tf_uplimage', $savedFilename);
+			} else {
+				$uploaderErrors = $uploader->getErrors();
 			}
 		} else {
 			if ($filename > '') {
@@ -224,10 +224,10 @@ switch ($op) {
 			$imgName = \str_replace(' ', '', $imgNameDef) . '.' . $extension;
 			$uploader->setPrefix($imgName);
 			$uploader->fetchMedia($_POST['xoops_upload_file'][3]);
-			if (!$uploader->upload()) {
-				$errors = $uploader->getErrors();
-			} else {
+			if ($uploader->upload()) {
 				$testfieldsObj->setVar('tf_uplfile', $uploader->getSavedFileName());
+			} else {
+				$errors = $uploader->getErrors();
 			}
 		} else {
 			if ($filename > '') {
@@ -249,10 +249,10 @@ switch ($op) {
 			$imgName = \str_replace(' ', '', $imgNameDef) . '.' . $extension;
 			$uploader->setPrefix($imgName);
 			$uploader->fetchMedia($_POST['xoops_upload_file'][4]);
-			if (!$uploader->upload()) {
-				$errors = $uploader->getErrors();
-			} else {
+			if ($uploader->upload()) {
 				$testfieldsObj->setVar('tf_selectfile', $uploader->getSavedFileName());
+			} else {
+				$errors = $uploader->getErrors();
 			}
 		} else {
 			if ($filename > '') {

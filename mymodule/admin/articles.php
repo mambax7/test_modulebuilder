@@ -104,9 +104,7 @@ switch ($op) {
 			$imgName = \str_replace(' ', '', $imgNameDef) . '.' . $extension;
 			$uploader->setPrefix($imgName);
 			$uploader->fetchMedia($_POST['xoops_upload_file'][0]);
-			if (!$uploader->upload()) {
-				$uploaderErrors = $uploader->getErrors();
-			} else {
+			if ($uploader->upload()) {
 				$savedFilename = $uploader->getSavedFileName();
 				$maxwidth  = (int)$helper->getConfig('maxwidth_image');
 				$maxheight = (int)$helper->getConfig('maxheight_image');
@@ -121,6 +119,8 @@ switch ($op) {
 					$result                    = $imgHandler->resizeImage();
 				}
 				$articlesObj->setVar('art_img', $savedFilename);
+			} else {
+				$uploaderErrors = $uploader->getErrors();
 			}
 		} else {
 			if ($filename > '') {
@@ -141,10 +141,10 @@ switch ($op) {
 			$imgName = \str_replace(' ', '', $imgNameDef) . '.' . $extension;
 			$uploader->setPrefix($imgName);
 			$uploader->fetchMedia($_POST['xoops_upload_file'][1]);
-			if (!$uploader->upload()) {
-				$errors = $uploader->getErrors();
-			} else {
+			if ($uploader->upload()) {
 				$articlesObj->setVar('art_file', $uploader->getSavedFileName());
+			} else {
+				$errors = $uploader->getErrors();
 			}
 		} else {
 			if ($filename > '') {

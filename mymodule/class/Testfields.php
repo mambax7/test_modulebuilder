@@ -313,7 +313,11 @@ class Testfields extends \XoopsObject
 		$groupList = $memberHandler->getGroupList();
 		$grouppermHandler = \xoops_getHandler('groupperm');
 		$fullList[] = \array_keys($groupList);
-		if (!$this->isNew()) {
+		if ($this->isNew()) {
+			$groupsCanApproveCheckbox = new \XoopsFormCheckBox(_AM_MYMODULE_PERMISSIONS_APPROVE, 'groups_approve_testfields[]', $fullList);
+			$groupsCanSubmitCheckbox = new \XoopsFormCheckBox(_AM_MYMODULE_PERMISSIONS_SUBMIT, 'groups_submit_testfields[]', $fullList);
+			$groupsCanViewCheckbox = new \XoopsFormCheckBox(_AM_MYMODULE_PERMISSIONS_VIEW, 'groups_view_testfields[]', $fullList);
+		} else {
 			$groupsIdsApprove = $grouppermHandler->getGroupIds('mymodule_approve_testfields', $this->getVar('tf_id'), $GLOBALS['xoopsModule']->getVar('mid'));
 			$groupsIdsApprove[] = \array_values($groupsIdsApprove);
 			$groupsCanApproveCheckbox = new \XoopsFormCheckBox(_AM_MYMODULE_PERMISSIONS_APPROVE, 'groups_approve_testfields[]', $groupsIdsApprove);
@@ -323,10 +327,6 @@ class Testfields extends \XoopsObject
 			$groupsIdsView = $grouppermHandler->getGroupIds('mymodule_view_testfields', $this->getVar('tf_id'), $GLOBALS['xoopsModule']->getVar('mid'));
 			$groupsIdsView[] = \array_values($groupsIdsView);
 			$groupsCanViewCheckbox = new \XoopsFormCheckBox(_AM_MYMODULE_PERMISSIONS_VIEW, 'groups_view_testfields[]', $groupsIdsView);
-		} else {
-			$groupsCanApproveCheckbox = new \XoopsFormCheckBox(_AM_MYMODULE_PERMISSIONS_APPROVE, 'groups_approve_testfields[]', $fullList);
-			$groupsCanSubmitCheckbox = new \XoopsFormCheckBox(_AM_MYMODULE_PERMISSIONS_SUBMIT, 'groups_submit_testfields[]', $fullList);
-			$groupsCanViewCheckbox = new \XoopsFormCheckBox(_AM_MYMODULE_PERMISSIONS_VIEW, 'groups_view_testfields[]', $fullList);
 		}
 		// To Approve
 		$groupsCanApproveCheckbox->addOptionArray($groupList);
