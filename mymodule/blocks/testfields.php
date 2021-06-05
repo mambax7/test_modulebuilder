@@ -126,10 +126,10 @@ function b_mymodule_testfields_edit($options)
 	$testfieldsAll = $testfieldsHandler->getAll($crTestfields);
 	unset($crTestfields);
 	$form .= _MB_MYMODULE_TESTFIELDS_TO_DISPLAY . "<br><select name='options[]' multiple='multiple' size='5'>";
-	$form .= "<option value='0' " . (false === \in_array(0, $options) ? '' : "selected='selected'") . '>' . _MB_MYMODULE_ALL_TESTFIELDS . '</option>';
+	$form .= "<option value='0' " . (!\in_array(0, $options) ? '' : "selected='selected'") . '>' . _MB_MYMODULE_ALL_TESTFIELDS . '</option>';
 	foreach (\array_keys($testfieldsAll) as $i) {
 		$tf_id = $testfieldsAll[$i]->getVar('tf_id');
-		$form .= "<option value='" . $tf_id . "' " . (false === \in_array($tf_id, $options) ? '' : "selected='selected'") . '>' . $testfieldsAll[$i]->getVar('tf_text') . '</option>';
+		$form .= "<option value='" . $tf_id . "' " . (!\in_array($tf_id, $options) ? '' : "selected='selected'") . '>' . $testfieldsAll[$i]->getVar('tf_text') . '</option>';
 	}
 	$form .= '</select>';
 
