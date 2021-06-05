@@ -12,7 +12,7 @@ namespace XoopsModules\Mymodule\Common;
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
 
-use \XoopsModules\Mymodule\Common;
+use XoopsModules\Mymodule\Common;
 
 /**
  * Class Migrate synchronize existing tables with target schema

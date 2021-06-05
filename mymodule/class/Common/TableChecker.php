@@ -12,7 +12,7 @@ namespace XoopsModules\Mymodule\Common;
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
 
-use \XoopsModules\Mymodule\Common;
+use XoopsModules\Mymodule\Common;
 
 /**
  * Class to compare current DB table structure with sql/mysql.sql
