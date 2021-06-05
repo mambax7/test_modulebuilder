@@ -50,7 +50,7 @@ function mymoduleCommentsUpdate($itemId, $itemNumb)
  * @param mixed $comment
  * @return bool
  */
-function mymoduleCommentsApprove(&$comment)
+function mymoduleCommentsApprove($comment)
 {
 	// Notification event
 	// Get instance of module
