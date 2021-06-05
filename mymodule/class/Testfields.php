@@ -169,7 +169,7 @@ class Testfields extends \XoopsObject
 		}
 		$imageSelect->setExtra("onchange='showImgSelected(\"imglabel_tf_imagelist\", \"tf_imagelist\", \"" . $imageDirectory . '", "", "' . XOOPS_URL . "\")'");
 		$imageTray->addElement($imageSelect, false);
-		$imageTray->addElement(new \XoopsFormLabel('', "<br><img src='" . XOOPS_URL . '/' . $imageDirectory . '/' . $tfImagelist . "' id='imglabel_tf_imagelist' alt='' style='max-width:100px' />"));
+		$imageTray->addElement(new \XoopsFormLabel('', "<br><img src='" . XOOPS_URL . '/' . $imageDirectory . '/' . $tfImagelist . "' id='imglabel_tf_imagelist' alt='' style='max-width:100px'>"));
 		// Form Frameworks Images tfImagelist: Upload new image
 		$fileSelectTray = new \XoopsFormElementTray('', '<br>');
 		$fileSelectTray->addElement(new \XoopsFormFile(_AM_MYMODULE_FORM_UPLOAD_NEW, 'tf_imagelist', $helper->getConfig('maxsize_image')));
@@ -196,7 +196,7 @@ class Testfields extends \XoopsObject
 		}
 		$imageSelect->setExtra("onchange='showImgSelected(\"imglabel_tf_uplimage\", \"tf_uplimage\", \"" . $imageDirectory . '", "", "' . XOOPS_URL . "\")'");
 		$imageTray->addElement($imageSelect, false);
-		$imageTray->addElement(new \XoopsFormLabel('', "<br><img src='" . XOOPS_URL . '/' . $imageDirectory . '/' . $tfUplimage . "' id='imglabel_tf_uplimage' alt='' style='max-width:100px' />"));
+		$imageTray->addElement(new \XoopsFormLabel('', "<br><img src='" . XOOPS_URL . '/' . $imageDirectory . '/' . $tfUplimage . "' id='imglabel_tf_uplimage' alt='' style='max-width:100px'>"));
 		// Form Image tfUplimage: Upload new image
 		if ($permissionUpload) {
 			$maxsize = $helper->getConfig('maxsize_image');

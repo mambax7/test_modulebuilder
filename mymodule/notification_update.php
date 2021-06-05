@@ -23,4 +23,4 @@ declare(strict_types=1);
  * @author         TDM XOOPS - Email:<info@email.com> - Website:<http://xoops.org>
  */
 include \dirname(\dirname(__DIR__)) . '/mainfile.php';
-include XOOPS_ROOT_PATH . '/include/notification_update.php';
+require XOOPS_ROOT_PATH . '/include/notification_update.php';

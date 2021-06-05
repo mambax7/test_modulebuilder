@@ -30,7 +30,7 @@ use XoopsModules\Mymodule\Common;
 
 require __DIR__ . '/header.php';
 $GLOBALS['xoopsOption']['template_main'] = 'mymodule_articles.tpl';
-include_once XOOPS_ROOT_PATH . '/header.php';
+require_once XOOPS_ROOT_PATH . '/header.php';
 
 $op    = Request::getCmd('op', 'list');
 $start = Request::getInt('start', 0);
@@ -91,7 +91,7 @@ switch ($op) {
 			unset($articles);
 			// Display Navigation
 			if ($articlesCount > $limit) {
-				include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
+				require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 				$pagenav = new \XoopsPageNav($articlesCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
 				$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
 			}
@@ -122,7 +122,7 @@ switch ($op) {
 		$articlesObj->setVar('art_title', Request::getString('art_title', ''));
 		$articlesObj->setVar('art_descr', Request::getText('art_descr', ''));
 		// Set Var art_img
-		include_once XOOPS_ROOT_PATH . '/class/uploader.php';
+		require_once XOOPS_ROOT_PATH . '/class/uploader.php';
 		$filename       = $_FILES['art_img']['name'];
 		$imgMimetype    = $_FILES['art_img']['type'];
 		$imgNameDef     = Request::getString('art_title');
@@ -161,7 +161,7 @@ switch ($op) {
 		}
 		$articlesObj->setVar('art_online', Request::getInt('art_online', 0));
 		// Set Var art_file
-		include_once XOOPS_ROOT_PATH . '/class/uploader.php';
+		require_once XOOPS_ROOT_PATH . '/class/uploader.php';
 		$filename       = $_FILES['art_file']['name'];
 		$imgNameDef     = Request::getString('art_title');
 		$uploader = new \XoopsMediaUploader(MYMODULE_UPLOAD_FILES_PATH . '/articles/', 

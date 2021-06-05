@@ -22,5 +22,5 @@ declare(strict_types=1);
  * @min_xoops      2.5.9
  * @author         TDM XOOPS - Email:<info@email.com> - Website:<http://xoops.org>
  */
-include_once \dirname(\dirname(__DIR__)) . '/mainfile.php';
-include_once XOOPS_ROOT_PATH.'/include/comment_post.php';
+require_once \dirname(\dirname(__DIR__)) . '/mainfile.php';
+require_once XOOPS_ROOT_PATH.'/include/comment_post.php';

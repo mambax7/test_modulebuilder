@@ -7,9 +7,9 @@
 	<span class='col-sm-9 justify'><{$testfield.checkbox}></span>
 	<span class='col-sm-9 justify'><{$testfield.user}></span>
 	<span class='col-sm-9 justify'><{$testfield.color}></span>
-	<span class='col-sm-3'><img src='<{$xoops_icons32_url|default:false}>/<{$testfield.imagelist}>' alt='testfields' /></span>
+	<span class='col-sm-3'><img src='<{$xoops_icons32_url|default:false}>/<{$testfield.imagelist}>' alt='testfields'></span>
 	<span class='col-sm-9 justify'><{$testfield.urlfile}></span>
-	<span class='col-sm-3'><img src='<{$mymodule_upload_url|default:false}>/images/testfields/<{$testfield.uplimage}>' alt='testfields' /></span>
+	<span class='col-sm-3'><img src='<{$mymodule_upload_url|default:false}>/images/testfields/<{$testfield.uplimage}>' alt='testfields'></span>
 	<span class='col-sm-9 justify'><{$testfield.uplfile}></span>
 	<span class='col-sm-9 justify'><{$testfield.textdateselect}></span>
 	<span class='col-sm-9 justify'><{$testfield.selectfile}></span>

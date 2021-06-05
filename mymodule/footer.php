@@ -33,4 +33,4 @@ $GLOBALS['xoopsTpl']->assign('fbcomments', $helper->getConfig('fbcomments'));
 $GLOBALS['xoopsTpl']->assign('admin', MYMODULE_ADMIN);
 $GLOBALS['xoopsTpl']->assign('copyright', $copyright);
 // 
-include_once XOOPS_ROOT_PATH . '/footer.php';
+require_once XOOPS_ROOT_PATH . '/footer.php';

@@ -28,7 +28,7 @@ use Xmf\Request;
 require __DIR__ . '/header.php';
 
 $cid = Request::getInt('cid', 0, 'GET');
-include_once XOOPS_ROOT_PATH.'/class/template.php';
+require_once XOOPS_ROOT_PATH.'/class/template.php';
 if (\function_exists('mb_http_output')) {
     mb_http_output('pass');
 }

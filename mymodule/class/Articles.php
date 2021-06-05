@@ -130,7 +130,7 @@ class Articles extends \XoopsObject
 		}
 		$imageSelect->setExtra("onchange='showImgSelected(\"imglabel_art_img\", \"art_img\", \"" . $imageDirectory . '", "", "' . XOOPS_URL . "\")'");
 		$imageTray->addElement($imageSelect, false);
-		$imageTray->addElement(new \XoopsFormLabel('', "<br><img src='" . XOOPS_URL . '/' . $imageDirectory . '/' . $artImg . "' id='imglabel_art_img' alt='' style='max-width:100px' />"));
+		$imageTray->addElement(new \XoopsFormLabel('', "<br><img src='" . XOOPS_URL . '/' . $imageDirectory . '/' . $artImg . "' id='imglabel_art_img' alt='' style='max-width:100px'>"));
 		// Form Image artImg: Upload new image
 		if ($permissionUpload) {
 			$maxsize = $helper->getConfig('maxsize_image');

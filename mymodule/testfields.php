@@ -30,7 +30,7 @@ use XoopsModules\Mymodule\Common;
 
 require __DIR__ . '/header.php';
 $GLOBALS['xoopsOption']['template_main'] = 'mymodule_testfields.tpl';
-include_once XOOPS_ROOT_PATH . '/header.php';
+require_once XOOPS_ROOT_PATH . '/header.php';
 
 $op    = Request::getCmd('op', 'list');
 $start = Request::getInt('start', 0);
@@ -91,7 +91,7 @@ switch ($op) {
 			unset($testfields);
 			// Display Navigation
 			if ($testfieldsCount > $limit) {
-				include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
+				require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 				$pagenav = new \XoopsPageNav($testfieldsCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
 				$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
 			}
@@ -134,7 +134,7 @@ switch ($op) {
 		$testfieldsObj->setVar('tf_user', Request::getInt('tf_user', 0));
 		$testfieldsObj->setVar('tf_color', Request::getString('tf_color', ''));
 		// Set Var tf_imagelist
-		include_once XOOPS_ROOT_PATH . '/class/uploader.php';
+		require_once XOOPS_ROOT_PATH . '/class/uploader.php';
 		$uploader = new \XoopsMediaUploader(XOOPS_ROOT_PATH . '/Frameworks/moduleclasses/icons/32', 
 													$helper->getConfig('mimetypes_image'), 
 													$helper->getConfig('maxsize_image'), null, null);
@@ -152,7 +152,7 @@ switch ($op) {
 		}
 		$testfieldsObj->setVar('tf_urlfile', formatUrl($_REQUEST['tf_urlfile']));
 		// Set Var tf_urlfile
-		include_once XOOPS_ROOT_PATH . '/class/uploader.php';
+		require_once XOOPS_ROOT_PATH . '/class/uploader.php';
 		$filename       = $_FILES['tf_urlfile']['name'];
 		$imgNameDef     = Request::getString('tf_text');
 		$uploader = new \XoopsMediaUploader(MYMODULE_UPLOAD_FILES_PATH . '/testfields/', 
@@ -175,7 +175,7 @@ switch ($op) {
 			$testfieldsObj->setVar('tf_urlfile', Request::getString('tf_urlfile'));
 		}
 		// Set Var tf_uplimage
-		include_once XOOPS_ROOT_PATH . '/class/uploader.php';
+		require_once XOOPS_ROOT_PATH . '/class/uploader.php';
 		$filename       = $_FILES['tf_uplimage']['name'];
 		$imgMimetype    = $_FILES['tf_uplimage']['type'];
 		$imgNameDef     = Request::getString('tf_text');
@@ -213,7 +213,7 @@ switch ($op) {
 			$testfieldsObj->setVar('tf_uplimage', Request::getString('tf_uplimage'));
 		}
 		// Set Var tf_uplfile
-		include_once XOOPS_ROOT_PATH . '/class/uploader.php';
+		require_once XOOPS_ROOT_PATH . '/class/uploader.php';
 		$filename       = $_FILES['tf_uplfile']['name'];
 		$imgNameDef     = Request::getString('tf_text');
 		$uploader = new \XoopsMediaUploader(MYMODULE_UPLOAD_FILES_PATH . '/testfields/', 
@@ -238,7 +238,7 @@ switch ($op) {
 		$testfieldTextdateselectObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('tf_textdateselect'));
 		$testfieldsObj->setVar('tf_textdateselect', $testfieldTextdateselectObj->getTimestamp());
 		// Set Var tf_selectfile
-		include_once XOOPS_ROOT_PATH . '/class/uploader.php';
+		require_once XOOPS_ROOT_PATH . '/class/uploader.php';
 		$filename       = $_FILES['tf_selectfile']['name'];
 		$imgNameDef     = Request::getString('tf_text');
 		$uploader = new \XoopsMediaUploader(MYMODULE_UPLOAD_FILES_PATH . '/testfields/', 

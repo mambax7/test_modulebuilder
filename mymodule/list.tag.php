@@ -23,4 +23,4 @@ declare(strict_types=1);
  * @author         TDM XOOPS - Email:<info@email.com> - Website:<http://xoops.org>
  */
 require __DIR__ . '/header.php';
-include XOOPS_ROOT_PATH . '/modules/tag/list.tag.php';
+require XOOPS_ROOT_PATH . '/modules/tag/list.tag.php';

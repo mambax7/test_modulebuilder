@@ -43,7 +43,7 @@ switch ($op) {
 		}
 		$rating = Request::getInt('rating', 0);
 		$itemid = 0;
-		$redir  = $_SERVER['HTTP_REFERER'];
+		$redir  = \Xmf\Request::getString('HTTP_REFERER', '', 'SERVER');
 		if (Constants::TABLE_ARTICLES === $source) {
 			$itemid = Request::getInt('art_id', 0);
 			$redir = 'articles.php?op=show&amp;art_id=' . $itemid;

@@ -55,7 +55,7 @@ if ($articlesCount > 0) {
 	}
 	// Display Navigation
 	if ($articlesCount > $limit) {
-		include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
+		require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 		$pagenav = new \XoopsPageNav($articlesCount, $limit, $start, 'startArticles', 'op=list&limitArticles=' . $limit);
 		$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
 	}
@@ -85,7 +85,7 @@ if ($testfieldsCount > 0) {
 	}
 	// Display Navigation
 	if ($testfieldsCount > $limit) {
-		include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
+		require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 		$pagenav = new \XoopsPageNav($testfieldsCount, $limit, $start, 'startTestfields', 'op=list&limitTestfields=' . $limit);
 		$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
 	}

@@ -375,7 +375,7 @@ $modversion['config'][] = [
 	'default'     => 'mymodule, categories, articles, testfields',
 ];
 // create increment steps for file size
-include_once __DIR__ . '/include/xoops_version.inc.php';
+require_once __DIR__ . '/include/xoops_version.inc.php';
 $iniPostMaxSize       = mymoduleReturnBytes(\ini_get('post_max_size'));
 $iniUploadMaxFileSize = mymoduleReturnBytes(\ini_get('upload_max_filesize'));
 $maxSize              = min($iniPostMaxSize, $iniUploadMaxFileSize);

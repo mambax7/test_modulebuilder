@@ -110,14 +110,14 @@ class TableChecker extends \XoopsObject
     {
         $tabledefs = [];
 
-        $modhandler = \xoops_getHandler('module');
-        $module = $modhandler->getByDirname($this->mydirname);
+        $moduleHandler = \xoops_getHandler('module');
+        $module = $moduleHandler->getByDirname($this->mydirname);
         $module->loadInfoAsVar($this->mydirname);
         $sqlfile = $module->getInfo('sqlfile');
         $sql_file_path = \XOOPS_ROOT_PATH . '/modules/' . $this->mydirname . '/' . $sqlfile[XOOPS_DB_TYPE];
 
         if (\file_exists($sql_file_path)) {
-            include_once \XOOPS_ROOT_PATH . '/class/database/sqlutility.php';
+            require_once \XOOPS_ROOT_PATH . '/class/database/sqlutility.php';
             $sqlutil = new \SqlUtility;
             $pieces = [];
             $sql_query = \trim(file_get_contents($sql_file_path));

@@ -23,7 +23,7 @@ declare(strict_types=1);
  * @author         TDM XOOPS - Email:<info@email.com> - Website:<http://xoops.org>
  */
 include \dirname(\dirname(__DIR__)) . '/mainfile.php';
-include __DIR__ . '/include/common.php';
+require __DIR__ . '/include/common.php';
 $moduleDirName = \basename(__DIR__);
 // Breadcrumbs
 $xoBreadcrumbs = [];

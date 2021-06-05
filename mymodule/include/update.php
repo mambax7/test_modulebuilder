@@ -39,7 +39,7 @@ function xoops_module_update_mymodule($module, $prev_version = null)
     $ret = mymodule_check_db($module);
 
     //check upload directory
-	include_once __DIR__ . '/install.php';
+	require_once __DIR__ . '/install.php';
     $ret = xoops_module_install_mymodule($module);
 
     $errors = $module->getErrors();

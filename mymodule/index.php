@@ -29,7 +29,7 @@ use XoopsModules\Mymodule\Constants;
 
 require __DIR__ . '/header.php';
 $GLOBALS['xoopsOption']['template_main'] = 'mymodule_index.tpl';
-include_once XOOPS_ROOT_PATH . '/header.php';
+require_once XOOPS_ROOT_PATH . '/header.php';
 // Define Stylesheet
 $GLOBALS['xoTheme']->addStylesheet($style, null);
 // Keywords
@@ -60,7 +60,7 @@ if ($articlesCount > 0) {
 	unset($articles);
 	// Display Navigation
 	if ($articlesCount > $limit) {
-		include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
+		require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 		$pagenav = new \XoopsPageNav($articlesCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
 		$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
 	}
@@ -91,7 +91,7 @@ if ($testfieldsCount > 0) {
 	unset($testfields);
 	// Display Navigation
 	if ($testfieldsCount > $limit) {
-		include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
+		require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 		$pagenav = new \XoopsPageNav($testfieldsCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
 		$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
 	}

@@ -27,7 +27,7 @@ use XoopsModules\Mymodule;
 use XoopsModules\Mymodule\Helper;
 use XoopsModules\Mymodule\Constants;
 
-include_once XOOPS_ROOT_PATH . '/modules/mymodule/include/common.php';
+require_once XOOPS_ROOT_PATH . '/modules/mymodule/include/common.php';
 
 /**
  * Function show block
@@ -36,7 +36,7 @@ include_once XOOPS_ROOT_PATH . '/modules/mymodule/include/common.php';
  */
 function b_mymodule_articles_show($options)
 {
-	include_once XOOPS_ROOT_PATH . '/modules/mymodule/class/articles.php';
+	require_once XOOPS_ROOT_PATH . '/modules/mymodule/class/articles.php';
 	$myts = MyTextSanitizer::getInstance();
 	$GLOBALS['xoopsTpl']->assign('mymodule_upload_url', MYMODULE_UPLOAD_URL);
 	$block       = [];
@@ -93,7 +93,7 @@ function b_mymodule_articles_show($options)
 		foreach (\array_keys($articlesAll) as $i) {
 			$block[$i]['id'] = $articlesAll[$i]->getVar('art_id');
 			$block[$i]['cat'] = $articlesAll[$i]->getVar('art_cat');
-			$block[$i]['title'] = $myts->htmlSpecialChars($articlesAll[$i]->getVar('art_title'));
+			$block[$i]['title'] = htmlspecialchars($articlesAll[$i]->getVar('art_title'));
 			$block[$i]['descr'] = \strip_tags($articlesAll[$i]->getVar('art_descr'));
 			$block[$i]['img'] = $articlesAll[$i]->getVar('art_img');
 			$block[$i]['file'] = $articlesAll[$i]->getVar('art_file');
@@ -113,14 +113,14 @@ function b_mymodule_articles_show($options)
  */
 function b_mymodule_articles_edit($options)
 {
-	include_once XOOPS_ROOT_PATH . '/modules/mymodule/class/articles.php';
+	require_once XOOPS_ROOT_PATH . '/modules/mymodule/class/articles.php';
 	$helper = Helper::getInstance();
 	$articlesHandler = $helper->getHandler('Articles');
 	$GLOBALS['xoopsTpl']->assign('mymodule_upload_url', MYMODULE_UPLOAD_URL);
 	$form = _MB_MYMODULE_DISPLAY;
-	$form .= "<input type='hidden' name='options[0]' value='".$options[0]."' />";
-	$form .= "<input type='text' name='options[1]' size='5' maxlength='255' value='" . $options[1] . "' />&nbsp;<br>";
-	$form .= _MB_MYMODULE_TITLE_LENGTH . " : <input type='text' name='options[2]' size='5' maxlength='255' value='" . $options[2] . "' /><br><br>";
+	$form .= "<input type='hidden' name='options[0]' value='".$options[0]."'>";
+	$form .= "<input type='text' name='options[1]' size='5' maxlength='255' value='" . $options[1] . "'>&nbsp;<br>";
+	$form .= _MB_MYMODULE_TITLE_LENGTH . " : <input type='text' name='options[2]' size='5' maxlength='255' value='" . $options[2] . "'><br><br>";
 	\array_shift($options);
 	\array_shift($options);
 	\array_shift($options);
@@ -132,10 +132,10 @@ function b_mymodule_articles_edit($options)
 	$articlesAll = $articlesHandler->getAll($crArticles);
 	unset($crArticles);
 	$form .= _MB_MYMODULE_ARTICLES_TO_DISPLAY . "<br><select name='options[]' multiple='multiple' size='5'>";
-	$form .= "<option value='0' " . (\in_array(0, $options) == false ? '' : "selected='selected'") . '>' . _MB_MYMODULE_ALL_ARTICLES . '</option>';
+	$form .= "<option value='0' " . (\in_array(0, $options) === false ? '' : "selected='selected'") . '>' . _MB_MYMODULE_ALL_ARTICLES . '</option>';
 	foreach (\array_keys($articlesAll) as $i) {
 		$art_id = $articlesAll[$i]->getVar('art_id');
-		$form .= "<option value='" . $art_id . "' " . (\in_array($art_id, $options) == false ? '' : "selected='selected'") . '>' . $articlesAll[$i]->getVar('art_title') . '</option>';
+		$form .= "<option value='" . $art_id . "' " . (\in_array($art_id, $options) === false ? '' : "selected='selected'") . '>' . $articlesAll[$i]->getVar('art_title') . '</option>';
 	}
 	$form .= '</select>';
 

@@ -46,6 +46,6 @@ if (!\defined('XOOPS_ICONS32_URL')) {
 \define('MYMODULE_ADMIN', MYMODULE_URL . '/admin/index.php');
 $localLogo = MYMODULE_IMAGE_URL . '/tdmxoops_logo.png';
 // Module Information
-$copyright = "<a href='http://xoops.org' title='XOOPS Project' target='_blank'><img src='" . $localLogo . "' alt='XOOPS Project' /></a>";
-include_once XOOPS_ROOT_PATH . '/class/xoopsrequest.php';
-include_once MYMODULE_PATH . '/include/functions.php';
+$copyright = "<a href='http://xoops.org' title='XOOPS Project' target='_blank'><img src='" . $localLogo . "' alt='XOOPS Project'></a>";
+require_once XOOPS_ROOT_PATH . '/class/xoopsrequest.php';
+require_once MYMODULE_PATH . '/include/functions.php';
