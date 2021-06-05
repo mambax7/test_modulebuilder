@@ -105,7 +105,7 @@ if ('global' === $op) {
 	$GLOBALS['xoopsTpl']->assign('form', $permform->render());
 	$permFound = true;
 }
-if ($op === 'approve_articles' || $op === 'submit_articles' || $op === 'view_articles') {
+if ('approve_articles' === $op || 'submit_articles' === $op || 'view_articles' === $op) {
 	$articlesCount = $articlesHandler->getCountArticles();
 	if ($articlesCount > 0) {
 		$articlesAll = $articlesHandler->getAllArticles(0, 'art_title');
@@ -116,7 +116,7 @@ if ($op === 'approve_articles' || $op === 'submit_articles' || $op === 'view_art
 	}
 	$permFound = true;
 }
-if ($op === 'approve_testfields' || $op === 'submit_testfields' || $op === 'view_testfields') {
+if ('approve_testfields' === $op || 'submit_testfields' === $op || 'view_testfields' === $op) {
 	$testfieldsCount = $testfieldsHandler->getCountTestfields();
 	if ($testfieldsCount > 0) {
 		$testfieldsAll = $testfieldsHandler->getAllTestfields(0, 'tf_text');

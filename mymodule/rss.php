@@ -43,7 +43,7 @@ $criteria = new \CriteriaCompo();
 
 $criteria->add(new \Criteria('cat_status', 0, '!='));
 $criteria->add(new \Criteria('cid', '(' . \implode(',', $categories) . ')','IN'));
-if ($cid != 0){
+if (0 != $cid){
     $criteria->add(new \Criteria('cid', $cid));
     $testfields = $testfieldsHandler->get($cid);
     $title = $xoopsConfig['sitename'] . ' - ' . $xoopsModule->getVar('name') . ' - ' . $testfields->getVar('tf_reads');
@@ -88,7 +88,7 @@ if (!$tpl->is_cached('db:mymodule_rss.tpl', $cid)) {
     foreach (\array_keys($testfieldsArr) as $i) {
         $description = $testfieldsArr[$i]->getVar('description');
         //permet d'afficher uniquement la description courte
-        if (\strpos($description,'[pagebreak]')==false){
+        if (false == \strpos($description, '[pagebreak]')){
             $description_short = $description;
         } else {
             $description_short = \substr($description,0,\strpos($description,'[pagebreak]'));

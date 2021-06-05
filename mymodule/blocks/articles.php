@@ -132,10 +132,10 @@ function b_mymodule_articles_edit($options)
 	$articlesAll = $articlesHandler->getAll($crArticles);
 	unset($crArticles);
 	$form .= _MB_MYMODULE_ARTICLES_TO_DISPLAY . "<br><select name='options[]' multiple='multiple' size='5'>";
-	$form .= "<option value='0' " . (\in_array(0, $options) === false ? '' : "selected='selected'") . '>' . _MB_MYMODULE_ALL_ARTICLES . '</option>';
+	$form .= "<option value='0' " . (false === \in_array(0, $options) ? '' : "selected='selected'") . '>' . _MB_MYMODULE_ALL_ARTICLES . '</option>';
 	foreach (\array_keys($articlesAll) as $i) {
 		$art_id = $articlesAll[$i]->getVar('art_id');
-		$form .= "<option value='" . $art_id . "' " . (\in_array($art_id, $options) === false ? '' : "selected='selected'") . '>' . $articlesAll[$i]->getVar('art_title') . '</option>';
+		$form .= "<option value='" . $art_id . "' " . (false === \in_array($art_id, $options) ? '' : "selected='selected'") . '>' . $articlesAll[$i]->getVar('art_title') . '</option>';
 	}
 	$form .= '</select>';
 

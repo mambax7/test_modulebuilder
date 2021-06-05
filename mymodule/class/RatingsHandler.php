@@ -108,7 +108,7 @@ class RatingsHandler extends \XoopsPersistableObjectHandler
 
             foreach ($ratingObjs as $ratingObj) {
                 $current_rating += $ratingObj->getVar('rate_value');
-                if (($ratingObj->getVar('rate_ip') == $ip && $uid == 0) || ($uid > 0 && $uid == $ratingObj->getVar('rate_uid'))) {
+                if (($ratingObj->getVar('rate_ip') == $ip && 0 == $uid) || ($uid > 0 && $uid == $ratingObj->getVar('rate_uid'))) {
                     $voted            = true;
                     $ItemRating['id'] = $ratingObj->getVar('rate_id');
                 }
@@ -145,7 +145,7 @@ class RatingsHandler extends \XoopsPersistableObjectHandler
 
             foreach ($ratingObjs as $ratingObj) {
                 $current_rating += $ratingObj->getVar('rate_value');
-                if (($ratingObj->getVar('rate_ip') == $ip && $uid == 0) || ($uid > 0 && $uid == $ratingObj->getVar('rate_uid'))) {
+                if (($ratingObj->getVar('rate_ip') == $ip && 0 == $uid) || ($uid > 0 && $uid == $ratingObj->getVar('rate_uid'))) {
                     $voted            = true;
                     $ItemRating['id'] = $ratingObj->getVar('rate_id');
                 }
@@ -164,7 +164,7 @@ class RatingsHandler extends \XoopsPersistableObjectHandler
             $current_rating = 0;
             foreach ($ratingObjs as $ratingObj) {
                 $current_rating += $ratingObj->getVar('rate_value');
-                if (($ratingObj->getVar('rate_ip') == $ip && $uid == 0) || ($uid > 0 && $uid == $ratingObj->getVar('rate_uid'))) {
+                if (($ratingObj->getVar('rate_ip') == $ip && 0 == $uid) || ($uid > 0 && $uid == $ratingObj->getVar('rate_uid'))) {
                     $voted            = true;
                     $ItemRating['id'] = $ratingObj->getVar('rate_id');
                 }
