@@ -50,7 +50,7 @@ function xoops_module_pre_install_mymodule(\XoopsModule $module)
 
 /**
  * @param \XoopsModule $module
- * @return bool|string
+ * @return bool
  */
 function xoops_module_install_mymodule(\XoopsModule $module)
 {

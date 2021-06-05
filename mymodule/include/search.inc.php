@@ -34,7 +34,7 @@ use XoopsModules\Mymodule;
  * @param $limit
  * @param $offset
  * @param $userid
- * @return mixed $itemIds
+ * @return array $itemIds
  */
 function mymodule_search($queryarray, $andor, $limit, $offset, $userid)
 {
