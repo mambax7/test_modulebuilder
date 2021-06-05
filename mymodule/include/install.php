@@ -30,7 +30,6 @@ use XoopsModules\Mymodule\Common;
 function xoops_module_pre_install_mymodule(\XoopsModule $module)
 {
     require \dirname(__DIR__) . '/preloads/autoloader.php';
-    /** @var Mymodule\Utility $utility */
     $utility = new Mymodule\Utility();
 
     //check for minimum XOOPS version
