@@ -23,7 +23,7 @@ namespace XoopsModules\Mymodule;
  * @package        mymodule
  * @since          1.0
  * @min_xoops      2.5.9
- * @author         TDM XOOPS - Email:<info@email.com> - Website:<http://xoops.org>
+ * @author         TDM XOOPS - Email:<info@email.com> - Website:<https://xoops.org>
  */
 
 use XoopsModules\Mymodule;
@@ -42,17 +42,17 @@ class Articles extends \XoopsObject
 	 */
 	public function __construct()
 	{
-		$this->initVar('art_id', XOBJ_DTYPE_INT);
-		$this->initVar('art_cat', XOBJ_DTYPE_INT);
-		$this->initVar('art_title', XOBJ_DTYPE_TXTBOX);
-		$this->initVar('art_descr', XOBJ_DTYPE_OTHER);
-		$this->initVar('art_img', XOBJ_DTYPE_TXTBOX);
-		$this->initVar('art_online', XOBJ_DTYPE_INT);
-		$this->initVar('art_file', XOBJ_DTYPE_TXTBOX);
-		$this->initVar('art_ratings', XOBJ_DTYPE_DECIMAL);
-		$this->initVar('art_votes', XOBJ_DTYPE_INT);
-		$this->initVar('art_created', XOBJ_DTYPE_INT);
-		$this->initVar('art_submitter', XOBJ_DTYPE_INT);
+		$this->initVar('art_id', \XOBJ_DTYPE_INT);
+		$this->initVar('art_cat', \XOBJ_DTYPE_INT);
+		$this->initVar('art_title', \XOBJ_DTYPE_TXTBOX);
+		$this->initVar('art_descr', \XOBJ_DTYPE_OTHER);
+		$this->initVar('art_img', \XOBJ_DTYPE_TXTBOX);
+		$this->initVar('art_online', \XOBJ_DTYPE_INT);
+		$this->initVar('art_file', \XOBJ_DTYPE_TXTBOX);
+		$this->initVar('art_ratings', \XOBJ_DTYPE_DECIMAL);
+		$this->initVar('art_votes', \XOBJ_DTYPE_INT);
+		$this->initVar('art_created', \XOBJ_DTYPE_INT);
+		$this->initVar('art_submitter', \XOBJ_DTYPE_INT);
 	}
 
 	/**
@@ -126,11 +126,11 @@ class Articles extends \XoopsObject
 		$imageSelect = new \XoopsFormSelect(\sprintf(_AM_MYMODULE_ARTICLE_IMG_UPLOADS, ".{$imageDirectory}/"), 'art_img', $artImg, 5);
 		$imageArray = \XoopsLists::getImgListAsArray( XOOPS_ROOT_PATH . $imageDirectory );
 		foreach ($imageArray as $image1) {
-			$imageSelect->addOption((string)($image1), $image1);
+			$imageSelect->addOption(($image1), $image1);
 		}
 		$imageSelect->setExtra("onchange='showImgSelected(\"imglabel_art_img\", \"art_img\", \"" . $imageDirectory . '", "", "' . XOOPS_URL . "\")'");
 		$imageTray->addElement($imageSelect, false);
-		$imageTray->addElement(new \XoopsFormLabel('', "<br><img src='" . XOOPS_URL . '/' . $imageDirectory . '/' . $artImg . "' id='imglabel_art_img' alt='' style='max-width:100px' />"));
+		$imageTray->addElement(new \XoopsFormLabel('', "<br><img src='" . XOOPS_URL . '/' . $imageDirectory . '/' . $artImg . "' id='imglabel_art_img' alt='' style='max-width:100px'>"));
 		// Form Image artImg: Upload new image
 		if ($permissionUpload) {
 			$maxsize = $helper->getConfig('maxsize_image');
@@ -175,7 +175,7 @@ class Articles extends \XoopsObject
 		$artVotes = $this->isNew() ? '0' : $this->getVar('art_votes');
 		$form->addElement(new \XoopsFormText(_AM_MYMODULE_ARTICLE_VOTES, 'art_votes', 20, 150, $artVotes));
 		// Form Text Date Select artCreated
-		$artCreated = $this->isNew() ? time() : $this->getVar('art_created');
+		$artCreated = $this->isNew() ? \time() : $this->getVar('art_created');
 		$form->addElement(new \XoopsFormTextDateSelect(_AM_MYMODULE_ARTICLE_CREATED, 'art_created', '', $artCreated));
 		// Form Select User artSubmitter
 		$artSubmitter = $this->isNew() ? $GLOBALS['xoopsUser']->uid() : $this->getVar('art_submitter');
@@ -185,7 +185,11 @@ class Articles extends \XoopsObject
 		$groupList = $memberHandler->getGroupList();
 		$grouppermHandler = \xoops_getHandler('groupperm');
 		$fullList[] = \array_keys($groupList);
-		if (!$this->isNew()) {
+		if ($this->isNew()) {
+			$groupsCanApproveCheckbox = new \XoopsFormCheckBox(_AM_MYMODULE_PERMISSIONS_APPROVE, 'groups_approve_articles[]', $fullList);
+			$groupsCanSubmitCheckbox = new \XoopsFormCheckBox(_AM_MYMODULE_PERMISSIONS_SUBMIT, 'groups_submit_articles[]', $fullList);
+			$groupsCanViewCheckbox = new \XoopsFormCheckBox(_AM_MYMODULE_PERMISSIONS_VIEW, 'groups_view_articles[]', $fullList);
+		} else {
 			$groupsIdsApprove = $grouppermHandler->getGroupIds('mymodule_approve_articles', $this->getVar('art_id'), $GLOBALS['xoopsModule']->getVar('mid'));
 			$groupsIdsApprove[] = \array_values($groupsIdsApprove);
 			$groupsCanApproveCheckbox = new \XoopsFormCheckBox(_AM_MYMODULE_PERMISSIONS_APPROVE, 'groups_approve_articles[]', $groupsIdsApprove);
@@ -195,10 +199,6 @@ class Articles extends \XoopsObject
 			$groupsIdsView = $grouppermHandler->getGroupIds('mymodule_view_articles', $this->getVar('art_id'), $GLOBALS['xoopsModule']->getVar('mid'));
 			$groupsIdsView[] = \array_values($groupsIdsView);
 			$groupsCanViewCheckbox = new \XoopsFormCheckBox(_AM_MYMODULE_PERMISSIONS_VIEW, 'groups_view_articles[]', $groupsIdsView);
-		} else {
-			$groupsCanApproveCheckbox = new \XoopsFormCheckBox(_AM_MYMODULE_PERMISSIONS_APPROVE, 'groups_approve_articles[]', $fullList);
-			$groupsCanSubmitCheckbox = new \XoopsFormCheckBox(_AM_MYMODULE_PERMISSIONS_SUBMIT, 'groups_submit_articles[]', $fullList);
-			$groupsCanViewCheckbox = new \XoopsFormCheckBox(_AM_MYMODULE_PERMISSIONS_VIEW, 'groups_view_articles[]', $fullList);
 		}
 		// To Approve
 		$groupsCanApproveCheckbox->addOptionArray($groupList);

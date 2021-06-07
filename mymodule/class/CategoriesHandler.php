@@ -23,7 +23,7 @@ namespace XoopsModules\Mymodule;
  * @package        mymodule
  * @since          1.0
  * @min_xoops      2.5.9
- * @author         TDM XOOPS - Email:<info@email.com> - Website:<http://xoops.org>
+ * @author         TDM XOOPS - Email:<info@email.com> - Website:<https://xoops.org>
  */
 
 use XoopsModules\Mymodule;
@@ -59,7 +59,7 @@ class CategoriesHandler extends \XoopsPersistableObjectHandler
 	 *
 	 * @param int $i field id
 	 * @param null fields
-	 * @return mixed reference to the {@link Get} object
+	 * @return \XoopsObject|null reference to the {@link Get} object
 	 */
 	public function get($i = null, $fields = null)
 	{

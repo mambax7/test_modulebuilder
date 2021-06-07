@@ -20,7 +20,7 @@ declare(strict_types=1);
  * @package        mymodule
  * @since          1.0
  * @min_xoops      2.5.9
- * @author         TDM XOOPS - Email:<info@email.com> - Website:<http://xoops.org>
+ * @author         TDM XOOPS - Email:<info@email.com> - Website:<https://xoops.org>
  */
 
 use Xmf\Request;
@@ -30,7 +30,7 @@ use XoopsModules\Mymodule\Common;
 
 require __DIR__ . '/header.php';
 $GLOBALS['xoopsOption']['template_main'] = 'mymodule_articles.tpl';
-include_once XOOPS_ROOT_PATH . '/header.php';
+require_once XOOPS_ROOT_PATH . '/header.php';
 
 $op    = Request::getCmd('op', 'list');
 $start = Request::getInt('start', 0);
@@ -91,7 +91,7 @@ switch ($op) {
 			unset($articles);
 			// Display Navigation
 			if ($articlesCount > $limit) {
-				include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
+				require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 				$pagenav = new \XoopsPageNav($articlesCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
 				$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
 			}
@@ -122,7 +122,7 @@ switch ($op) {
 		$articlesObj->setVar('art_title', Request::getString('art_title', ''));
 		$articlesObj->setVar('art_descr', Request::getText('art_descr', ''));
 		// Set Var art_img
-		include_once XOOPS_ROOT_PATH . '/class/uploader.php';
+		require_once XOOPS_ROOT_PATH . '/class/uploader.php';
 		$filename       = $_FILES['art_img']['name'];
 		$imgMimetype    = $_FILES['art_img']['type'];
 		$imgNameDef     = Request::getString('art_title');
@@ -135,9 +135,7 @@ switch ($op) {
 			$imgName = \str_replace(' ', '', $imgNameDef) . '.' . $extension;
 			$uploader->setPrefix($imgName);
 			$uploader->fetchMedia($_POST['xoops_upload_file'][0]);
-			if (!$uploader->upload()) {
-				$uploaderErrors = $uploader->getErrors();
-			} else {
+			if ($uploader->upload()) {
 				$savedFilename = $uploader->getSavedFileName();
 				$maxwidth  = (int)$helper->getConfig('maxwidth_image');
 				$maxheight = (int)$helper->getConfig('maxheight_image');
@@ -152,6 +150,8 @@ switch ($op) {
 					$result                    = $imgHandler->resizeImage();
 				}
 				$articlesObj->setVar('art_img', $savedFilename);
+			} else {
+				$uploaderErrors = $uploader->getErrors();
 			}
 		} else {
 			if ($filename > '') {
@@ -161,7 +161,7 @@ switch ($op) {
 		}
 		$articlesObj->setVar('art_online', Request::getInt('art_online', 0));
 		// Set Var art_file
-		include_once XOOPS_ROOT_PATH . '/class/uploader.php';
+		require_once XOOPS_ROOT_PATH . '/class/uploader.php';
 		$filename       = $_FILES['art_file']['name'];
 		$imgNameDef     = Request::getString('art_title');
 		$uploader = new \XoopsMediaUploader(MYMODULE_UPLOAD_FILES_PATH . '/articles/', 
@@ -172,10 +172,10 @@ switch ($op) {
 			$imgName = \str_replace(' ', '', $imgNameDef) . '.' . $extension;
 			$uploader->setPrefix($imgName);
 			$uploader->fetchMedia($_POST['xoops_upload_file'][1]);
-			if (!$uploader->upload()) {
-				$errors = $uploader->getErrors();
-			} else {
+			if ($uploader->upload()) {
 				$articlesObj->setVar('art_file', $uploader->getSavedFileName());
+			} else {
+				$errors = $uploader->getErrors();
 			}
 		} else {
 			if ($filename > '') {

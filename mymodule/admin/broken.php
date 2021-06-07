@@ -20,7 +20,7 @@ declare(strict_types=1);
  * @package        mymodule
  * @since          1.0
  * @min_xoops      2.5.9
- * @author         TDM XOOPS - Email:<info@email.com> - Website:<http://xoops.org>
+ * @author         TDM XOOPS - Email:<info@email.com> - Website:<https://xoops.org>
  */
 
 use Xmf\Request;
@@ -55,7 +55,7 @@ if ($articlesCount > 0) {
 	}
 	// Display Navigation
 	if ($articlesCount > $limit) {
-		include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
+		require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 		$pagenav = new \XoopsPageNav($articlesCount, $limit, $start, 'startArticles', 'op=list&limitArticles=' . $limit);
 		$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
 	}
@@ -85,7 +85,7 @@ if ($testfieldsCount > 0) {
 	}
 	// Display Navigation
 	if ($testfieldsCount > $limit) {
-		include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
+		require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 		$pagenav = new \XoopsPageNav($testfieldsCount, $limit, $start, 'startTestfields', 'op=list&limitTestfields=' . $limit);
 		$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
 	}

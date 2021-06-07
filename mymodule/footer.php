@@ -20,7 +20,7 @@ declare(strict_types=1);
  * @package        mymodule
  * @since          1.0
  * @min_xoops      2.5.9
- * @author         TDM XOOPS - Email:<info@email.com> - Website:<http://xoops.org>
+ * @author         TDM XOOPS - Email:<info@email.com> - Website:<https://xoops.org>
  */
 if ($helper->getConfig('show_breadcrumbs') && \count($xoBreadcrumbs) > 0) {
 	$GLOBALS['xoopsTpl']->assign('xoBreadcrumbs', $xoBreadcrumbs);
@@ -33,4 +33,4 @@ $GLOBALS['xoopsTpl']->assign('fbcomments', $helper->getConfig('fbcomments'));
 $GLOBALS['xoopsTpl']->assign('admin', MYMODULE_ADMIN);
 $GLOBALS['xoopsTpl']->assign('copyright', $copyright);
 // 
-include_once XOOPS_ROOT_PATH . '/footer.php';
+require_once XOOPS_ROOT_PATH . '/footer.php';

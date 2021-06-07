@@ -20,7 +20,7 @@ declare(strict_types=1);
  * @package        mymodule
  * @since          1.0
  * @min_xoops      2.5.9
- * @author         TDM XOOPS - Email:<info@email.com> - Website:<http://xoops.org>
+ * @author         TDM XOOPS - Email:<info@email.com> - Website:<https://xoops.org>
  */
 
 use XoopsModules\Mymodule;
@@ -34,7 +34,7 @@ use XoopsModules\Mymodule;
  * @param $limit
  * @param $offset
  * @param $userid
- * @return mixed $itemIds
+ * @return array $itemIds
  */
 function mymodule_search($queryarray, $andor, $limit, $offset, $userid)
 {
@@ -61,7 +61,7 @@ function mymodule_search($queryarray, $andor, $limit, $offset, $userid)
 	}
 	// search user(s)
 	if ($userid && \is_array($userid)) {
-		$userid = array_map('intval', $userid);
+		$userid = array_map('\intval', $userid);
 		$crUser = new \CriteriaCompo();
 		$crUser->add(new \Criteria('art_submitter', '(' . \implode(',', $userid) . ')', 'IN'), 'OR');
 	} elseif (is_numeric($userid) && $userid > 0) {
@@ -112,7 +112,7 @@ function mymodule_search($queryarray, $andor, $limit, $offset, $userid)
 	}
 	// search user(s)
 	if ($userid && \is_array($userid)) {
-		$userid = array_map('intval', $userid);
+		$userid = array_map('\intval', $userid);
 		$crUser = new \CriteriaCompo();
 		$crUser->add(new \Criteria('tf_submitter', '(' . \implode(',', $userid) . ')', 'IN'), 'OR');
 	} elseif (is_numeric($userid) && $userid > 0) {

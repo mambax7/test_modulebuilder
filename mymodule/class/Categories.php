@@ -23,7 +23,7 @@ namespace XoopsModules\Mymodule;
  * @package        mymodule
  * @since          1.0
  * @min_xoops      2.5.9
- * @author         TDM XOOPS - Email:<info@email.com> - Website:<http://xoops.org>
+ * @author         TDM XOOPS - Email:<info@email.com> - Website:<https://xoops.org>
  */
 
 use XoopsModules\Mymodule;
@@ -42,11 +42,11 @@ class Categories extends \XoopsObject
 	 */
 	public function __construct()
 	{
-		$this->initVar('cat_id', XOBJ_DTYPE_INT);
-		$this->initVar('cat_name', XOBJ_DTYPE_TXTBOX);
-		$this->initVar('cat_logo', XOBJ_DTYPE_TXTBOX);
-		$this->initVar('cat_created', XOBJ_DTYPE_INT);
-		$this->initVar('cat_submitter', XOBJ_DTYPE_INT);
+		$this->initVar('cat_id', \XOBJ_DTYPE_INT);
+		$this->initVar('cat_name', \XOBJ_DTYPE_TXTBOX);
+		$this->initVar('cat_logo', \XOBJ_DTYPE_TXTBOX);
+		$this->initVar('cat_created', \XOBJ_DTYPE_INT);
+		$this->initVar('cat_submitter', \XOBJ_DTYPE_INT);
 	}
 
 	/**
@@ -93,7 +93,7 @@ class Categories extends \XoopsObject
 		// Form Text catName
 		$form->addElement(new \XoopsFormText(_AM_MYMODULE_CATEGORY_NAME, 'cat_name', 50, 255, $this->getVar('cat_name')), true);
 		// Form Text Date Select catCreated
-		$catCreated = $this->isNew() ? time() : $this->getVar('cat_created');
+		$catCreated = $this->isNew() ? \time() : $this->getVar('cat_created');
 		$form->addElement(new \XoopsFormTextDateSelect(_AM_MYMODULE_CATEGORY_CREATED, 'cat_created', '', $catCreated), true);
 		// To Save
 		$form->addElement(new \XoopsFormHidden('op', 'save'));

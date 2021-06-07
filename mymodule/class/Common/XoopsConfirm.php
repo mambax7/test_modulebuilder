@@ -20,7 +20,7 @@ namespace XoopsModules\Mymodule\Common;
  * @package        Mymodule
  * @since          1.0
  * @min_xoops      2.5.9
- * @author         Goffy - Email:<goffy@myxoops.org> - Website:<http://xoops.org>
+ * @author         Goffy - Email:<goffy@myxoops.org> - Website:<https://xoops.org>
  */
 
 use XoopsModules\Mymodule;
@@ -62,7 +62,7 @@ class XoopsConfirm
     public function getFormXoopsConfirm()
     {
         //in order to be accessable from user and admin area this should be place in language common.php
-        if (!defined('CO_MYMODULE_DELETE_CONFIRM')) {
+        if (!\defined('CO_MYMODULE_DELETE_CONFIRM')) {
             \define('CO_MYMODULE_DELETE_CONFIRM', 'Confirm delete');
             \define('CO_MYMODULE_DELETE_LABEL', 'Do you really want to delete:');
         }

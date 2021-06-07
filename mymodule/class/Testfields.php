@@ -23,7 +23,7 @@ namespace XoopsModules\Mymodule;
  * @package        mymodule
  * @since          1.0
  * @min_xoops      2.5.9
- * @author         TDM XOOPS - Email:<info@email.com> - Website:<http://xoops.org>
+ * @author         TDM XOOPS - Email:<info@email.com> - Website:<https://xoops.org>
  */
 
 use XoopsModules\Mymodule;
@@ -42,34 +42,34 @@ class Testfields extends \XoopsObject
 	 */
 	public function __construct()
 	{
-		$this->initVar('tf_id', XOBJ_DTYPE_INT);
-		$this->initVar('tf_text', XOBJ_DTYPE_TXTBOX);
-		$this->initVar('tf_textarea', XOBJ_DTYPE_TXTAREA);
-		$this->initVar('tf_dhtml', XOBJ_DTYPE_OTHER);
-		$this->initVar('tf_checkbox', XOBJ_DTYPE_INT);
-		$this->initVar('tf_yesno', XOBJ_DTYPE_INT);
-		$this->initVar('tf_selectbox', XOBJ_DTYPE_INT);
-		$this->initVar('tf_user', XOBJ_DTYPE_INT);
-		$this->initVar('tf_color', XOBJ_DTYPE_TXTBOX);
-		$this->initVar('tf_imagelist', XOBJ_DTYPE_TXTBOX);
-		$this->initVar('tf_urlfile', XOBJ_DTYPE_TXTBOX);
-		$this->initVar('tf_uplimage', XOBJ_DTYPE_TXTBOX);
-		$this->initVar('tf_uplfile', XOBJ_DTYPE_TXTBOX);
-		$this->initVar('tf_textdateselect', XOBJ_DTYPE_INT);
-		$this->initVar('tf_selectfile', XOBJ_DTYPE_TXTBOX);
-		$this->initVar('tf_password', XOBJ_DTYPE_TXTBOX);
-		$this->initVar('tf_country_list', XOBJ_DTYPE_TXTBOX);
-		$this->initVar('tf_language', XOBJ_DTYPE_TXTBOX);
-		$this->initVar('tf_radio', XOBJ_DTYPE_INT);
-		$this->initVar('tf_status', XOBJ_DTYPE_INT);
-		$this->initVar('tf_datetime', XOBJ_DTYPE_INT);
-		$this->initVar('tf_combobox', XOBJ_DTYPE_INT);
-		$this->initVar('tf_comments', XOBJ_DTYPE_INT);
-		$this->initVar('tf_ratings', XOBJ_DTYPE_DECIMAL);
-		$this->initVar('tf_votes', XOBJ_DTYPE_INT);
-		$this->initVar('tf_uuid', XOBJ_DTYPE_TXTBOX);
-		$this->initVar('tf_ip', XOBJ_DTYPE_TXTBOX);
-		$this->initVar('tf_reads', XOBJ_DTYPE_INT);
+		$this->initVar('tf_id', \XOBJ_DTYPE_INT);
+		$this->initVar('tf_text', \XOBJ_DTYPE_TXTBOX);
+		$this->initVar('tf_textarea', \XOBJ_DTYPE_TXTAREA);
+		$this->initVar('tf_dhtml', \XOBJ_DTYPE_OTHER);
+		$this->initVar('tf_checkbox', \XOBJ_DTYPE_INT);
+		$this->initVar('tf_yesno', \XOBJ_DTYPE_INT);
+		$this->initVar('tf_selectbox', \XOBJ_DTYPE_INT);
+		$this->initVar('tf_user', \XOBJ_DTYPE_INT);
+		$this->initVar('tf_color', \XOBJ_DTYPE_TXTBOX);
+		$this->initVar('tf_imagelist', \XOBJ_DTYPE_TXTBOX);
+		$this->initVar('tf_urlfile', \XOBJ_DTYPE_TXTBOX);
+		$this->initVar('tf_uplimage', \XOBJ_DTYPE_TXTBOX);
+		$this->initVar('tf_uplfile', \XOBJ_DTYPE_TXTBOX);
+		$this->initVar('tf_textdateselect', \XOBJ_DTYPE_INT);
+		$this->initVar('tf_selectfile', \XOBJ_DTYPE_TXTBOX);
+		$this->initVar('tf_password', \XOBJ_DTYPE_TXTBOX);
+		$this->initVar('tf_country_list', \XOBJ_DTYPE_TXTBOX);
+		$this->initVar('tf_language', \XOBJ_DTYPE_TXTBOX);
+		$this->initVar('tf_radio', \XOBJ_DTYPE_INT);
+		$this->initVar('tf_status', \XOBJ_DTYPE_INT);
+		$this->initVar('tf_datetime', \XOBJ_DTYPE_INT);
+		$this->initVar('tf_combobox', \XOBJ_DTYPE_INT);
+		$this->initVar('tf_comments', \XOBJ_DTYPE_INT);
+		$this->initVar('tf_ratings', \XOBJ_DTYPE_DECIMAL);
+		$this->initVar('tf_votes', \XOBJ_DTYPE_INT);
+		$this->initVar('tf_uuid', \XOBJ_DTYPE_TXTBOX);
+		$this->initVar('tf_ip', \XOBJ_DTYPE_TXTBOX);
+		$this->initVar('tf_reads', \XOBJ_DTYPE_INT);
 	}
 
 	/**
@@ -165,11 +165,11 @@ class Testfields extends \XoopsObject
 		$imageSelect = new \XoopsFormSelect(\sprintf(_AM_MYMODULE_TESTFIELD_IMAGELIST_UPLOADS, ".{$imageDirectory}/"), 'tf_imagelist', $tfImagelist, 5);
 		$imageArray = \XoopsLists::getImgListAsArray( XOOPS_ROOT_PATH . $imageDirectory );
 		foreach ($imageArray as $image1) {
-			$imageSelect->addOption((string)($image1), $image1);
+			$imageSelect->addOption(($image1), $image1);
 		}
 		$imageSelect->setExtra("onchange='showImgSelected(\"imglabel_tf_imagelist\", \"tf_imagelist\", \"" . $imageDirectory . '", "", "' . XOOPS_URL . "\")'");
 		$imageTray->addElement($imageSelect, false);
-		$imageTray->addElement(new \XoopsFormLabel('', "<br><img src='" . XOOPS_URL . '/' . $imageDirectory . '/' . $tfImagelist . "' id='imglabel_tf_imagelist' alt='' style='max-width:100px' />"));
+		$imageTray->addElement(new \XoopsFormLabel('', "<br><img src='" . XOOPS_URL . '/' . $imageDirectory . '/' . $tfImagelist . "' id='imglabel_tf_imagelist' alt='' style='max-width:100px'>"));
 		// Form Frameworks Images tfImagelist: Upload new image
 		$fileSelectTray = new \XoopsFormElementTray('', '<br>');
 		$fileSelectTray->addElement(new \XoopsFormFile(_AM_MYMODULE_FORM_UPLOAD_NEW, 'tf_imagelist', $helper->getConfig('maxsize_image')));
@@ -192,11 +192,11 @@ class Testfields extends \XoopsObject
 		$imageSelect = new \XoopsFormSelect(\sprintf(_AM_MYMODULE_TESTFIELD_UPLIMAGE_UPLOADS, ".{$imageDirectory}/"), 'tf_uplimage', $tfUplimage, 5);
 		$imageArray = \XoopsLists::getImgListAsArray( XOOPS_ROOT_PATH . $imageDirectory );
 		foreach ($imageArray as $image1) {
-			$imageSelect->addOption((string)($image1), $image1);
+			$imageSelect->addOption(($image1), $image1);
 		}
 		$imageSelect->setExtra("onchange='showImgSelected(\"imglabel_tf_uplimage\", \"tf_uplimage\", \"" . $imageDirectory . '", "", "' . XOOPS_URL . "\")'");
 		$imageTray->addElement($imageSelect, false);
-		$imageTray->addElement(new \XoopsFormLabel('', "<br><img src='" . XOOPS_URL . '/' . $imageDirectory . '/' . $tfUplimage . "' id='imglabel_tf_uplimage' alt='' style='max-width:100px' />"));
+		$imageTray->addElement(new \XoopsFormLabel('', "<br><img src='" . XOOPS_URL . '/' . $imageDirectory . '/' . $tfUplimage . "' id='imglabel_tf_uplimage' alt='' style='max-width:100px'>"));
 		// Form Image tfUplimage: Upload new image
 		if ($permissionUpload) {
 			$maxsize = $helper->getConfig('maxsize_image');
@@ -224,7 +224,7 @@ class Testfields extends \XoopsObject
 			$form->addElement(new \XoopsFormHidden('tf_uplfile', $tfUplfile));
 		}
 		// Form Text Date Select tfTextdateselect
-		$tfTextdateselect = $this->isNew() ? time() : $this->getVar('tf_textdateselect');
+		$tfTextdateselect = $this->isNew() ? \time() : $this->getVar('tf_textdateselect');
 		$form->addElement(new \XoopsFormTextDateSelect(_AM_MYMODULE_TESTFIELD_TEXTDATESELECT, 'tf_textdateselect', '', $tfTextdateselect));
 		// Form File tfSelectfile
 		// Form File tfSelectfile: Select Uploaded File 
@@ -235,7 +235,7 @@ class Testfields extends \XoopsObject
 		$fileSelect = new \XoopsFormSelect(\sprintf(_AM_MYMODULE_TESTFIELD_SELECTFILE_UPLOADS, ".{$fileDirectory}/"), 'tf_selectfile', $tfSelectfile, 5);
 		$fileArray = \XoopsLists::getImgListAsArray( XOOPS_ROOT_PATH . $fileDirectory );
 		foreach ($fileArray as $file1) {
-			$fileSelect->addOption((string)($file1), $file1);
+			$fileSelect->addOption(($file1), $file1);
 		}
 		$fileTray->addElement($fileSelect, false);
 		// Form File tfSelectfile: Upload new file
@@ -281,7 +281,7 @@ class Testfields extends \XoopsObject
 		$tfStatusSelect->addOption(Constants::STATUS_BROKEN, _AM_MYMODULE_STATUS_BROKEN);
 		$form->addElement($tfStatusSelect, true);
 		// Form Text Date Select tfDatetime
-		$tfDatetime = $this->isNew() ? time() : $this->getVar('tf_datetime');
+		$tfDatetime = $this->isNew() ? \time() : $this->getVar('tf_datetime');
 		$form->addElement(new \XoopsFormDateTime(_AM_MYMODULE_TESTFIELD_DATETIME, 'tf_datetime', '', $tfDatetime));
 		// Testfields Handler
 		$testfieldsHandler = $helper->getHandler('Testfields');
@@ -313,7 +313,11 @@ class Testfields extends \XoopsObject
 		$groupList = $memberHandler->getGroupList();
 		$grouppermHandler = \xoops_getHandler('groupperm');
 		$fullList[] = \array_keys($groupList);
-		if (!$this->isNew()) {
+		if ($this->isNew()) {
+			$groupsCanApproveCheckbox = new \XoopsFormCheckBox(_AM_MYMODULE_PERMISSIONS_APPROVE, 'groups_approve_testfields[]', $fullList);
+			$groupsCanSubmitCheckbox = new \XoopsFormCheckBox(_AM_MYMODULE_PERMISSIONS_SUBMIT, 'groups_submit_testfields[]', $fullList);
+			$groupsCanViewCheckbox = new \XoopsFormCheckBox(_AM_MYMODULE_PERMISSIONS_VIEW, 'groups_view_testfields[]', $fullList);
+		} else {
 			$groupsIdsApprove = $grouppermHandler->getGroupIds('mymodule_approve_testfields', $this->getVar('tf_id'), $GLOBALS['xoopsModule']->getVar('mid'));
 			$groupsIdsApprove[] = \array_values($groupsIdsApprove);
 			$groupsCanApproveCheckbox = new \XoopsFormCheckBox(_AM_MYMODULE_PERMISSIONS_APPROVE, 'groups_approve_testfields[]', $groupsIdsApprove);
@@ -323,10 +327,6 @@ class Testfields extends \XoopsObject
 			$groupsIdsView = $grouppermHandler->getGroupIds('mymodule_view_testfields', $this->getVar('tf_id'), $GLOBALS['xoopsModule']->getVar('mid'));
 			$groupsIdsView[] = \array_values($groupsIdsView);
 			$groupsCanViewCheckbox = new \XoopsFormCheckBox(_AM_MYMODULE_PERMISSIONS_VIEW, 'groups_view_testfields[]', $groupsIdsView);
-		} else {
-			$groupsCanApproveCheckbox = new \XoopsFormCheckBox(_AM_MYMODULE_PERMISSIONS_APPROVE, 'groups_approve_testfields[]', $fullList);
-			$groupsCanSubmitCheckbox = new \XoopsFormCheckBox(_AM_MYMODULE_PERMISSIONS_SUBMIT, 'groups_submit_testfields[]', $fullList);
-			$groupsCanViewCheckbox = new \XoopsFormCheckBox(_AM_MYMODULE_PERMISSIONS_VIEW, 'groups_view_testfields[]', $fullList);
 		}
 		// To Approve
 		$groupsCanApproveCheckbox->addOptionArray($groupList);

@@ -17,7 +17,7 @@
  * @package        mymodule
  * @since          1.0
  * @min_xoops      2.5.9
- * @author         TDM XOOPS - Email:<info@email.com> - Website:<http://xoops.org>
+ * @author         TDM XOOPS - Email:<info@email.com> - Website:<https://xoops.org>
  */
 $(document).ready(function(){
     $( "button, input:button, input:submit, input:file, input:reset" ).css("color","inherit").button();

@@ -39,7 +39,7 @@ function xoops_module_update_mymodule($module, $prev_version = null)
     $ret = mymodule_check_db($module);
 
     //check upload directory
-	include_once __DIR__ . '/install.php';
+	require_once __DIR__ . '/install.php';
     $ret = xoops_module_install_mymodule($module);
 
     $errors = $module->getErrors();
@@ -64,7 +64,7 @@ function update_mymodule_v10($module)
         'SELECT t1.tpl_id FROM ' . $xoopsDB->prefix('tplfile') . ' t1, ' . $xoopsDB->prefix('tplfile') . ' t2 WHERE t1.tpl_refid = t2.tpl_refid AND t1.tpl_module = t2.tpl_module AND t1.tpl_tplset=t2.tpl_tplset AND t1.tpl_file = t2.tpl_file AND t1.tpl_type = t2.tpl_type AND t1.tpl_id > t2.tpl_id'
     );
     $tplids = [];
-    while (false !== (list($tplid) = $xoopsDB->fetchRow($result))) {
+    while (list($tplid) = $xoopsDB->fetchRow($result)) {
         $tplids[] = $tplid;
     }
     if (\count($tplids) > 0) {

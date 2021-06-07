@@ -20,7 +20,7 @@ declare(strict_types=1);
  * @package        mymodule
  * @since          1.0
  * @min_xoops      2.5.9
- * @author         TDM XOOPS - Email:<info@email.com> - Website:<http://xoops.org>
+ * @author         TDM XOOPS - Email:<info@email.com> - Website:<https://xoops.org>
  */
 
 use Xmf\Request;
@@ -36,7 +36,7 @@ $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('perm
 $op = Request::getCmd('op', 'global');
 
 // Get Form
-include_once XOOPS_ROOT_PATH . '/class/xoopsform/grouppermform.php';
+require_once XOOPS_ROOT_PATH . '/class/xoopsform/grouppermform.php';
 \xoops_load('XoopsFormLoader');
 $permTableForm = new \XoopsSimpleForm('', 'fselperm', 'permissions.php', 'post');
 $formSelect = new \XoopsFormSelect('', 'op', $op);
@@ -56,7 +56,7 @@ switch ($op) {
 		$formTitle = _AM_MYMODULE_PERMISSIONS_GLOBAL;
 		$permName = 'mymodule_ac';
 		$permDesc = _AM_MYMODULE_PERMISSIONS_GLOBAL_DESC;
-		$globalPerms = array( '4' => _AM_MYMODULE_PERMISSIONS_GLOBAL_4, '8' => _AM_MYMODULE_PERMISSIONS_GLOBAL_8, '16' => _AM_MYMODULE_PERMISSIONS_GLOBAL_16 );
+		$globalPerms = ['4' => _AM_MYMODULE_PERMISSIONS_GLOBAL_4, '8' => _AM_MYMODULE_PERMISSIONS_GLOBAL_8, '16' => _AM_MYMODULE_PERMISSIONS_GLOBAL_16];
 		break;
 	case 'approve_articles':
 		$formTitle = _AM_MYMODULE_PERMISSIONS_APPROVE;
@@ -105,7 +105,7 @@ if ('global' === $op) {
 	$GLOBALS['xoopsTpl']->assign('form', $permform->render());
 	$permFound = true;
 }
-if ($op === 'approve_articles' || $op === 'submit_articles' || $op === 'view_articles') {
+if ('approve_articles' === $op || 'submit_articles' === $op || 'view_articles' === $op) {
 	$articlesCount = $articlesHandler->getCountArticles();
 	if ($articlesCount > 0) {
 		$articlesAll = $articlesHandler->getAllArticles(0, 'art_title');
@@ -116,7 +116,7 @@ if ($op === 'approve_articles' || $op === 'submit_articles' || $op === 'view_art
 	}
 	$permFound = true;
 }
-if ($op === 'approve_testfields' || $op === 'submit_testfields' || $op === 'view_testfields') {
+if ('approve_testfields' === $op || 'submit_testfields' === $op || 'view_testfields' === $op) {
 	$testfieldsCount = $testfieldsHandler->getCountTestfields();
 	if ($testfieldsCount > 0) {
 		$testfieldsAll = $testfieldsHandler->getAllTestfields(0, 'tf_text');

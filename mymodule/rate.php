@@ -20,7 +20,7 @@ declare(strict_types=1);
  * @package        mymodule
  * @since          1.0
  * @min_xoops      2.5.9
- * @author         TDM XOOPS - Email:<info@email.com> - Website:<http://xoops.org>
+ * @author         TDM XOOPS - Email:<info@email.com> - Website:<https://xoops.org>
  */
 
 use Xmf\Request;
@@ -43,7 +43,7 @@ switch ($op) {
 		}
 		$rating = Request::getInt('rating', 0);
 		$itemid = 0;
-		$redir  = $_SERVER['HTTP_REFERER'];
+		$redir  = \Xmf\Request::getString('HTTP_REFERER', '', 'SERVER');
 		if (Constants::TABLE_ARTICLES === $source) {
 			$itemid = Request::getInt('art_id', 0);
 			$redir = 'articles.php?op=show&amp;art_id=' . $itemid;

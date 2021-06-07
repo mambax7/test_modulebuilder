@@ -20,7 +20,7 @@ declare(strict_types=1);
  * @package        mymodule
  * @since          1.0
  * @min_xoops      2.5.9
- * @author         TDM XOOPS - Email:<info@email.com> - Website:<http://xoops.org>
+ * @author         TDM XOOPS - Email:<info@email.com> - Website:<https://xoops.org>
  */
 
 use Xmf\Request;
@@ -28,7 +28,7 @@ use Xmf\Request;
 require __DIR__ . '/header.php';
 
 $cid = Request::getInt('cid', 0, 'GET');
-include_once XOOPS_ROOT_PATH.'/class/template.php';
+require_once XOOPS_ROOT_PATH.'/class/template.php';
 if (\function_exists('mb_http_output')) {
     mb_http_output('pass');
 }
@@ -43,7 +43,7 @@ $criteria = new \CriteriaCompo();
 
 $criteria->add(new \Criteria('cat_status', 0, '!='));
 $criteria->add(new \Criteria('cid', '(' . \implode(',', $categories) . ')','IN'));
-if ($cid != 0){
+if (0 != $cid){
     $criteria->add(new \Criteria('cid', $cid));
     $testfields = $testfieldsHandler->get($cid);
     $title = $xoopsConfig['sitename'] . ' - ' . $xoopsModule->getVar('name') . ' - ' . $testfields->getVar('tf_reads');
@@ -88,16 +88,18 @@ if (!$tpl->is_cached('db:mymodule_rss.tpl', $cid)) {
     foreach (\array_keys($testfieldsArr) as $i) {
         $description = $testfieldsArr[$i]->getVar('description');
         //permet d'afficher uniquement la description courte
-        if (\strpos($description,'[pagebreak]')==false){
+        if (false == \strpos($description, '[pagebreak]')){
             $description_short = $description;
         } else {
             $description_short = \substr($description,0,\strpos($description,'[pagebreak]'));
         }
-        $tpl->append('items', array('title' => htmlspecialchars($testfieldsArr[$i]->getVar('tf_reads'), ENT_QUOTES),
-                                    'link' => XOOPS_URL . '/modules/mymodule/single.php?cid=' . $testfieldsArr[$i]->getVar('cid') . '&amp;tf_id=' . $testfieldsArr[$i]->getVar('tf_id'),
-                                    'guid' => XOOPS_URL . '/modules/mymodule/single.php?cid=' . $testfieldsArr[$i]->getVar('cid') . '&amp;tf_id=' . $testfieldsArr[$i]->getVar('tf_id'),
-                                    'pubdate' => \formatTimestamp($testfieldsArr[$i]->getVar('date'), 'rss'),
-                                    'description' => htmlspecialchars($description_short, ENT_QUOTES)));
+        $tpl->append('items', [
+            'title'       => htmlspecialchars($testfieldsArr[$i]->getVar('tf_reads'), ENT_QUOTES),
+            'link'        => XOOPS_URL . '/modules/mymodule/single.php?cid=' . $testfieldsArr[$i]->getVar('cid') . '&amp;tf_id=' . $testfieldsArr[$i]->getVar('tf_id'),
+            'guid'        => XOOPS_URL . '/modules/mymodule/single.php?cid=' . $testfieldsArr[$i]->getVar('cid') . '&amp;tf_id=' . $testfieldsArr[$i]->getVar('tf_id'),
+            'pubdate'     => \formatTimestamp($testfieldsArr[$i]->getVar('date'), 'rss'),
+            'description' => htmlspecialchars($description_short, ENT_QUOTES)
+        ]);
     }
 }
 header('Content-Type:text/xml; charset=' . _CHARSET);

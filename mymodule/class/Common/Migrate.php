@@ -12,7 +12,7 @@ namespace XoopsModules\Mymodule\Common;
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
 
-use \XoopsModules\Mymodule\Common;
+use XoopsModules\Mymodule\Common;
 
 /**
  * Class Migrate synchronize existing tables with target schema
@@ -36,7 +36,7 @@ class Migrate extends \Xmf\Database\Migrate
         if (null !== $configurator) {
             $this->renameTables = $configurator->renameTables;
 
-            $moduleDirName = \basename(dirname(__DIR__, 2));
+            $moduleDirName = \basename(\dirname(__DIR__, 2));
             parent::__construct($moduleDirName);
         }
     }

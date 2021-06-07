@@ -20,7 +20,7 @@ declare(strict_types=1);
  * @package        mymodule
  * @since          1.0
  * @min_xoops      2.5.9
- * @author         TDM XOOPS - Email:<info@email.com> - Website:<http://xoops.org>
+ * @author         TDM XOOPS - Email:<info@email.com> - Website:<https://xoops.org>
  */
 
 use Xmf\Request;
@@ -58,7 +58,7 @@ switch ($op) {
 			}
 			// Display Navigation
 			if ($categoriesCount > $limit) {
-				include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
+				require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 				$pagenav = new \XoopsPageNav($categoriesCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
 				$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
 			}
@@ -89,7 +89,7 @@ switch ($op) {
 		// Set Vars
 		$categoriesObj->setVar('cat_name', Request::getString('cat_name', ''));
 		// Set Var cat_logo
-		include_once XOOPS_ROOT_PATH . '/class/uploader.php';
+		require_once XOOPS_ROOT_PATH . '/class/uploader.php';
 		$filename       = $_FILES['cat_logo']['name'];
 		$imgMimetype    = $_FILES['cat_logo']['type'];
 		$imgNameDef     = Request::getString('cat_name');
@@ -102,9 +102,7 @@ switch ($op) {
 			$imgName = \str_replace(' ', '', $imgNameDef) . '.' . $extension;
 			$uploader->setPrefix($imgName);
 			$uploader->fetchMedia($_POST['xoops_upload_file'][0]);
-			if (!$uploader->upload()) {
-				$uploaderErrors = $uploader->getErrors();
-			} else {
+			if ($uploader->upload()) {
 				$savedFilename = $uploader->getSavedFileName();
 				$maxwidth  = (int)$helper->getConfig('maxwidth_image');
 				$maxheight = (int)$helper->getConfig('maxheight_image');
@@ -119,6 +117,8 @@ switch ($op) {
 					$result                    = $imgHandler->resizeImage();
 				}
 				$categoriesObj->setVar('cat_logo', $savedFilename);
+			} else {
+				$uploaderErrors = $uploader->getErrors();
 			}
 		} else {
 			if ($filename > '') {

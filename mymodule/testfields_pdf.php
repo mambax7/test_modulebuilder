@@ -20,7 +20,7 @@ declare(strict_types=1);
  * @package        mymodule
  * @since          1.0
  * @min_xoops      2.5.9
- * @author         TDM XOOPS - Email:<info@email.com> - Website:<http://xoops.org>
+ * @author         TDM XOOPS - Email:<info@email.com> - Website:<https://xoops.org>
  */
 
 use Xmf\Request;
@@ -93,23 +93,23 @@ $pdf->SetAuthor($pdfData['author']);
 $pdf->SetTitle($title);
 $pdf->SetKeywords($pdfData['keywords']);
 // Set default header data
-$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, MYMODULE_HEADER_TITLE, MYMODULE_HEADER_STRING);
+$pdf->setHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, MYMODULE_HEADER_TITLE, MYMODULE_HEADER_STRING);
 // Set margins
 $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP + 10, PDF_MARGIN_RIGHT);
 // Set auto page breaks
 $pdf->SetAutoPageBreak(true, PDF_MARGIN_BOTTOM);
-$pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
-$pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
+$pdf->setHeaderMargin(PDF_MARGIN_HEADER);
+$pdf->setFooterMargin(PDF_MARGIN_FOOTER);
 $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO); //set image scale factor
 // For chinese
 if ('cn' == _LANGCODE) {
-	$pdf->setHeaderFont(array('gbsn00lp', '', $pdfData['fontsize']));
+	$pdf->setHeaderFont(['gbsn00lp', '', $pdfData['fontsize']]);
 	$pdf->SetFont('gbsn00lp', '', $pdfData['fontsize']);
-	$pdf->setFooterFont(array('gbsn00lp', '', $pdfData['fontsize']));
+	$pdf->setFooterFont(['gbsn00lp', '', $pdfData['fontsize']]);
 } else {
-	$pdf->setHeaderFont(array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
+	$pdf->setHeaderFont([PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN]);
 	$pdf->SetFont($pdfData['fontname'], '', $pdfData['fontsize']);
-	$pdf->setFooterFont(array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+	$pdf->setFooterFont([PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA]);
 }
 // Set some language-dependent strings (optional)
 $lang = XOOPS_ROOT_PATH.'/Frameworks/tcpdf/lang/eng.php';

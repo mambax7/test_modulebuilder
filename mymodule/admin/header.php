@@ -20,10 +20,10 @@ declare(strict_types=1);
  * @package        mymodule
  * @since          1.0
  * @min_xoops      2.5.9
- * @author         TDM XOOPS - Email:<info@email.com> - Website:<http://xoops.org>
+ * @author         TDM XOOPS - Email:<info@email.com> - Website:<https://xoops.org>
  */
-include \dirname(\dirname(\dirname(__DIR__))) . '/include/cp_header.php';
-include_once \dirname(__DIR__) . '/include/common.php';
+include dirname(__DIR__, 3) . '/include/cp_header.php';
+require_once \dirname(__DIR__) . '/include/common.php';
 
 $sysPathIcon16   = '../' . $GLOBALS['xoopsModule']->getInfo('sysicons16');
 $sysPathIcon32   = '../' . $GLOBALS['xoopsModule']->getInfo('sysicons32');
@@ -39,7 +39,7 @@ $testfieldsHandler = $helper->getHandler('Testfields');
 $myts = MyTextSanitizer::getInstance();
 // 
 if (!isset($xoopsTpl) || !\is_object($xoopsTpl)) {
-	include_once XOOPS_ROOT_PATH . '/class/template.php';
+	require_once XOOPS_ROOT_PATH . '/class/template.php';
 	$xoopsTpl = new \XoopsTpl();
 }
 
@@ -49,7 +49,7 @@ if (!isset($xoopsTpl) || !\is_object($xoopsTpl)) {
 
 // Local admin menu class
 if (\file_exists($GLOBALS['xoops']->path($pathModuleAdmin.'/moduleadmin.php'))) {
-	include_once $GLOBALS['xoops']->path($pathModuleAdmin.'/moduleadmin.php');
+	require_once $GLOBALS['xoops']->path($pathModuleAdmin.'/moduleadmin.php');
 } else {
 	\redirect_header('../../../admin.php', 5, _AM_MODULEADMIN_MISSING);
 }

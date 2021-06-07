@@ -20,7 +20,7 @@ declare(strict_types=1);
  * @package        mymodule
  * @since          1.0
  * @min_xoops      2.5.9
- * @author         TDM XOOPS - Email:<info@email.com> - Website:<http://xoops.org>
+ * @author         TDM XOOPS - Email:<info@email.com> - Website:<https://xoops.org>
  */
 if (!\defined('XOOPS_ICONS32_PATH')) {
 	\define('XOOPS_ICONS32_PATH', XOOPS_ROOT_PATH . '/Frameworks/moduleclasses/icons/32');
@@ -46,6 +46,6 @@ if (!\defined('XOOPS_ICONS32_URL')) {
 \define('MYMODULE_ADMIN', MYMODULE_URL . '/admin/index.php');
 $localLogo = MYMODULE_IMAGE_URL . '/tdmxoops_logo.png';
 // Module Information
-$copyright = "<a href='http://xoops.org' title='XOOPS Project' target='_blank'><img src='" . $localLogo . "' alt='XOOPS Project' /></a>";
-include_once XOOPS_ROOT_PATH . '/class/xoopsrequest.php';
-include_once MYMODULE_PATH . '/include/functions.php';
+$copyright = "<a href='https://xoops.org' title='XOOPS Project' target='_blank'><img src='" . $localLogo . "' alt='XOOPS Project'></a>";
+require_once XOOPS_ROOT_PATH . '/class/xoopsrequest.php';
+require_once MYMODULE_PATH . '/include/functions.php';

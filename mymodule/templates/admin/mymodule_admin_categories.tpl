@@ -19,12 +19,12 @@
 			<tr class='<{cycle values='odd, even'}>'>
 				<td class='center'><{$category.id}></td>
 				<td class='center'><{$category.name}></td>
-				<td class='center'><img src="<{$mymodule_upload_url|default:false}>/images/categories/<{$category.logo}>" alt="categories" style="max-width:100px" /></td>
+				<td class='center'><img src="<{$mymodule_upload_url|default:false}>/images/categories/<{$category.logo}>" alt="categories" style="max-width:100px"></td>
 				<td class='center'><{$category.created}></td>
 				<td class='center'><{$category.submitter}></td>
 				<td class="center  width5">
-					<a href="categories.php?op=edit&amp;cat_id=<{$category.id}>" title="<{$smarty.const._EDIT}>"><img src="<{xoModuleIcons16 edit.png}>" alt="<{$smarty.const._EDIT}> categories" /></a>
-					<a href="categories.php?op=delete&amp;cat_id=<{$category.id}>" title="<{$smarty.const._DELETE}>"><img src="<{xoModuleIcons16 delete.png}>" alt="<{$smarty.const._DELETE}> categories" /></a>
+					<a href="categories.php?op=edit&amp;cat_id=<{$category.id}>" title="<{$smarty.const._EDIT}>"><img src="<{xoModuleIcons16 edit.png}>" alt="<{$smarty.const._EDIT}> categories"></a>
+					<a href="categories.php?op=delete&amp;cat_id=<{$category.id}>" title="<{$smarty.const._DELETE}>"><img src="<{xoModuleIcons16 delete.png}>" alt="<{$smarty.const._DELETE}> categories"></a>
 				</td>
 			</tr>
 			<{/foreach}>

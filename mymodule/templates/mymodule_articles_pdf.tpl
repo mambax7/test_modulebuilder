@@ -3,5 +3,5 @@
 	<div class='col-sm-3'><{$smarty.const._MA_MYMODULE_ARTICLE_DESCR}>: </div>
 	<div class='col-sm-8'><{$article.descr}></div>
 	<div class='col-sm-3'><{$smarty.const._MA_MYMODULE_ARTICLE_IMG}>: </div>
-	<div class='col-sm-9'><img src='<{$mymodule_upload_url|default:false}>/images/articles/<{$article.img}>' alt='articles' /></div>
+	<div class='col-sm-9'><img src='<{$mymodule_upload_url|default:false}>/images/articles/<{$article.img}>' alt='articles'></div>
 </div>

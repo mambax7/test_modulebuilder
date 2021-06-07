@@ -20,17 +20,17 @@ declare(strict_types=1);
  * @package        mymodule
  * @since          1.0
  * @min_xoops      2.5.9
- * @author         TDM XOOPS - Email:<info@email.com> - Website:<http://xoops.org>
+ * @author         TDM XOOPS - Email:<info@email.com> - Website:<https://xoops.org>
  */
 
-include_once __DIR__ . '/admin.php';
+require_once __DIR__ . '/admin.php';
 
 // ---------------- Main ----------------
 \define('_MA_MYMODULE_INDEX', 'Overview My Module');
 \define('_MA_MYMODULE_TITLE', 'My Module');
 \define('_MA_MYMODULE_DESC', 'This module is for doing following...');
 \define('_MA_MYMODULE_INDEX_DESC', "Welcome to the homepage of your new module My Module!<br>
-As you can see, you have created a page with a list of links at the top to navigate between the pages of your module. This description is only visible on the homepage of this module, the other pages you will see the content you created when you built this module with the module ModuleBuilder, and after creating new content in admin of this module. In order to expand this module with other resources, just add the code you need to extend the functionality of the same. The files are grouped by type, from the header to the footer to see how divided the source code.<br><br>If you see this message, it is because you have not created content for this module. Once you have created any type of content, you will not see this message.<br><br>If you liked the module ModuleBuilder and thanks to the long process for giving the opportunity to the new module to be created in a moment, consider making a donation to keep the module ModuleBuilder and make a donation using this button <a href='http://www.txmodxoops.org/modules/xdonations/index.php' title='Donation To Txmod Xoops'><img src='https://www.paypal.com/en_US/i/btn/btn_donate_LG.gif' alt='Button Donations' /></a><br>Thanks!<br><br>Use the link below to go to the admin and create content.");
+As you can see, you have created a page with a list of links at the top to navigate between the pages of your module. This description is only visible on the homepage of this module, the other pages you will see the content you created when you built this module with the module ModuleBuilder, and after creating new content in admin of this module. In order to expand this module with other resources, just add the code you need to extend the functionality of the same. The files are grouped by type, from the header to the footer to see how divided the source code.<br><br>If you see this message, it is because you have not created content for this module. Once you have created any type of content, you will not see this message.<br><br>If you liked the module ModuleBuilder and thanks to the long process for giving the opportunity to the new module to be created in a moment, consider making a donation to keep the module ModuleBuilder and make a donation using this button <a href='http://www.txmodxoops.org/modules/xdonations/index.php' title='Donation To Txmod Xoops'><img src='https://www.paypal.com/en_US/i/btn/btn_donate_LG.gif' alt='Button Donations'></a><br>Thanks!<br><br>Use the link below to go to the admin and create content.");
 \define('_MA_MYMODULE_NO_PDF_LIBRARY', 'Libraries TCPDF not there yet, upload them in root/Frameworks');
 \define('_MA_MYMODULE_NO', 'No');
 \define('_MA_MYMODULE_DETAILS', 'Show details');
@@ -105,7 +105,7 @@ As you can see, you have created a page with a list of links at the top to navig
 \define('_MA_MYMODULE_FORM_SURE_DELETE', "Are you sure to delete: <b><span style='color : Red;'>%s </span></b>");
 \define('_MA_MYMODULE_FORM_SURE_RENEW', "Are you sure to update: <b><span style='color : Red;'>%s </span></b>");
 \define('_MA_MYMODULE_FORM_SURE_BROKEN', "Are you sure to notify as broken: <b><span style='color : Red;'>%s </span></b>");
-\define('_MA_MYMODULE_INVALID_PARAM', "Invalid parameter");
+\define('_MA_MYMODULE_INVALID_PARAM', 'Invalid parameter');
 // ---------------- Ratings ----------------
 \define('_MA_MYMODULE_RATING_CURRENT_1', 'Rating: %c / %m (%t rating totally)');
 \define('_MA_MYMODULE_RATING_CURRENT_X', 'Rating: %c / %m (%t ratings totally)');

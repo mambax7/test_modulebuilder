@@ -20,13 +20,13 @@ declare(strict_types=1);
  * @package        mymodule
  * @since          1.0
  * @min_xoops      2.5.9
- * @author         TDM XOOPS - Email:<info@email.com> - Website:<http://xoops.org>
+ * @author         TDM XOOPS - Email:<info@email.com> - Website:<https://xoops.org>
  */
 
 
 use XoopsModules\Mymodule\Common;
 
-include_once \dirname(__DIR__) . '/preloads/autoloader.php';
+require_once \dirname(__DIR__) . '/preloads/autoloader.php';
 require __DIR__ . '/header.php';
 
 // Template Index
@@ -54,7 +54,7 @@ if ($configurator->uploadFolders && \is_array($configurator->uploadFolders)) {
 // Uploads Folders Created
 foreach (\array_keys($folder) as $i) {
 	$adminObject->addConfigBoxLine($folder[$i], 'folder');
-	$adminObject->addConfigBoxLine(array($folder[$i], '777'), 'chmod');
+	$adminObject->addConfigBoxLine([$folder[$i], '777'], 'chmod');
 }
 
 // Render Index
@@ -62,7 +62,7 @@ $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('inde
 // Test Data
 if ($helper->getConfig('displaySampleButton')) {
 	\xoops_loadLanguage('admin/modulesadmin', 'system');
-	include_once \dirname(__DIR__) . '/testdata/index.php';
+	require_once \dirname(__DIR__) . '/testdata/index.php';
 	$adminObject->addItemButton(\constant('CO_' . $moduleDirNameUpper . '_ADD_SAMPLEDATA'), '__DIR__ . /../../testdata/index.php?op=load', 'add');
 	$adminObject->addItemButton(\constant('CO_' . $moduleDirNameUpper . '_SAVE_SAMPLEDATA'), '__DIR__ . /../../testdata/index.php?op=save', 'add');
 //	$adminObject->addItemButton(\constant('CO_' . $moduleDirNameUpper . '_EXPORT_SCHEMA'), '__DIR__ . /../../testdata/index.php?op=exportschema', 'add');

@@ -34,10 +34,8 @@ function xoops_module_uninstall_mymodule(\XoopsModule $module)
 
     $moduleDirName      = \basename(\dirname(__DIR__));
     $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
-    /** @var Mymodule\Helper $helper */
     $helper = Mymodule\Helper::getInstance();
 
-    /** @var Mymodule\Utility $utility */
     $utility = new Mymodule\Utility();
 
     $success = true;

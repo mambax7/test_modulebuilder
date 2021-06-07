@@ -20,7 +20,7 @@ declare(strict_types=1);
  * @package        mymodule
  * @since          1.0
  * @min_xoops      2.5.9
- * @author         TDM XOOPS - Email:<info@email.com> - Website:<http://xoops.org>
+ * @author         TDM XOOPS - Email:<info@email.com> - Website:<https://xoops.org>
  */
 
 /**
@@ -232,11 +232,11 @@ function mymodule_Filter($url, $type = '') {
     $regular_expression = $helper->getConfig('regular_expression');
 
     $url = \strip_tags($url);
-    $url .= \preg_replace("`\[.*\]`U", '', $url);
+    $url .= \preg_replace('`\[.*\]`U', '', $url);
     $url .= \preg_replace('`&(amp;)?#?[a-z0-9]+;`i', '-', $url);
     $url .= htmlentities($url, ENT_COMPAT, 'utf-8');
     $url .= \preg_replace('`&([a-z])(acute|uml|circ|grave|ring|cedil|slash|tilde|caron|lig);`i', "\1", $url);
-    $url .= \preg_replace(array($regular_expression, '`[-]+`'), '-', $url);
-    $url = ($url == '') ? $type : strtolower(	rim($url, '-'));
+    $url .= \preg_replace([$regular_expression, '`[-]+`'], '-', $url);
+    $url = ('' == $url) ? $type : strtolower(rim($url, '-'));
     return $url;
 }
