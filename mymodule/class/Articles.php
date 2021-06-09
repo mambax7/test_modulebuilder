@@ -18,12 +18,12 @@ namespace XoopsModules\Mymodule;
 /**
  * My Module module for xoops
  *
- * @copyright      2020 XOOPS Project (https://xoops.org)
+ * @copyright      2021 XOOPS Project (https://xoops.org)
  * @license        GPL 2.0 or later
  * @package        mymodule
  * @since          1.0
  * @min_xoops      2.5.9
- * @author         TDM XOOPS - Email:<info@email.com> - Website:<https://xoops.org>
+ * @author         TDM XOOPS - Email:<info@email.com> - Website:<http://xoops.org>
  */
 
 use XoopsModules\Mymodule;
@@ -47,7 +47,7 @@ class Articles extends \XoopsObject
 		$this->initVar('art_title', \XOBJ_DTYPE_TXTBOX);
 		$this->initVar('art_descr', \XOBJ_DTYPE_OTHER);
 		$this->initVar('art_img', \XOBJ_DTYPE_TXTBOX);
-		$this->initVar('art_online', \XOBJ_DTYPE_INT);
+		$this->initVar('art_status', \XOBJ_DTYPE_INT);
 		$this->initVar('art_file', \XOBJ_DTYPE_TXTBOX);
 		$this->initVar('art_ratings', \XOBJ_DTYPE_DECIMAL);
 		$this->initVar('art_votes', \XOBJ_DTYPE_INT);
@@ -92,16 +92,28 @@ class Articles extends \XoopsObject
 		$isAdmin = $GLOBALS['xoopsUser']->isAdmin($GLOBALS['xoopsModule']->mid());
 		// Permissions for uploader
 		$grouppermHandler = \xoops_getHandler('groupperm');
-		$groups = \is_object($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser']->getGroups() : XOOPS_GROUP_ANONYMOUS;
+		$groups = \is_object($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser']->getGroups() : \XOOPS_GROUP_ANONYMOUS;
 		$permissionUpload = $grouppermHandler->checkRight('upload_groups', 32, $groups, $GLOBALS['xoopsModule']->getVar('mid')) ? true : false;
 		// Title
-		$title = $this->isNew() ? \sprintf(_AM_MYMODULE_ARTICLE_ADD) : \sprintf(_AM_MYMODULE_ARTICLE_EDIT);
+		$title = $this->isNew() ? \sprintf(\_AM_MYMODULE_ARTICLE_ADD) : \sprintf(\_AM_MYMODULE_ARTICLE_EDIT);
 		// Get Theme Form
 		\xoops_load('XoopsFormLoader');
 		$form = new \XoopsThemeForm($title, 'form', $action, 'post', true);
 		$form->setExtra('enctype="multipart/form-data"');
+		// Use tag module
+		$dirTag = \is_dir(\XOOPS_ROOT_PATH . '/modules/tag') ? true : false;
+		if (($helper->getConfig('usetag') == 1) && $dirTag) {
+			$tagId = $this->isNew() ? 0 : $this->getVar('art_id');
+			require_once \XOOPS_ROOT_PATH . '/modules/tag/include/formtag.php';
+			$form->addElement(new \XoopsFormTag('tag', 60, 255, $tagId, 0), true);
+		}
+		// Form Table categories
+		$categoriesHandler = $helper->getHandler('Categories');
+		$artCatSelect = new \XoopsFormSelect(\_AM_MYMODULE_ARTICLE_CAT, 'art_cat', $this->getVar('art_cat'));
+		$artCatSelect->addOptionArray($categoriesHandler->getList());
+		$form->addElement($artCatSelect, true);
 		// Form Text artTitle
-		$form->addElement(new \XoopsFormText(_AM_MYMODULE_ARTICLE_TITLE, 'art_title', 50, 255, $this->getVar('art_title')), true);
+		$form->addElement(new \XoopsFormText(\_AM_MYMODULE_ARTICLE_TITLE, 'art_title', 50, 255, $this->getVar('art_title')), true);
 		// Form Editor DhtmlTextArea artDescr
 		$editorConfigs = [];
 		if ($isAdmin) {
@@ -116,89 +128,89 @@ class Articles extends \XoopsObject
 		$editorConfigs['width'] = '100%';
 		$editorConfigs['height'] = '400px';
 		$editorConfigs['editor'] = $editor;
-		$form->addElement(new \XoopsFormEditor(_AM_MYMODULE_ARTICLE_DESCR, 'art_descr', $editorConfigs), true);
+		$form->addElement(new \XoopsFormEditor(\_AM_MYMODULE_ARTICLE_DESCR, 'art_descr', $editorConfigs), true);
 		// Form Image artImg
 		// Form Image artImg: Select Uploaded Image 
 		$getArtImg = $this->getVar('art_img');
 		$artImg = $getArtImg ?: 'blank.gif';
 		$imageDirectory = '/uploads/mymodule/images/articles';
-		$imageTray = new \XoopsFormElementTray(_AM_MYMODULE_ARTICLE_IMG, '<br>');
-		$imageSelect = new \XoopsFormSelect(\sprintf(_AM_MYMODULE_ARTICLE_IMG_UPLOADS, ".{$imageDirectory}/"), 'art_img', $artImg, 5);
-		$imageArray = \XoopsLists::getImgListAsArray( XOOPS_ROOT_PATH . $imageDirectory );
+		$imageTray = new \XoopsFormElementTray(\_AM_MYMODULE_ARTICLE_IMG, '<br>');
+		$imageSelect = new \XoopsFormSelect(\sprintf(\_AM_MYMODULE_ARTICLE_IMG_UPLOADS, ".{$imageDirectory}/"), 'art_img', $artImg, 5);
+		$imageArray = \XoopsLists::getImgListAsArray( \XOOPS_ROOT_PATH . $imageDirectory );
 		foreach ($imageArray as $image1) {
 			$imageSelect->addOption(($image1), $image1);
 		}
-		$imageSelect->setExtra("onchange='showImgSelected(\"imglabel_art_img\", \"art_img\", \"" . $imageDirectory . '", "", "' . XOOPS_URL . "\")'");
+		$imageSelect->setExtra("onchange='showImgSelected(\"imglabel_art_img\", \"art_img\", \"" . $imageDirectory . '", "", "' . \XOOPS_URL . "\")'");
 		$imageTray->addElement($imageSelect, false);
-		$imageTray->addElement(new \XoopsFormLabel('', "<br><img src='" . XOOPS_URL . '/' . $imageDirectory . '/' . $artImg . "' id='imglabel_art_img' alt='' style='max-width:100px'>"));
+		$imageTray->addElement(new \XoopsFormLabel('', "<br><img src='" . \XOOPS_URL . '/' . $imageDirectory . '/' . $artImg . "' id='imglabel_art_img' alt='' style='max-width:100px' >"));
 		// Form Image artImg: Upload new image
 		if ($permissionUpload) {
 			$maxsize = $helper->getConfig('maxsize_image');
-			$imageTray->addElement(new \XoopsFormFile('<br>' . _AM_MYMODULE_FORM_UPLOAD_NEW, 'art_img', $maxsize));
-			$imageTray->addElement(new \XoopsFormLabel(_AM_MYMODULE_FORM_UPLOAD_SIZE, ($maxsize / 1048576) . ' '  . _AM_MYMODULE_FORM_UPLOAD_SIZE_MB));
-			$imageTray->addElement(new \XoopsFormLabel(_AM_MYMODULE_FORM_UPLOAD_IMG_WIDTH, $helper->getConfig('maxwidth_image') . ' px'));
-			$imageTray->addElement(new \XoopsFormLabel(_AM_MYMODULE_FORM_UPLOAD_IMG_HEIGHT, $helper->getConfig('maxheight_image') . ' px'));
+			$imageTray->addElement(new \XoopsFormFile('<br>' . \_AM_MYMODULE_FORM_UPLOAD_NEW, 'art_img', $maxsize));
+			$imageTray->addElement(new \XoopsFormLabel(\_AM_MYMODULE_FORM_UPLOAD_SIZE, ($maxsize / 1048576) . ' '  . \_AM_MYMODULE_FORM_UPLOAD_SIZE_MB));
+			$imageTray->addElement(new \XoopsFormLabel(\_AM_MYMODULE_FORM_UPLOAD_IMG_WIDTH, $helper->getConfig('maxwidth_image') . ' px'));
+			$imageTray->addElement(new \XoopsFormLabel(\_AM_MYMODULE_FORM_UPLOAD_IMG_HEIGHT, $helper->getConfig('maxheight_image') . ' px'));
 		} else {
 			$imageTray->addElement(new \XoopsFormHidden('art_img', $artImg));
 		}
 		$form->addElement($imageTray);
-		// Form Select Status artOnline
+		// Form Select Status artStatus
 		$permissionsHandler = $helper->getHandler('Permissions');
-		$artOnlineSelect = new \XoopsFormSelect(_AM_MYMODULE_ARTICLE_ONLINE, 'art_online', $this->getVar('art_online'));
-		$artOnlineSelect->addOption(Constants::STATUS_NONE, _AM_MYMODULE_STATUS_NONE);
-		$artOnlineSelect->addOption(Constants::STATUS_OFFLINE, _AM_MYMODULE_STATUS_OFFLINE);
-		$artOnlineSelect->addOption(Constants::STATUS_SUBMITTED, _AM_MYMODULE_STATUS_SUBMITTED);
+		$artStatusSelect = new \XoopsFormSelect(\_AM_MYMODULE_ARTICLE_STATUS, 'art_status', $this->getVar('art_status'));
+		$artStatusSelect->addOption(Constants::STATUS_NONE, \_AM_MYMODULE_STATUS_NONE);
+		$artStatusSelect->addOption(Constants::STATUS_OFFLINE, \_AM_MYMODULE_STATUS_OFFLINE);
+		$artStatusSelect->addOption(Constants::STATUS_SUBMITTED, \_AM_MYMODULE_STATUS_SUBMITTED);
 		if ($permissionsHandler->getPermGlobalApprove()) {
-			$artOnlineSelect->addOption(Constants::STATUS_APPROVED, _AM_MYMODULE_STATUS_APPROVED);
+			$artStatusSelect->addOption(Constants::STATUS_APPROVED, \_AM_MYMODULE_STATUS_APPROVED);
 		}
-		$artOnlineSelect->addOption(Constants::STATUS_BROKEN, _AM_MYMODULE_STATUS_BROKEN);
-		$form->addElement($artOnlineSelect, true);
+		$artStatusSelect->addOption(Constants::STATUS_BROKEN, \_AM_MYMODULE_STATUS_BROKEN);
+		$form->addElement($artStatusSelect, true);
 		// Form File: Upload artFile
 		$artFile = $this->isNew() ? '' : $this->getVar('art_file');
 		if ($permissionUpload) {
-			$fileUploadTray = new \XoopsFormElementTray(_AM_MYMODULE_ARTICLE_FILE, '<br>');
+			$fileUploadTray = new \XoopsFormElementTray(\_AM_MYMODULE_ARTICLE_FILE, '<br>');
 			$fileDirectory = '/uploads/mymodule/files/articles';
 			if (!$this->isNew()) {
-				$fileUploadTray->addElement(new \XoopsFormLabel(\sprintf(_AM_MYMODULE_ARTICLE_FILE_UPLOADS, ".{$fileDirectory}/"), $artFile));
+				$fileUploadTray->addElement(new \XoopsFormLabel(\sprintf(\_AM_MYMODULE_ARTICLE_FILE_UPLOADS, ".{$fileDirectory}/"), $artFile));
 			}
 			$maxsize = $helper->getConfig('maxsize_file');
 			$fileUploadTray->addElement(new \XoopsFormFile('', 'art_file', $maxsize));
-			$fileUploadTray->addElement(new \XoopsFormLabel(_AM_MYMODULE_FORM_UPLOAD_SIZE, ($maxsize / 1048576) . ' '  . _AM_MYMODULE_FORM_UPLOAD_SIZE_MB));
+			$fileUploadTray->addElement(new \XoopsFormLabel(\_AM_MYMODULE_FORM_UPLOAD_SIZE, ($maxsize / 1048576) . ' '  . \_AM_MYMODULE_FORM_UPLOAD_SIZE_MB));
 			$form->addElement($fileUploadTray);
 		} else {
 			$form->addElement(new \XoopsFormHidden('art_file', $artFile));
 		}
 		// Form Text artRatings
 		$artRatings = $this->isNew() ? '0.00' : $this->getVar('art_ratings');
-		$form->addElement(new \XoopsFormText(_AM_MYMODULE_ARTICLE_RATINGS, 'art_ratings', 20, 150, $artRatings));
+		$form->addElement(new \XoopsFormText(\_AM_MYMODULE_ARTICLE_RATINGS, 'art_ratings', 20, 150, $artRatings));
 		// Form Text artVotes
 		$artVotes = $this->isNew() ? '0' : $this->getVar('art_votes');
-		$form->addElement(new \XoopsFormText(_AM_MYMODULE_ARTICLE_VOTES, 'art_votes', 20, 150, $artVotes));
+		$form->addElement(new \XoopsFormText(\_AM_MYMODULE_ARTICLE_VOTES, 'art_votes', 20, 150, $artVotes));
 		// Form Text Date Select artCreated
 		$artCreated = $this->isNew() ? \time() : $this->getVar('art_created');
-		$form->addElement(new \XoopsFormTextDateSelect(_AM_MYMODULE_ARTICLE_CREATED, 'art_created', '', $artCreated));
+		$form->addElement(new \XoopsFormTextDateSelect(\_AM_MYMODULE_ARTICLE_CREATED, 'art_created', '', $artCreated));
 		// Form Select User artSubmitter
 		$artSubmitter = $this->isNew() ? $GLOBALS['xoopsUser']->uid() : $this->getVar('art_submitter');
-		$form->addElement(new \XoopsFormSelectUser(_AM_MYMODULE_ARTICLE_SUBMITTER, 'art_submitter', false, $artSubmitter));
+		$form->addElement(new \XoopsFormSelectUser(\_AM_MYMODULE_ARTICLE_SUBMITTER, 'art_submitter', false, $artSubmitter));
 		// Permissions
 		$memberHandler = \xoops_getHandler('member');
 		$groupList = $memberHandler->getGroupList();
 		$grouppermHandler = \xoops_getHandler('groupperm');
 		$fullList[] = \array_keys($groupList);
 		if ($this->isNew()) {
-			$groupsCanApproveCheckbox = new \XoopsFormCheckBox(_AM_MYMODULE_PERMISSIONS_APPROVE, 'groups_approve_articles[]', $fullList);
-			$groupsCanSubmitCheckbox = new \XoopsFormCheckBox(_AM_MYMODULE_PERMISSIONS_SUBMIT, 'groups_submit_articles[]', $fullList);
-			$groupsCanViewCheckbox = new \XoopsFormCheckBox(_AM_MYMODULE_PERMISSIONS_VIEW, 'groups_view_articles[]', $fullList);
+			$groupsCanApproveCheckbox = new \XoopsFormCheckBox(\_AM_MYMODULE_PERMISSIONS_APPROVE, 'groups_approve_articles[]', $fullList);
+			$groupsCanSubmitCheckbox = new \XoopsFormCheckBox(\_AM_MYMODULE_PERMISSIONS_SUBMIT, 'groups_submit_articles[]', $fullList);
+			$groupsCanViewCheckbox = new \XoopsFormCheckBox(\_AM_MYMODULE_PERMISSIONS_VIEW, 'groups_view_articles[]', $fullList);
 		} else {
 			$groupsIdsApprove = $grouppermHandler->getGroupIds('mymodule_approve_articles', $this->getVar('art_id'), $GLOBALS['xoopsModule']->getVar('mid'));
 			$groupsIdsApprove[] = \array_values($groupsIdsApprove);
-			$groupsCanApproveCheckbox = new \XoopsFormCheckBox(_AM_MYMODULE_PERMISSIONS_APPROVE, 'groups_approve_articles[]', $groupsIdsApprove);
+			$groupsCanApproveCheckbox = new \XoopsFormCheckBox(\_AM_MYMODULE_PERMISSIONS_APPROVE, 'groups_approve_articles[]', $groupsIdsApprove);
 			$groupsIdsSubmit = $grouppermHandler->getGroupIds('mymodule_submit_articles', $this->getVar('art_id'), $GLOBALS['xoopsModule']->getVar('mid'));
 			$groupsIdsSubmit[] = \array_values($groupsIdsSubmit);
-			$groupsCanSubmitCheckbox = new \XoopsFormCheckBox(_AM_MYMODULE_PERMISSIONS_SUBMIT, 'groups_submit_articles[]', $groupsIdsSubmit);
+			$groupsCanSubmitCheckbox = new \XoopsFormCheckBox(\_AM_MYMODULE_PERMISSIONS_SUBMIT, 'groups_submit_articles[]', $groupsIdsSubmit);
 			$groupsIdsView = $grouppermHandler->getGroupIds('mymodule_view_articles', $this->getVar('art_id'), $GLOBALS['xoopsModule']->getVar('mid'));
 			$groupsIdsView[] = \array_values($groupsIdsView);
-			$groupsCanViewCheckbox = new \XoopsFormCheckBox(_AM_MYMODULE_PERMISSIONS_VIEW, 'groups_view_articles[]', $groupsIdsView);
+			$groupsCanViewCheckbox = new \XoopsFormCheckBox(\_AM_MYMODULE_PERMISSIONS_VIEW, 'groups_view_articles[]', $groupsIdsView);
 		}
 		// To Approve
 		$groupsCanApproveCheckbox->addOptionArray($groupList);
@@ -211,7 +223,7 @@ class Articles extends \XoopsObject
 		$form->addElement($groupsCanViewCheckbox);
 		// To Save
 		$form->addElement(new \XoopsFormHidden('op', 'save'));
-		$form->addElement(new \XoopsFormButtonTray('', _SUBMIT, 'submit', '', false));
+		$form->addElement(new \XoopsFormButtonTray('', \_SUBMIT, 'submit', '', false));
 		return $form;
 	}
 
@@ -228,30 +240,32 @@ class Articles extends \XoopsObject
 		$utility = new \XoopsModules\Mymodule\Utility();
 		$ret = $this->getValues($keys, $format, $maxDepth);
 		$ret['id']          = $this->getVar('art_id');
-		$ret['cat']         = $this->getVar('art_cat');
+		$categoriesHandler = $helper->getHandler('Categories');
+		$categoriesObj = $categoriesHandler->get($this->getVar('art_cat'));
+		$ret['cat']         = $categoriesObj->getVar('cat_name');
 		$ret['title']       = $this->getVar('art_title');
 		$ret['descr']       = $this->getVar('art_descr', 'e');
 		$editorMaxchar = $helper->getConfig('editor_maxchar');
 		$ret['descr_short'] = $utility::truncateHtml($ret['descr'], $editorMaxchar);
 		$ret['img']         = $this->getVar('art_img');
-		$status             = $this->getVar('art_online');
+		$status             = $this->getVar('art_status');
 		$ret['status']      = $status;
 		switch ($status) {
 			case Constants::STATUS_NONE:
 			default:
-				$status_text = _AM_MYMODULE_STATUS_NONE;
+				$status_text = \_AM_MYMODULE_STATUS_NONE;
 				break;
 			case Constants::STATUS_OFFLINE:
-				$status_text = _AM_MYMODULE_STATUS_OFFLINE;
+				$status_text = \_AM_MYMODULE_STATUS_OFFLINE;
 				break;
 			case Constants::STATUS_SUBMITTED:
-				$status_text = _AM_MYMODULE_STATUS_SUBMITTED;
+				$status_text = \_AM_MYMODULE_STATUS_SUBMITTED;
 				break;
 			case Constants::STATUS_APPROVED:
-				$status_text = _AM_MYMODULE_STATUS_APPROVED;
+				$status_text = \_AM_MYMODULE_STATUS_APPROVED;
 				break;
 			case Constants::STATUS_BROKEN:
-				$status_text = _AM_MYMODULE_STATUS_BROKEN;
+				$status_text = \_AM_MYMODULE_STATUS_BROKEN;
 				break;
 		}
 		$ret['status_text'] = $status_text;

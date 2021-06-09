@@ -15,12 +15,12 @@ declare(strict_types=1);
 /**
  * My Module module for xoops
  *
- * @copyright      2020 XOOPS Project (https://xoops.org)
+ * @copyright      2021 XOOPS Project (https://xoops.org)
  * @license        GPL 2.0 or later
  * @package        mymodule
  * @since          1.0
  * @min_xoops      2.5.9
- * @author         TDM XOOPS - Email:<info@email.com> - Website:<https://xoops.org>
+ * @author         TDM XOOPS - Email:<info@email.com> - Website:<http://xoops.org>
  */
 
 use Xmf\Request;
@@ -30,7 +30,7 @@ use XoopsModules\Mymodule\Common;
 
 require __DIR__ . '/header.php';
 $GLOBALS['xoopsOption']['template_main'] = 'mymodule_articles.tpl';
-require_once XOOPS_ROOT_PATH . '/header.php';
+require_once \XOOPS_ROOT_PATH . '/header.php';
 
 $op    = Request::getCmd('op', 'list');
 $start = Request::getInt('start', 0);
@@ -40,12 +40,12 @@ $artId = Request::getInt('art_id', 0);
 // Define Stylesheet
 $GLOBALS['xoTheme']->addStylesheet($style, null);
 // Paths
-$GLOBALS['xoopsTpl']->assign('xoops_icons32_url', XOOPS_ICONS32_URL);
-$GLOBALS['xoopsTpl']->assign('mymodule_url', MYMODULE_URL);
+$GLOBALS['xoopsTpl']->assign('xoops_icons32_url', \XOOPS_ICONS32_URL);
+$GLOBALS['xoopsTpl']->assign('mymodule_url', \MYMODULE_URL);
 // Keywords
 $keywords = [];
 // Breadcrumbs
-$xoBreadcrumbs[] = ['title' => _MA_MYMODULE_INDEX, 'link' => 'index.php'];
+$xoBreadcrumbs[] = ['title' => \_MA_MYMODULE_INDEX, 'link' => 'index.php'];
 // Permissions
 $permEdit = $permissionsHandler->getPermGlobalSubmit();
 $GLOBALS['xoopsTpl']->assign('permEdit', $permEdit);
@@ -56,17 +56,17 @@ switch ($op) {
 	case 'list':
 	default:
 		// Breadcrumbs
-		$xoBreadcrumbs[] = ['title' => _MA_MYMODULE_ARTICLES_LIST];
+		$xoBreadcrumbs[] = ['title' => \_MA_MYMODULE_ARTICLES_LIST];
 		$ratingbars = (int)$helper->getConfig('ratingbars');
 		if ($ratingbars > 0) {
-			$GLOBALS['xoTheme']->addStylesheet(MYMODULE_URL . '/assets/css/rating.css', null);
+			$GLOBALS['xoTheme']->addStylesheet(\MYMODULE_URL . '/assets/css/rating.css', null);
 			$GLOBALS['xoopsTpl']->assign('rating', $ratingbars);
 			$GLOBALS['xoopsTpl']->assign('rating_5stars', (Constants::RATING_5STARS === $ratingbars));
 			$GLOBALS['xoopsTpl']->assign('rating_10stars', (Constants::RATING_10STARS === $ratingbars));
 			$GLOBALS['xoopsTpl']->assign('rating_10num', (Constants::RATING_10NUM === $ratingbars));
 			$GLOBALS['xoopsTpl']->assign('rating_likes', (Constants::RATING_LIKES === $ratingbars));
 			$GLOBALS['xoopsTpl']->assign('itemid', 'art_id');
-			$GLOBALS['xoopsTpl']->assign('mymodule_icon_url_16', MYMODULE_URL . '/' . $modPathIcon16);
+			$GLOBALS['xoopsTpl']->assign('mymodule_icon_url_16', \MYMODULE_URL . '/' . $modPathIcon16);
 		}
 		$crArticles = new \CriteriaCompo();
 		if ($artId > 0) {
@@ -91,7 +91,7 @@ switch ($op) {
 			unset($articles);
 			// Display Navigation
 			if ($articlesCount > $limit) {
-				require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
+				require_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
 				$pagenav = new \XoopsPageNav($articlesCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
 				$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
 			}
@@ -111,23 +111,23 @@ switch ($op) {
 		}
 		// Check permissions
 		if (!$permissionsHandler->getPermGlobalSubmit()) {
-			\redirect_header('articles.php?op=list', 3, _NOPERM);
+			\redirect_header('articles.php?op=list', 3, \_NOPERM);
 		}
 		if ($artId > 0) {
 			$articlesObj = $articlesHandler->get($artId);
 		} else {
 			$articlesObj = $articlesHandler->create();
 		}
+		$uploaderErrors = '';
 		$articlesObj->setVar('art_cat', Request::getInt('art_cat', 0));
 		$articlesObj->setVar('art_title', Request::getString('art_title', ''));
 		$articlesObj->setVar('art_descr', Request::getText('art_descr', ''));
 		// Set Var art_img
-		require_once XOOPS_ROOT_PATH . '/class/uploader.php';
+		require_once \XOOPS_ROOT_PATH . '/class/uploader.php';
 		$filename       = $_FILES['art_img']['name'];
 		$imgMimetype    = $_FILES['art_img']['type'];
 		$imgNameDef     = Request::getString('art_title');
-		$uploaderErrors = '';
-		$uploader = new \XoopsMediaUploader(MYMODULE_UPLOAD_IMAGE_PATH . '/articles/', 
+		$uploader = new \XoopsMediaUploader(\MYMODULE_UPLOAD_IMAGE_PATH . '/articles/', 
 													$helper->getConfig('mimetypes_image'), 
 													$helper->getConfig('maxsize_image'), null, null);
 		if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
@@ -142,8 +142,8 @@ switch ($op) {
 				if ($maxwidth > 0 && $maxheight > 0) {
 					// Resize image
 					$imgHandler                = new Mymodule\Common\Resizer();
-					$imgHandler->sourceFile    = MYMODULE_UPLOAD_IMAGE_PATH . '/articles/' . $savedFilename;
-					$imgHandler->endFile       = MYMODULE_UPLOAD_IMAGE_PATH . '/articles/' . $savedFilename;
+					$imgHandler->sourceFile    = \MYMODULE_UPLOAD_IMAGE_PATH . '/articles/' . $savedFilename;
+					$imgHandler->endFile       = \MYMODULE_UPLOAD_IMAGE_PATH . '/articles/' . $savedFilename;
 					$imgHandler->imageMimetype = $imgMimetype;
 					$imgHandler->maxWidth      = $maxwidth;
 					$imgHandler->maxHeight     = $maxheight;
@@ -151,20 +151,20 @@ switch ($op) {
 				}
 				$articlesObj->setVar('art_img', $savedFilename);
 			} else {
-				$uploaderErrors = $uploader->getErrors();
+				$uploaderErrors .= '<br>' . $uploader->getErrors();
 			}
 		} else {
 			if ($filename > '') {
-				$uploaderErrors = $uploader->getErrors();
+				$uploaderErrors .= '<br>' . $uploader->getErrors();
 			}
 			$articlesObj->setVar('art_img', Request::getString('art_img'));
 		}
-		$articlesObj->setVar('art_online', Request::getInt('art_online', 0));
+		$articlesObj->setVar('art_status', Request::getInt('art_status', 0));
 		// Set Var art_file
-		require_once XOOPS_ROOT_PATH . '/class/uploader.php';
+		require_once \XOOPS_ROOT_PATH . '/class/uploader.php';
 		$filename       = $_FILES['art_file']['name'];
 		$imgNameDef     = Request::getString('art_title');
-		$uploader = new \XoopsMediaUploader(MYMODULE_UPLOAD_FILES_PATH . '/articles/', 
+		$uploader = new \XoopsMediaUploader(\MYMODULE_UPLOAD_FILES_PATH . '/articles/', 
 													$helper->getConfig('mimetypes_file'), 
 													$helper->getConfig('maxsize_file'), null, null);
 		if ($uploader->fetchMedia($_POST['xoops_upload_file'][1])) {
@@ -175,17 +175,17 @@ switch ($op) {
 			if ($uploader->upload()) {
 				$articlesObj->setVar('art_file', $uploader->getSavedFileName());
 			} else {
-				$errors = $uploader->getErrors();
+				$uploaderErrors .= '<br>' . $uploader->getErrors();
 			}
 		} else {
 			if ($filename > '') {
-				$uploaderErrors = $uploader->getErrors();
+				$uploaderErrors .= '<br>' . $uploader->getErrors();
 			}
 			$articlesObj->setVar('art_file', Request::getString('art_file'));
 		}
 		$articlesObj->setVar('art_ratings', Request::getFloat('art_ratings', 0));
 		$articlesObj->setVar('art_votes', Request::getInt('art_votes', 0));
-		$articleCreatedObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('art_created'));
+		$articleCreatedObj = \DateTime::createFromFormat(\_SHORTDATESTRING, Request::getString('art_created'));
 		$articlesObj->setVar('art_created', $articleCreatedObj->getTimestamp());
 		$articlesObj->setVar('art_submitter', Request::getInt('art_submitter', 0));
 		// Insert Data
@@ -216,12 +216,12 @@ switch ($op) {
 			}
 			// Handle notification
 			$artTitle = $articlesObj->getVar('art_title');
-			$artOnline = $articlesObj->getVar('art_online');
+			$artStatus = $articlesObj->getVar('art_status');
 			$tags = [];
 			$tags['ITEM_NAME'] = $artTitle;
-			$tags['ITEM_URL']  = XOOPS_URL . '/modules/mymodule/articles.php?op=show&art_id=' . $artId;
+			$tags['ITEM_URL']  = \XOOPS_URL . '/modules/mymodule/articles.php?op=show&art_id=' . $artId;
 			$notificationHandler = \xoops_getHandler('notification');
-			if (Constants::STATUS_SUBMITTED == $artOnline) {
+			if (Constants::STATUS_SUBMITTED == $artStatus) {
 				// Event approve notification
 				$notificationHandler->triggerEvent('global', 0, 'global_approve', $tags);
 				$notificationHandler->triggerEvent('articles', $newArtId, 'article_approve', $tags);
@@ -239,7 +239,7 @@ switch ($op) {
 			if ('' !== $uploaderErrors) {
 				\redirect_header('articles.php?op=edit&art_id=' . $newArtId, 5, $uploaderErrors);
 			} else {
-				\redirect_header('articles.php?op=list', 2, _MA_MYMODULE_FORM_OK);
+				\redirect_header('articles.php?op=list', 2, \_MA_MYMODULE_FORM_OK);
 			}
 		}
 		// Get Form Error
@@ -249,10 +249,10 @@ switch ($op) {
 		break;
 	case 'new':
 		// Breadcrumbs
-		$xoBreadcrumbs[] = ['title' => _MA_MYMODULE_ARTICLE_ADD];
+		$xoBreadcrumbs[] = ['title' => \_MA_MYMODULE_ARTICLE_ADD];
 		// Check permissions
 		if (!$permissionsHandler->getPermGlobalSubmit()) {
-			\redirect_header('articles.php?op=list', 3, _NOPERM);
+			\redirect_header('articles.php?op=list', 3, \_NOPERM);
 		}
 		// Form Create
 		$articlesObj = $articlesHandler->create();
@@ -261,14 +261,14 @@ switch ($op) {
 		break;
 	case 'edit':
 		// Breadcrumbs
-		$xoBreadcrumbs[] = ['title' => _MA_MYMODULE_ARTICLE_EDIT];
+		$xoBreadcrumbs[] = ['title' => \_MA_MYMODULE_ARTICLE_EDIT];
 		// Check permissions
 		if (!$permissionsHandler->getPermGlobalSubmit()) {
-			\redirect_header('articles.php?op=list', 3, _NOPERM);
+			\redirect_header('articles.php?op=list', 3, \_NOPERM);
 		}
 		// Check params
 		if (0 == $artId) {
-			\redirect_header('articles.php?op=list', 3, _MA_MYMODULE_INVALID_PARAM);
+			\redirect_header('articles.php?op=list', 3, \_MA_MYMODULE_INVALID_PARAM);
 		}
 		// Get Form
 		$articlesObj = $articlesHandler->get($artId);
@@ -277,14 +277,14 @@ switch ($op) {
 		break;
 	case 'delete':
 		// Breadcrumbs
-		$xoBreadcrumbs[] = ['title' => _MA_MYMODULE_ARTICLE_DELETE];
+		$xoBreadcrumbs[] = ['title' => \_MA_MYMODULE_ARTICLE_DELETE];
 		// Check permissions
 		if (!$permissionsHandler->getPermGlobalSubmit()) {
-			\redirect_header('articles.php?op=list', 3, _NOPERM);
+			\redirect_header('articles.php?op=list', 3, \_NOPERM);
 		}
 		// Check params
 		if (0 == $artId) {
-			\redirect_header('articles.php?op=list', 3, _MA_MYMODULE_INVALID_PARAM);
+			\redirect_header('articles.php?op=list', 3, \_MA_MYMODULE_INVALID_PARAM);
 		}
 		$articlesObj = $articlesHandler->get($artId);
 		$artTitle = $articlesObj->getVar('art_title');
@@ -299,7 +299,7 @@ switch ($op) {
 				$notificationHandler = \xoops_getHandler('notification');
 				$notificationHandler->triggerEvent('global', 0, 'global_delete', $tags);
 				$notificationHandler->triggerEvent('articles', $artId, 'article_delete', $tags);
-				\redirect_header('articles.php', 3, _MA_MYMODULE_FORM_DELETE_OK);
+				\redirect_header('articles.php', 3, \_MA_MYMODULE_FORM_DELETE_OK);
 			} else {
 				$GLOBALS['xoopsTpl']->assign('error', $articlesObj->getHtmlErrors());
 			}
@@ -307,17 +307,17 @@ switch ($op) {
 			$xoopsconfirm = new Common\XoopsConfirm(
 				['ok' => 1, 'art_id' => $artId, 'op' => 'delete'],
 				$_SERVER['REQUEST_URI'],
-				\sprintf(_MA_MYMODULE_FORM_SURE_DELETE, $articlesObj->getVar('art_title')));
+				\sprintf(\_MA_MYMODULE_FORM_SURE_DELETE, $articlesObj->getVar('art_title')));
 			$form = $xoopsconfirm->getFormXoopsConfirm();
 			$GLOBALS['xoopsTpl']->assign('form', $form->render());
 		}
 		break;
 	case 'broken':
 		// Breadcrumbs
-		$xoBreadcrumbs[] = ['title' => _MA_MYMODULE_BROKEN];
+		$xoBreadcrumbs[] = ['title' => \_MA_MYMODULE_BROKEN];
 		// Check params
 		if (0 == $artId) {
-			\redirect_header('articles.php?op=list', 3, _MA_MYMODULE_INVALID_PARAM);
+			\redirect_header('articles.php?op=list', 3, \_MA_MYMODULE_INVALID_PARAM);
 		}
 		$articlesObj = $articlesHandler->get($artId);
 		$artTitle = $articlesObj->getVar('art_title');
@@ -325,16 +325,16 @@ switch ($op) {
 			if (!$GLOBALS['xoopsSecurity']->check()) {
 				\redirect_header('articles.php', 3, \implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
 			}
-			$articlesObj->setVar('art_online', Constants::STATUS_BROKEN);
+			$articlesObj->setVar('art_status', Constants::STATUS_BROKEN);
 			if ($articlesHandler->insert($articlesObj)) {
 				// Event broken notification
 				$tags = [];
 				$tags['ITEM_NAME'] = $artTitle;
-				$tags['ITEM_URL']  = XOOPS_URL . '/modules/mymodule/articles.php?op=show&art_id=' . $artId;
+				$tags['ITEM_URL']  = \XOOPS_URL . '/modules/mymodule/articles.php?op=show&art_id=' . $artId;
 				$notificationHandler = \xoops_getHandler('notification');
 				$notificationHandler->triggerEvent('global', 0, 'global_broken', $tags);
 				$notificationHandler->triggerEvent('articles', $artId, 'article_broken', $tags);
-				\redirect_header('articles.php', 3, _MA_MYMODULE_FORM_OK);
+				\redirect_header('articles.php', 3, \_MA_MYMODULE_FORM_OK);
 			} else {
 				$GLOBALS['xoopsTpl']->assign('error', $articlesObj->getHtmlErrors());
 			}
@@ -342,7 +342,7 @@ switch ($op) {
 			$xoopsconfirm = new Common\XoopsConfirm(
 				['ok' => 1, 'art_id' => $artId, 'op' => 'broken'],
 				$_SERVER['REQUEST_URI'],
-				\sprintf(_MA_MYMODULE_FORM_SURE_BROKEN, $articlesObj->getVar('art_title')));
+				\sprintf(\_MA_MYMODULE_FORM_SURE_BROKEN, $articlesObj->getVar('art_title')));
 			$form = $xoopsconfirm->getFormXoopsConfirm();
 			$GLOBALS['xoopsTpl']->assign('form', $form->render());
 		}
@@ -354,8 +354,8 @@ mymoduleMetaKeywords($helper->getConfig('keywords') . ', ' . \implode(',', $keyw
 unset($keywords);
 
 // Description
-mymoduleMetaDescription(_MA_MYMODULE_ARTICLES_DESC);
-$GLOBALS['xoopsTpl']->assign('xoops_mpageurl', MYMODULE_URL.'/articles.php');
-$GLOBALS['xoopsTpl']->assign('mymodule_upload_url', MYMODULE_UPLOAD_URL);
+mymoduleMetaDescription(\_MA_MYMODULE_ARTICLES_DESC);
+$GLOBALS['xoopsTpl']->assign('xoops_mpageurl', \MYMODULE_URL.'/articles.php');
+$GLOBALS['xoopsTpl']->assign('mymodule_upload_url', \MYMODULE_UPLOAD_URL);
 
 require __DIR__ . '/footer.php';

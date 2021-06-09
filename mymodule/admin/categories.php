@@ -15,12 +15,12 @@ declare(strict_types=1);
 /**
  * My Module module for xoops
  *
- * @copyright      2020 XOOPS Project (https://xoops.org)
+ * @copyright      2021 XOOPS Project (https://xoops.org)
  * @license        GPL 2.0 or later
  * @package        mymodule
  * @since          1.0
  * @min_xoops      2.5.9
- * @author         TDM XOOPS - Email:<info@email.com> - Website:<https://xoops.org>
+ * @author         TDM XOOPS - Email:<info@email.com> - Website:<http://xoops.org>
  */
 
 use Xmf\Request;
@@ -42,13 +42,13 @@ switch ($op) {
 		$limit = Request::getInt('limit', $helper->getConfig('adminpager'));
 		$templateMain = 'mymodule_admin_categories.tpl';
 		$GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('categories.php'));
-		$adminObject->addItemButton(_AM_MYMODULE_ADD_CATEGORY, 'categories.php?op=new', 'add');
+		$adminObject->addItemButton(\_AM_MYMODULE_ADD_CATEGORY, 'categories.php?op=new', 'add');
 		$GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
 		$categoriesCount = $categoriesHandler->getCountCategories();
 		$categoriesAll = $categoriesHandler->getAllCategories($start, $limit);
 		$GLOBALS['xoopsTpl']->assign('categories_count', $categoriesCount);
-		$GLOBALS['xoopsTpl']->assign('mymodule_url', MYMODULE_URL);
-		$GLOBALS['xoopsTpl']->assign('mymodule_upload_url', MYMODULE_UPLOAD_URL);
+		$GLOBALS['xoopsTpl']->assign('mymodule_url', \MYMODULE_URL);
+		$GLOBALS['xoopsTpl']->assign('mymodule_upload_url', \MYMODULE_UPLOAD_URL);
 		// Table view categories
 		if ($categoriesCount > 0) {
 			foreach (\array_keys($categoriesAll) as $i) {
@@ -58,18 +58,18 @@ switch ($op) {
 			}
 			// Display Navigation
 			if ($categoriesCount > $limit) {
-				require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
+				require_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
 				$pagenav = new \XoopsPageNav($categoriesCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
 				$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
 			}
 		} else {
-			$GLOBALS['xoopsTpl']->assign('error', _AM_MYMODULE_THEREARENT_CATEGORIES);
+			$GLOBALS['xoopsTpl']->assign('error', \_AM_MYMODULE_THEREARENT_CATEGORIES);
 		}
 		break;
 	case 'new':
 		$templateMain = 'mymodule_admin_categories.tpl';
 		$GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('categories.php'));
-		$adminObject->addItemButton(_AM_MYMODULE_LIST_CATEGORIES, 'categories.php', 'list');
+		$adminObject->addItemButton(\_AM_MYMODULE_LIST_CATEGORIES, 'categories.php', 'list');
 		$GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
 		// Form Create
 		$categoriesObj = $categoriesHandler->create();
@@ -87,14 +87,14 @@ switch ($op) {
 			$categoriesObj = $categoriesHandler->create();
 		}
 		// Set Vars
+		$uploaderErrors = '';
 		$categoriesObj->setVar('cat_name', Request::getString('cat_name', ''));
 		// Set Var cat_logo
-		require_once XOOPS_ROOT_PATH . '/class/uploader.php';
+		require_once \XOOPS_ROOT_PATH . '/class/uploader.php';
 		$filename       = $_FILES['cat_logo']['name'];
 		$imgMimetype    = $_FILES['cat_logo']['type'];
 		$imgNameDef     = Request::getString('cat_name');
-		$uploaderErrors = '';
-		$uploader = new \XoopsMediaUploader(MYMODULE_UPLOAD_IMAGE_PATH . '/categories/', 
+		$uploader = new \XoopsMediaUploader(\MYMODULE_UPLOAD_IMAGE_PATH . '/categories/', 
 													$helper->getConfig('mimetypes_image'), 
 													$helper->getConfig('maxsize_image'), null, null);
 		if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
@@ -109,8 +109,8 @@ switch ($op) {
 				if ($maxwidth > 0 && $maxheight > 0) {
 					// Resize image
 					$imgHandler                = new Mymodule\Common\Resizer();
-					$imgHandler->sourceFile    = MYMODULE_UPLOAD_IMAGE_PATH . '/categories/' . $savedFilename;
-					$imgHandler->endFile       = MYMODULE_UPLOAD_IMAGE_PATH . '/categories/' . $savedFilename;
+					$imgHandler->sourceFile    = \MYMODULE_UPLOAD_IMAGE_PATH . '/categories/' . $savedFilename;
+					$imgHandler->endFile       = \MYMODULE_UPLOAD_IMAGE_PATH . '/categories/' . $savedFilename;
 					$imgHandler->imageMimetype = $imgMimetype;
 					$imgHandler->maxWidth      = $maxwidth;
 					$imgHandler->maxHeight     = $maxheight;
@@ -118,15 +118,15 @@ switch ($op) {
 				}
 				$categoriesObj->setVar('cat_logo', $savedFilename);
 			} else {
-				$uploaderErrors = $uploader->getErrors();
+				$uploaderErrors .= '<br>' . $uploader->getErrors();
 			}
 		} else {
 			if ($filename > '') {
-				$uploaderErrors = $uploader->getErrors();
+				$uploaderErrors .= '<br>' . $uploader->getErrors();
 			}
 			$categoriesObj->setVar('cat_logo', Request::getString('cat_logo'));
 		}
-		$categoryCreatedObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('cat_created'));
+		$categoryCreatedObj = \DateTime::createFromFormat(\_SHORTDATESTRING, Request::getString('cat_created'));
 		$categoriesObj->setVar('cat_created', $categoryCreatedObj->getTimestamp());
 		$categoriesObj->setVar('cat_submitter', Request::getInt('cat_submitter', 0));
 		// Insert Data
@@ -134,7 +134,7 @@ switch ($op) {
 			if ('' !== $uploaderErrors) {
 				\redirect_header('categories.php?op=edit&cat_id=' . $catId, 5, $uploaderErrors);
 			} else {
-				\redirect_header('categories.php?op=list', 2, _AM_MYMODULE_FORM_OK);
+				\redirect_header('categories.php?op=list', 2, \_AM_MYMODULE_FORM_OK);
 			}
 		}
 		// Get Form
@@ -145,8 +145,8 @@ switch ($op) {
 	case 'edit':
 		$templateMain = 'mymodule_admin_categories.tpl';
 		$GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('categories.php'));
-		$adminObject->addItemButton(_AM_MYMODULE_ADD_CATEGORY, 'categories.php?op=new', 'add');
-		$adminObject->addItemButton(_AM_MYMODULE_LIST_CATEGORIES, 'categories.php', 'list');
+		$adminObject->addItemButton(\_AM_MYMODULE_ADD_CATEGORY, 'categories.php?op=new', 'add');
+		$adminObject->addItemButton(\_AM_MYMODULE_LIST_CATEGORIES, 'categories.php', 'list');
 		$GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
 		// Get Form
 		$categoriesObj = $categoriesHandler->get($catId);
@@ -163,7 +163,7 @@ switch ($op) {
 				\redirect_header('categories.php', 3, \implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
 			}
 			if ($categoriesHandler->delete($categoriesObj)) {
-				\redirect_header('categories.php', 3, _AM_MYMODULE_FORM_DELETE_OK);
+				\redirect_header('categories.php', 3, \_AM_MYMODULE_FORM_DELETE_OK);
 			} else {
 				$GLOBALS['xoopsTpl']->assign('error', $categoriesObj->getHtmlErrors());
 			}
@@ -171,7 +171,7 @@ switch ($op) {
 			$xoopsconfirm = new Common\XoopsConfirm(
 				['ok' => 1, 'cat_id' => $catId, 'op' => 'delete'],
 				$_SERVER['REQUEST_URI'],
-				\sprintf(_AM_MYMODULE_FORM_SURE_DELETE, $categoriesObj->getVar('cat_name')));
+				\sprintf(\_AM_MYMODULE_FORM_SURE_DELETE, $categoriesObj->getVar('cat_name')));
 			$form = $xoopsconfirm->getFormXoopsConfirm();
 			$GLOBALS['xoopsTpl']->assign('form', $form->render());
 		}

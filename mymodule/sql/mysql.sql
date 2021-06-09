@@ -3,9 +3,9 @@
 # http://www.phpmyadmin.net
 #
 # Host: localhost
-# Generated on: Sat Jun 05, 2021 to 18:06:51
-# Server version: 5.5.5-10.4.10-MariaDB
-# PHP Version: 8.0.1
+# Generated on: Wed Jun 09, 2021 to 18:33:37
+# Server version: 8.0.16
+# PHP Version: 8.0.0
 
 #
 # Structure table for `mymodule_categories` 5
@@ -26,11 +26,11 @@ CREATE TABLE `mymodule_categories` (
 
 CREATE TABLE `mymodule_articles` (
   `art_id` INT(8) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `art_cat` INT(8) NOT NULL DEFAULT '0',
+  `art_cat` INT(10) NOT NULL DEFAULT '0',
   `art_title` VARCHAR(200) NOT NULL DEFAULT '',
   `art_descr` MEDIUMTEXT NOT NULL ,
   `art_img` VARCHAR(200) NULL DEFAULT '',
-  `art_online` INT(1) NOT NULL DEFAULT '0',
+  `art_status` INT(1) NOT NULL DEFAULT '0',
   `art_file` VARCHAR(200) NOT NULL DEFAULT '',
   `art_ratings` DOUBLE(10, 2) NOT NULL DEFAULT '0.00',
   `art_votes` INT(10) NOT NULL DEFAULT '0',

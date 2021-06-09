@@ -18,12 +18,12 @@ namespace XoopsModules\Mymodule;
 /**
  * My Module module for xoops
  *
- * @copyright      2020 XOOPS Project (https://xoops.org)
+ * @copyright      2021 XOOPS Project (https://xoops.org)
  * @license        GPL 2.0 or later
  * @package        mymodule
  * @since          1.0
  * @min_xoops      2.5.9
- * @author         TDM XOOPS - Email:<info@email.com> - Website:<https://xoops.org>
+ * @author         TDM XOOPS - Email:<info@email.com> - Website:<http://xoops.org>
  */
 
 use XoopsModules\Mymodule;
@@ -85,19 +85,19 @@ class Categories extends \XoopsObject
 		}
 		$isAdmin = $GLOBALS['xoopsUser']->isAdmin($GLOBALS['xoopsModule']->mid());
 		// Title
-		$title = $this->isNew() ? \sprintf(_AM_MYMODULE_CATEGORY_ADD) : \sprintf(_AM_MYMODULE_CATEGORY_EDIT);
+		$title = $this->isNew() ? \sprintf(\_AM_MYMODULE_CATEGORY_ADD) : \sprintf(\_AM_MYMODULE_CATEGORY_EDIT);
 		// Get Theme Form
 		\xoops_load('XoopsFormLoader');
 		$form = new \XoopsThemeForm($title, 'form', $action, 'post', true);
 		$form->setExtra('enctype="multipart/form-data"');
 		// Form Text catName
-		$form->addElement(new \XoopsFormText(_AM_MYMODULE_CATEGORY_NAME, 'cat_name', 50, 255, $this->getVar('cat_name')), true);
+		$form->addElement(new \XoopsFormText(\_AM_MYMODULE_CATEGORY_NAME, 'cat_name', 50, 255, $this->getVar('cat_name')), true);
 		// Form Text Date Select catCreated
 		$catCreated = $this->isNew() ? \time() : $this->getVar('cat_created');
-		$form->addElement(new \XoopsFormTextDateSelect(_AM_MYMODULE_CATEGORY_CREATED, 'cat_created', '', $catCreated), true);
+		$form->addElement(new \XoopsFormTextDateSelect(\_AM_MYMODULE_CATEGORY_CREATED, 'cat_created', '', $catCreated), true);
 		// To Save
 		$form->addElement(new \XoopsFormHidden('op', 'save'));
-		$form->addElement(new \XoopsFormButtonTray('', _SUBMIT, 'submit', '', false));
+		$form->addElement(new \XoopsFormButtonTray('', \_SUBMIT, 'submit', '', false));
 		return $form;
 	}
 

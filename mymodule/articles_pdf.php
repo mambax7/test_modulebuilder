@@ -15,12 +15,12 @@ declare(strict_types=1);
 /**
  * My Module module for xoops
  *
- * @copyright      2020 XOOPS Project (https://xoops.org)
+ * @copyright      2021 XOOPS Project (https://xoops.org)
  * @license        GPL 2.0 or later
  * @package        mymodule
  * @since          1.0
  * @min_xoops      2.5.9
- * @author         TDM XOOPS - Email:<info@email.com> - Website:<https://xoops.org>
+ * @author         TDM XOOPS - Email:<info@email.com> - Website:<http://xoops.org>
  */
 
 use Xmf\Request;
@@ -28,15 +28,15 @@ use XoopsModules\Mymodule;
 use XoopsModules\Mymodule\Constants;
 
 require __DIR__ . '/header.php';
-require_once XOOPS_ROOT_PATH . '/header.php';
-if (\file_exists($tcpdf = XOOPS_ROOT_PATH.'/Frameworks/tcpdf/')) {
+require_once \XOOPS_ROOT_PATH . '/header.php';
+if (\file_exists($tcpdf = \XOOPS_ROOT_PATH.'/Frameworks/tcpdf/')) {
 	require_once $tcpdf . 'tcpdf.php';
 } else {
-	\redirect_header('articles.php', 2, _MA_MYMODULE_NO_PDF_LIBRARY);
+	\redirect_header('articles.php', 2, \_MA_MYMODULE_NO_PDF_LIBRARY);
 }
 require_once $tcpdf . 'config/tcpdf_config.php';
 // Get new template
-require_once XOOPS_ROOT_PATH . '/class/template.php';
+require_once \XOOPS_ROOT_PATH . '/class/template.php';
 $pdfTpl = new $xoopsTpl();
 
 // Get requests
@@ -76,7 +76,7 @@ $pdfData['keywords']  = $helper->getConfig('keywords');
 \define('MYMODULE_HEADER_TITLE', $pdfData['title']);
 \define('MYMODULE_HEADER_STRING', $pdfData['subject']);
 \define('MYMODULE_HEADER_LOGO', 'logo.gif');
-\define('MYMODULE_IMAGES_PATH', XOOPS_ROOT_PATH.'/images/');
+\define('MYMODULE_IMAGES_PATH', \XOOPS_ROOT_PATH.'/images/');
 
 // Assign customs tpl fields
 $pdfTpl->assign('content_header', 'articles');
@@ -106,14 +106,14 @@ $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO); //set image scale factor
 if ('cn' == _LANGCODE) {
 	$pdf->setHeaderFont(['gbsn00lp', '', $pdfData['fontsize']]);
 	$pdf->SetFont('gbsn00lp', '', $pdfData['fontsize']);
-	$pdf->setFooterFont(['gbsn00lp', '', $pdfData['fontsize']]);
+	$pdf->setFooterFont('gbsn00lp', '', $pdfData['fontsize']]);
 } else {
-	$pdf->setHeaderFont([PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN]);
+	$pdf->setHeaderFont(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN);
 	$pdf->SetFont($pdfData['fontname'], '', $pdfData['fontsize']);
-	$pdf->setFooterFont([PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA]);
+	$pdf->setFooterFont([PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA);
 }
 // Set some language-dependent strings (optional)
-$lang = XOOPS_ROOT_PATH.'/Frameworks/tcpdf/lang/eng.php';
+$lang = \XOOPS_ROOT_PATH.'/Frameworks/tcpdf/lang/eng.php';
 if (@\file_exists($lang)) {
 	require_once $lang;
 	$pdf->setLanguageArray($lang);
@@ -121,7 +121,7 @@ if (@\file_exists($lang)) {
 // Add Page document
 $pdf->AddPage();
 // Output
-$template_path = MYMODULE_PATH . '/templates/mymodule_articles_pdf.tpl';
+$template_path = \MYMODULE_PATH . '/templates/mymodule_articles_pdf.tpl';
 $content = $pdfTpl->fetch($template_path);
 $pdf->writeHTMLCell($w=0, $h=0, $x='', $y='', $content, $border=0, $ln=1, $fill=0, $reseth=true, $align='', $autopadding=true);
 $pdf->Output($pdfFilename, 'I');

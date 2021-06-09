@@ -17,8 +17,8 @@
 				<td class='center'><{$article.table}></td>
 				<td class='center'><{$article.main}></td>
 				<td class='center width5'>
-					<a href='articles.php?op=edit&amp;<{$article.key}>=<{$article.keyval}>' title='<{$smarty.const._EDIT}>'><img src='<{xoModuleIcons16 edit.png}>' alt='articles'></a>
-					<a href='articles.php?op=delete&amp;<{$article.key}>=<{$article.keyval}>' title='<{$smarty.const._DELETE}>'><img src='<{xoModuleIcons16 delete.png}>' alt='articles'></a>
+					<a href='articles.php?op=edit&amp;<{$article.key}>=<{$article.keyval}>' title='<{$smarty.const._EDIT}>'><img src='<{xoModuleIcons16 edit.png}>' alt='articles' ></a>
+					<a href='articles.php?op=delete&amp;<{$article.key}>=<{$article.keyval}>' title='<{$smarty.const._DELETE}>'><img src='<{xoModuleIcons16 delete.png}>' alt='articles' ></a>
 				</td>
 			</tr>
 			<{/foreach}>
@@ -32,7 +32,7 @@
 <{else}>
 	<{if $nodataArticles|default:''}>
 		<div>
-			<{$nodataArticles|default:false}><img src='<{xoModuleIcons32 button_ok.png}>' alt='articles'>
+			<{$nodataArticles|default:false}><img src='<{xoModuleIcons32 button_ok.png}>' alt='articles' >
 		</div>
 		<div class='clear spacer'></div>
 		<br>
@@ -58,8 +58,8 @@
 				<td class='center'><{$testfield.table}></td>
 				<td class='center'><{$testfield.main}></td>
 				<td class='center width5'>
-					<a href='testfields.php?op=edit&amp;<{$testfield.key}>=<{$testfield.keyval}>' title='<{$smarty.const._EDIT}>'><img src='<{xoModuleIcons16 edit.png}>' alt='testfields'></a>
-					<a href='testfields.php?op=delete&amp;<{$testfield.key}>=<{$testfield.keyval}>' title='<{$smarty.const._DELETE}>'><img src='<{xoModuleIcons16 delete.png}>' alt='testfields'></a>
+					<a href='testfields.php?op=edit&amp;<{$testfield.key}>=<{$testfield.keyval}>' title='<{$smarty.const._EDIT}>'><img src='<{xoModuleIcons16 edit.png}>' alt='testfields' ></a>
+					<a href='testfields.php?op=delete&amp;<{$testfield.key}>=<{$testfield.keyval}>' title='<{$smarty.const._DELETE}>'><img src='<{xoModuleIcons16 delete.png}>' alt='testfields' ></a>
 				</td>
 			</tr>
 			<{/foreach}>
@@ -73,7 +73,7 @@
 <{else}>
 	<{if $nodataTestfields|default:''}>
 		<div>
-			<{$nodataTestfields|default:false}><img src='<{xoModuleIcons32 button_ok.png}>' alt='testfields'>
+			<{$nodataTestfields|default:false}><img src='<{xoModuleIcons32 button_ok.png}>' alt='testfields' >
 		</div>
 		<div class='clear spacer'></div>
 		<br>

@@ -15,14 +15,14 @@ declare(strict_types=1);
 /**
  * My Module module for xoops
  *
- * @copyright      2020 XOOPS Project (https://xoops.org)
+ * @copyright      2021 XOOPS Project (https://xoops.org)
  * @license        GPL 2.0 or later
  * @package        mymodule
  * @since          1.0
  * @min_xoops      2.5.9
- * @author         TDM XOOPS - Email:<info@email.com> - Website:<https://xoops.org>
+ * @author         TDM XOOPS - Email:<info@email.com> - Website:<http://xoops.org>
  */
-include dirname(__DIR__, 2) . '/mainfile.php';
+require \dirname(__DIR__, 2) . '/mainfile.php';
 require __DIR__ . '/include/common.php';
 $moduleDirName = \basename(__DIR__);
 // Breadcrumbs
@@ -37,7 +37,7 @@ $ratingsHandler = $helper->getHandler('Ratings');
 // 
 $myts = MyTextSanitizer::getInstance();
 // Default Css Style
-$style = MYMODULE_URL . '/assets/css/style.css';
+$style = \MYMODULE_URL . '/assets/css/style.css';
 // Smarty Default
 $sysPathIcon16 = $GLOBALS['xoopsModule']->getInfo('sysicons16');
 $sysPathIcon32 = $GLOBALS['xoopsModule']->getInfo('sysicons32');

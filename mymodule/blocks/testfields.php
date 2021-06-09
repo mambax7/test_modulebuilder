@@ -15,19 +15,19 @@ declare(strict_types=1);
 /**
  * My Module module for xoops
  *
- * @copyright      2020 XOOPS Project (https://xoops.org)
+ * @copyright      2021 XOOPS Project (https://xoops.org)
  * @license        GPL 2.0 or later
  * @package        mymodule
  * @since          1.0
  * @min_xoops      2.5.9
- * @author         TDM XOOPS - Email:<info@email.com> - Website:<https://xoops.org>
+ * @author         TDM XOOPS - Email:<info@email.com> - Website:<http://xoops.org>
  */
 
 use XoopsModules\Mymodule;
 use XoopsModules\Mymodule\Helper;
 use XoopsModules\Mymodule\Constants;
 
-require_once XOOPS_ROOT_PATH . '/modules/mymodule/include/common.php';
+require_once \XOOPS_ROOT_PATH . '/modules/mymodule/include/common.php';
 
 /**
  * Function show block
@@ -36,9 +36,8 @@ require_once XOOPS_ROOT_PATH . '/modules/mymodule/include/common.php';
  */
 function b_mymodule_testfields_show($options)
 {
-	require_once XOOPS_ROOT_PATH . '/modules/mymodule/class/testfields.php';
-	$myts = MyTextSanitizer::getInstance();
-	$GLOBALS['xoopsTpl']->assign('mymodule_upload_url', MYMODULE_UPLOAD_URL);
+	require_once \XOOPS_ROOT_PATH . '/modules/mymodule/class/testfields.php';
+	$GLOBALS['xoopsTpl']->assign('mymodule_upload_url', \MYMODULE_UPLOAD_URL);
 	$block       = [];
 	$typeBlock   = $options[0];
 	$limit       = $options[1];
@@ -62,8 +61,8 @@ function b_mymodule_testfields_show($options)
 			// For the block: testfields new
 			$crTestfields->add(new \Criteria('tf_status', Constants::PERM_GLOBAL_VIEW, '>'));
 			// new since last week: 7 * 24 * 60 * 60 = 604800
-			$crTestfields->add(new \Criteria('tf_datetime', time() - 604800, '>='));
-			$crTestfields->add(new \Criteria('tf_datetime', time(), '<='));
+			$crTestfields->add(new \Criteria('tf_datetime', \time() - 604800, '>='));
+			$crTestfields->add(new \Criteria('tf_datetime', \time(), '<='));
 			$crTestfields->setSort('tf_datetime');
 			$crTestfields->setOrder('ASC');
 			break;
@@ -92,7 +91,7 @@ function b_mymodule_testfields_show($options)
 	if (\count($testfieldsAll) > 0) {
 		foreach (\array_keys($testfieldsAll) as $i) {
 			$block[$i]['id'] = $testfieldsAll[$i]->getVar('tf_id');
-			$block[$i]['text'] = htmlspecialchars($testfieldsAll[$i]->getVar('tf_text'), ENT_QUOTES | ENT_HTML5);
+			$block[$i]['text'] = \htmlspecialchars($testfieldsAll[$i]->getVar('tf_text'), ENT_QUOTES | ENT_HTML5);
 		}
 	}
 
@@ -107,14 +106,14 @@ function b_mymodule_testfields_show($options)
  */
 function b_mymodule_testfields_edit($options)
 {
-	require_once XOOPS_ROOT_PATH . '/modules/mymodule/class/testfields.php';
+	require_once \XOOPS_ROOT_PATH . '/modules/mymodule/class/testfields.php';
 	$helper = Helper::getInstance();
 	$testfieldsHandler = $helper->getHandler('Testfields');
-	$GLOBALS['xoopsTpl']->assign('mymodule_upload_url', MYMODULE_UPLOAD_URL);
-	$form = _MB_MYMODULE_DISPLAY;
-	$form .= "<input type='hidden' name='options[0]' value='".$options[0]."'>";
-	$form .= "<input type='text' name='options[1]' size='5' maxlength='255' value='" . $options[1] . "'>&nbsp;<br>";
-	$form .= _MB_MYMODULE_TITLE_LENGTH . " : <input type='text' name='options[2]' size='5' maxlength='255' value='" . $options[2] . "'><br><br>";
+	$GLOBALS['xoopsTpl']->assign('mymodule_upload_url', \MYMODULE_UPLOAD_URL);
+	$form = \_MB_MYMODULE_DISPLAY;
+	$form .= "<input type='hidden' name='options[0]' value='".$options[0]."' >";
+	$form .= "<input type='text' name='options[1]' size='5' maxlength='255' value='" . $options[1] . "' >&nbsp;<br>";
+	$form .= \_MB_MYMODULE_TITLE_LENGTH . " : <input type='text' name='options[2]' size='5' maxlength='255' value='" . $options[2] . "' ><br><br>";
 	\array_shift($options);
 	\array_shift($options);
 	\array_shift($options);
@@ -125,8 +124,8 @@ function b_mymodule_testfields_edit($options)
 	$crTestfields->setOrder('ASC');
 	$testfieldsAll = $testfieldsHandler->getAll($crTestfields);
 	unset($crTestfields);
-	$form .= _MB_MYMODULE_TESTFIELDS_TO_DISPLAY . "<br><select name='options[]' multiple='multiple' size='5'>";
-	$form .= "<option value='0' " . (!\in_array(0, $options) ? '' : "selected='selected'") . '>' . _MB_MYMODULE_ALL_TESTFIELDS . '</option>';
+	$form .= \_MB_MYMODULE_TESTFIELDS_TO_DISPLAY . "<br><select name='options[]' multiple='multiple' size='5'>";
+	$form .= "<option value='0' " . (!\in_array(0, $options) && !\in_array('0', $options) ? '' : "selected='selected'") . '>' . \_MB_MYMODULE_ALL_TESTFIELDS . '</option>';
 	foreach (\array_keys($testfieldsAll) as $i) {
 		$tf_id = $testfieldsAll[$i]->getVar('tf_id');
 		$form .= "<option value='" . $tf_id . "' " . (!\in_array($tf_id, $options) ? '' : "selected='selected'") . '>' . $testfieldsAll[$i]->getVar('tf_text') . '</option>';

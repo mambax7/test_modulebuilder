@@ -15,12 +15,12 @@ declare(strict_types=1);
 /**
  * My Module module for xoops
  *
- * @copyright      2020 XOOPS Project (https://xoops.org)
+ * @copyright      2021 XOOPS Project (https://xoops.org)
  * @license        GPL 2.0 or later
  * @package        mymodule
  * @since          1.0
  * @min_xoops      2.5.9
- * @author         TDM XOOPS - Email:<info@email.com> - Website:<https://xoops.org>
+ * @author         TDM XOOPS - Email:<info@email.com> - Website:<http://xoops.org>
  */
 
 $dirname       = \basename(\dirname(__DIR__));
@@ -30,47 +30,47 @@ $moduleInfo    = $moduleHandler->get($xoopsModule->getVar('mid'));
 $sysPathIcon32 = $moduleInfo->getInfo('sysicons32');
 
 $adminmenu[] = [
-	'title' => _MI_MYMODULE_ADMENU1,
+	'title' => \_MI_MYMODULE_ADMENU1,
 	'link' => 'admin/index.php',
 	'icon' => $sysPathIcon32.'/dashboard.png',
 ];
 $adminmenu[] = [
-	'title' => _MI_MYMODULE_ADMENU2,
+	'title' => \_MI_MYMODULE_ADMENU2,
 	'link' => 'admin/categories.php',
 	'icon' => 'assets/icons/32/category.png',
 ];
 $adminmenu[] = [
-	'title' => _MI_MYMODULE_ADMENU3,
+	'title' => \_MI_MYMODULE_ADMENU3,
 	'link' => 'admin/articles.php',
 	'icon' => 'assets/icons/32/penguin.png',
 ];
 $adminmenu[] = [
-	'title' => _MI_MYMODULE_ADMENU4,
+	'title' => \_MI_MYMODULE_ADMENU4,
 	'link' => 'admin/testfields.php',
 	'icon' => 'assets/icons/32/alert.png',
 ];
 $adminmenu[] = [
-	'title' => _MI_MYMODULE_ADMENU5,
+	'title' => \_MI_MYMODULE_ADMENU5,
 	'link' => 'admin/broken.php',
 	'icon' => $sysPathIcon32.'/brokenlink.png',
 ];
 $adminmenu[] = [
-	'title' => _MI_MYMODULE_ADMENU6,
+	'title' => \_MI_MYMODULE_ADMENU6,
 	'link' => 'admin/permissions.php',
 	'icon' => $sysPathIcon32.'/permissions.png',
 ];
 $adminmenu[] = [
-	'title' => _MI_MYMODULE_ADMENU7,
+	'title' => \_MI_MYMODULE_ADMENU7,
 	'link' => 'admin/clone.php',
 	'icon' => $sysPathIcon32.'/page_copy.png',
 ];
 $adminmenu[] = [
-	'title' => _MI_MYMODULE_ADMENU8,
+	'title' => \_MI_MYMODULE_ADMENU8,
 	'link' => 'admin/feedback.php',
 	'icon' => $sysPathIcon32.'/mail_foward.png',
 ];
 $adminmenu[] = [
-	'title' => _MI_MYMODULE_ABOUT,
+	'title' => \_MI_MYMODULE_ABOUT,
 	'link' => 'admin/about.php',
 	'icon' => $sysPathIcon32.'/about.png',
 ];

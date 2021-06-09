@@ -15,12 +15,12 @@ declare(strict_types=1);
 /**
  * My Module module for xoops
  *
- * @copyright      2020 XOOPS Project (https://xoops.org)
+ * @copyright      2021 XOOPS Project (https://xoops.org)
  * @license        GPL 2.0 or later
  * @package        mymodule
  * @since          1.0
  * @min_xoops      2.5.9
- * @author         TDM XOOPS - Email:<info@email.com> - Website:<https://xoops.org>
+ * @author         TDM XOOPS - Email:<info@email.com> - Website:<http://xoops.org>
  */
 if ($helper->getConfig('show_breadcrumbs') && \count($xoBreadcrumbs) > 0) {
 	$GLOBALS['xoopsTpl']->assign('xoBreadcrumbs', $xoBreadcrumbs);
@@ -30,7 +30,7 @@ $GLOBALS['xoopsTpl']->assign('adv', $helper->getConfig('advertise'));
 $GLOBALS['xoopsTpl']->assign('bookmarks', $helper->getConfig('bookmarks'));
 $GLOBALS['xoopsTpl']->assign('fbcomments', $helper->getConfig('fbcomments'));
 // 
-$GLOBALS['xoopsTpl']->assign('admin', MYMODULE_ADMIN);
+$GLOBALS['xoopsTpl']->assign('admin', \MYMODULE_ADMIN);
 $GLOBALS['xoopsTpl']->assign('copyright', $copyright);
 // 
-require_once XOOPS_ROOT_PATH . '/footer.php';
+require_once \XOOPS_ROOT_PATH . '/footer.php';

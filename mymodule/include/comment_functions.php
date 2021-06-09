@@ -15,12 +15,12 @@ declare(strict_types=1);
 /**
  * My Module module for xoops
  *
- * @copyright      2020 XOOPS Project (https://xoops.org)
+ * @copyright      2021 XOOPS Project (https://xoops.org)
  * @license        GPL 2.0 or later
  * @package        mymodule
  * @since          1.0
  * @min_xoops      2.5.9
- * @author         TDM XOOPS - Email:<info@email.com> - Website:<https://xoops.org>
+ * @author         TDM XOOPS - Email:<info@email.com> - Website:<http://xoops.org>
  */
 
 /**
@@ -62,7 +62,7 @@ function mymoduleCommentsApprove($comment)
 
 	$tags = [];
 	$tags['ITEM_NAME'] = $tfText;
-	$tags['ITEM_URL']  = XOOPS_URL . '/modules/mymodule/testfields.php?op=show&tf_id=' . $tfId;
+	$tags['ITEM_URL']  = \XOOPS_URL . '/modules/mymodule/testfields.php?op=show&tf_id=' . $tfId;
 	$notificationHandler = \xoops_getHandler('notification');
 	// Event modify notification
 	$notificationHandler->triggerEvent('global', 0, 'global_comment', $tags);

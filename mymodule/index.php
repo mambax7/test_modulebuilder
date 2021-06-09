@@ -15,12 +15,12 @@ declare(strict_types=1);
 /**
  * My Module module for xoops
  *
- * @copyright      2020 XOOPS Project (https://xoops.org)
+ * @copyright      2021 XOOPS Project (https://xoops.org)
  * @license        GPL 2.0 or later
  * @package        mymodule
  * @since          1.0
  * @min_xoops      2.5.9
- * @author         TDM XOOPS - Email:<info@email.com> - Website:<https://xoops.org>
+ * @author         TDM XOOPS - Email:<info@email.com> - Website:<http://xoops.org>
  */
 
 use Xmf\Request;
@@ -29,16 +29,16 @@ use XoopsModules\Mymodule\Constants;
 
 require __DIR__ . '/header.php';
 $GLOBALS['xoopsOption']['template_main'] = 'mymodule_index.tpl';
-require_once XOOPS_ROOT_PATH . '/header.php';
+require_once \XOOPS_ROOT_PATH . '/header.php';
 // Define Stylesheet
 $GLOBALS['xoTheme']->addStylesheet($style, null);
 // Keywords
 $keywords = [];
 // Breadcrumbs
-$xoBreadcrumbs[] = ['title' => _MA_MYMODULE_INDEX];
+$xoBreadcrumbs[] = ['title' => \_MA_MYMODULE_INDEX];
 // Paths
-$GLOBALS['xoopsTpl']->assign('xoops_icons32_url', XOOPS_ICONS32_URL);
-$GLOBALS['xoopsTpl']->assign('mymodule_url', MYMODULE_URL);
+$GLOBALS['xoopsTpl']->assign('xoops_icons32_url', \XOOPS_ICONS32_URL);
+$GLOBALS['xoopsTpl']->assign('mymodule_url', \MYMODULE_URL);
 // Tables
 $articlesCount = $articlesHandler->getCountArticles();
 $GLOBALS['xoopsTpl']->assign('articlesCount', $articlesCount);
@@ -60,11 +60,11 @@ if ($articlesCount > 0) {
 	unset($articles);
 	// Display Navigation
 	if ($articlesCount > $limit) {
-		require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
+		require_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
 		$pagenav = new \XoopsPageNav($articlesCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
 		$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
 	}
-	$GLOBALS['xoopsTpl']->assign('lang_thereare', \sprintf(_MA_MYMODULE_INDEX_THEREARE, $articlesCount));
+	$GLOBALS['xoopsTpl']->assign('lang_thereare', \sprintf(\_MA_MYMODULE_INDEX_THEREARE, $articlesCount));
 	$GLOBALS['xoopsTpl']->assign('divideby', $helper->getConfig('divideby'));
 	$GLOBALS['xoopsTpl']->assign('numb_col', $helper->getConfig('numb_col'));
 }
@@ -91,11 +91,11 @@ if ($testfieldsCount > 0) {
 	unset($testfields);
 	// Display Navigation
 	if ($testfieldsCount > $limit) {
-		require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
+		require_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
 		$pagenav = new \XoopsPageNav($testfieldsCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
 		$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
 	}
-	$GLOBALS['xoopsTpl']->assign('lang_thereare', \sprintf(_MA_MYMODULE_INDEX_THEREARE, $testfieldsCount));
+	$GLOBALS['xoopsTpl']->assign('lang_thereare', \sprintf(\_MA_MYMODULE_INDEX_THEREARE, $testfieldsCount));
 	$GLOBALS['xoopsTpl']->assign('divideby', $helper->getConfig('divideby'));
 	$GLOBALS['xoopsTpl']->assign('numb_col', $helper->getConfig('numb_col'));
 }
@@ -105,8 +105,8 @@ $GLOBALS['xoopsTpl']->assign('table_type', $helper->getConfig('table_type'));
 mymoduleMetaKeywords($helper->getConfig('keywords') . ', ' . \implode(',', $keywords));
 unset($keywords);
 // Description
-mymoduleMetaDescription(_MA_MYMODULE_INDEX_DESC);
-$GLOBALS['xoopsTpl']->assign('xoops_mpageurl', MYMODULE_URL.'/index.php');
-$GLOBALS['xoopsTpl']->assign('xoops_icons32_url', XOOPS_ICONS32_URL);
-$GLOBALS['xoopsTpl']->assign('mymodule_upload_url', MYMODULE_UPLOAD_URL);
+mymoduleMetaDescription(\_MA_MYMODULE_INDEX_DESC);
+$GLOBALS['xoopsTpl']->assign('xoops_mpageurl', \MYMODULE_URL.'/index.php');
+$GLOBALS['xoopsTpl']->assign('xoops_icons32_url', \XOOPS_ICONS32_URL);
+$GLOBALS['xoopsTpl']->assign('mymodule_upload_url', \MYMODULE_UPLOAD_URL);
 require __DIR__ . '/footer.php';

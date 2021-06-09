@@ -15,19 +15,19 @@ declare(strict_types=1);
 /**
  * My Module module for xoops
  *
- * @copyright      2020 XOOPS Project (https://xoops.org)
+ * @copyright      2021 XOOPS Project (https://xoops.org)
  * @license        GPL 2.0 or later
  * @package        mymodule
  * @since          1.0
  * @min_xoops      2.5.9
- * @author         TDM XOOPS - Email:<info@email.com> - Website:<https://xoops.org>
+ * @author         TDM XOOPS - Email:<info@email.com> - Website:<http://xoops.org>
  */
 
 use XoopsModules\Mymodule;
 use XoopsModules\Mymodule\Helper;
 use XoopsModules\Mymodule\Constants;
 
-require_once XOOPS_ROOT_PATH . '/modules/mymodule/include/common.php';
+require_once \XOOPS_ROOT_PATH . '/modules/mymodule/include/common.php';
 
 /**
  * Function show block
@@ -36,9 +36,8 @@ require_once XOOPS_ROOT_PATH . '/modules/mymodule/include/common.php';
  */
 function b_mymodule_articles_show($options)
 {
-	require_once XOOPS_ROOT_PATH . '/modules/mymodule/class/articles.php';
-	$myts = MyTextSanitizer::getInstance();
-	$GLOBALS['xoopsTpl']->assign('mymodule_upload_url', MYMODULE_UPLOAD_URL);
+	require_once \XOOPS_ROOT_PATH . '/modules/mymodule/class/articles.php';
+	$GLOBALS['xoopsTpl']->assign('mymodule_upload_url', \MYMODULE_UPLOAD_URL);
 	$block       = [];
 	$typeBlock   = $options[0];
 	$limit       = $options[1];
@@ -54,34 +53,34 @@ function b_mymodule_articles_show($options)
 		case 'last':
 		default:
 			// For the block: articles last
-			$crArticles->add(new \Criteria('art_online', Constants::PERM_GLOBAL_VIEW, '>'));
+			$crArticles->add(new \Criteria('art_status', Constants::PERM_GLOBAL_VIEW, '>'));
 			$crArticles->setSort('art_created');
 			$crArticles->setOrder('DESC');
 			break;
 		case 'new':
 			// For the block: articles new
-			$crArticles->add(new \Criteria('art_online', Constants::PERM_GLOBAL_VIEW, '>'));
+			$crArticles->add(new \Criteria('art_status', Constants::PERM_GLOBAL_VIEW, '>'));
 			// new since last week: 7 * 24 * 60 * 60 = 604800
-			$crArticles->add(new \Criteria('art_created', time() - 604800, '>='));
-			$crArticles->add(new \Criteria('art_created', time(), '<='));
+			$crArticles->add(new \Criteria('art_created', \time() - 604800, '>='));
+			$crArticles->add(new \Criteria('art_created', \time(), '<='));
 			$crArticles->setSort('art_created');
 			$crArticles->setOrder('ASC');
 			break;
 		case 'hits':
 			// For the block: articles hits
-			$crArticles->add(new \Criteria('art_online', Constants::PERM_GLOBAL_VIEW, '>'));
+			$crArticles->add(new \Criteria('art_status', Constants::PERM_GLOBAL_VIEW, '>'));
 			$crArticles->setSort('art_hits');
 			$crArticles->setOrder('DESC');
 			break;
 		case 'top':
 			// For the block: articles top
-			$crArticles->add(new \Criteria('art_online', Constants::PERM_GLOBAL_VIEW, '>'));
+			$crArticles->add(new \Criteria('art_status', Constants::PERM_GLOBAL_VIEW, '>'));
 			$crArticles->setSort('art_top');
 			$crArticles->setOrder('ASC');
 			break;
 		case 'random':
 			// For the block: articles random
-			$crArticles->add(new \Criteria('art_online', Constants::PERM_GLOBAL_VIEW, '>'));
+			$crArticles->add(new \Criteria('art_status', Constants::PERM_GLOBAL_VIEW, '>'));
 			$crArticles->setSort('RAND()');
 			break;
 	}
@@ -93,7 +92,7 @@ function b_mymodule_articles_show($options)
 		foreach (\array_keys($articlesAll) as $i) {
 			$block[$i]['id'] = $articlesAll[$i]->getVar('art_id');
 			$block[$i]['cat'] = $articlesAll[$i]->getVar('art_cat');
-			$block[$i]['title'] = htmlspecialchars($articlesAll[$i]->getVar('art_title'), ENT_QUOTES | ENT_HTML5);
+			$block[$i]['title'] = \htmlspecialchars($articlesAll[$i]->getVar('art_title'), ENT_QUOTES | ENT_HTML5);
 			$block[$i]['descr'] = \strip_tags($articlesAll[$i]->getVar('art_descr'));
 			$block[$i]['img'] = $articlesAll[$i]->getVar('art_img');
 			$block[$i]['file'] = $articlesAll[$i]->getVar('art_file');
@@ -113,14 +112,14 @@ function b_mymodule_articles_show($options)
  */
 function b_mymodule_articles_edit($options)
 {
-	require_once XOOPS_ROOT_PATH . '/modules/mymodule/class/articles.php';
+	require_once \XOOPS_ROOT_PATH . '/modules/mymodule/class/articles.php';
 	$helper = Helper::getInstance();
 	$articlesHandler = $helper->getHandler('Articles');
-	$GLOBALS['xoopsTpl']->assign('mymodule_upload_url', MYMODULE_UPLOAD_URL);
-	$form = _MB_MYMODULE_DISPLAY;
-	$form .= "<input type='hidden' name='options[0]' value='".$options[0]."'>";
-	$form .= "<input type='text' name='options[1]' size='5' maxlength='255' value='" . $options[1] . "'>&nbsp;<br>";
-	$form .= _MB_MYMODULE_TITLE_LENGTH . " : <input type='text' name='options[2]' size='5' maxlength='255' value='" . $options[2] . "'><br><br>";
+	$GLOBALS['xoopsTpl']->assign('mymodule_upload_url', \MYMODULE_UPLOAD_URL);
+	$form = \_MB_MYMODULE_DISPLAY;
+	$form .= "<input type='hidden' name='options[0]' value='".$options[0]."' >";
+	$form .= "<input type='text' name='options[1]' size='5' maxlength='255' value='" . $options[1] . "' >&nbsp;<br>";
+	$form .= \_MB_MYMODULE_TITLE_LENGTH . " : <input type='text' name='options[2]' size='5' maxlength='255' value='" . $options[2] . "' ><br><br>";
 	\array_shift($options);
 	\array_shift($options);
 	\array_shift($options);
@@ -131,8 +130,8 @@ function b_mymodule_articles_edit($options)
 	$crArticles->setOrder('ASC');
 	$articlesAll = $articlesHandler->getAll($crArticles);
 	unset($crArticles);
-	$form .= _MB_MYMODULE_ARTICLES_TO_DISPLAY . "<br><select name='options[]' multiple='multiple' size='5'>";
-	$form .= "<option value='0' " . (!\in_array(0, $options) ? '' : "selected='selected'") . '>' . _MB_MYMODULE_ALL_ARTICLES . '</option>';
+	$form .= \_MB_MYMODULE_ARTICLES_TO_DISPLAY . "<br><select name='options[]' multiple='multiple' size='5'>";
+	$form .= "<option value='0' " . (!\in_array(0, $options) && !\in_array('0', $options) ? '' : "selected='selected'") . '>' . \_MB_MYMODULE_ALL_ARTICLES . '</option>';
 	foreach (\array_keys($articlesAll) as $i) {
 		$art_id = $articlesAll[$i]->getVar('art_id');
 		$form .= "<option value='" . $art_id . "' " . (!\in_array($art_id, $options) ? '' : "selected='selected'") . '>' . $articlesAll[$i]->getVar('art_title') . '</option>';

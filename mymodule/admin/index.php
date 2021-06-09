@@ -15,12 +15,12 @@ declare(strict_types=1);
 /**
  * My Module module for xoops
  *
- * @copyright      2020 XOOPS Project (https://xoops.org)
+ * @copyright      2021 XOOPS Project (https://xoops.org)
  * @license        GPL 2.0 or later
  * @package        mymodule
  * @since          1.0
  * @min_xoops      2.5.9
- * @author         TDM XOOPS - Email:<info@email.com> - Website:<https://xoops.org>
+ * @author         TDM XOOPS - Email:<info@email.com> - Website:<http://xoops.org>
  */
 
 
@@ -38,11 +38,11 @@ $countArticles = $articlesHandler->getCount();
 $countTestfields = $testfieldsHandler->getCount();
 
 // InfoBox Statistics
-$adminObject->addInfoBox(_AM_MYMODULE_STATISTICS);
+$adminObject->addInfoBox(\_AM_MYMODULE_STATISTICS);
 // Info elements
-$adminObject->addInfoBoxLine(\sprintf( '<label>' . _AM_MYMODULE_THEREARE_CATEGORIES . '</label>', $countCategories));
-$adminObject->addInfoBoxLine(\sprintf( '<label>' . _AM_MYMODULE_THEREARE_ARTICLES . '</label>', $countArticles));
-$adminObject->addInfoBoxLine(\sprintf( '<label>' . _AM_MYMODULE_THEREARE_TESTFIELDS . '</label>', $countTestfields));
+$adminObject->addInfoBoxLine(\sprintf( '<label>' . \_AM_MYMODULE_THEREARE_CATEGORIES . '</label>', $countCategories));
+$adminObject->addInfoBoxLine(\sprintf( '<label>' . \_AM_MYMODULE_THEREARE_ARTICLES . '</label>', $countArticles));
+$adminObject->addInfoBoxLine(\sprintf( '<label>' . \_AM_MYMODULE_THEREARE_TESTFIELDS . '</label>', $countTestfields));
 
 // Upload Folders
 $configurator = new Common\Configurator();
