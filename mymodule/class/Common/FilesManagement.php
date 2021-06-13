@@ -30,12 +30,12 @@ trait FilesManagement
     public static function createFolder($folder)
     {
         try {
-            if (!\file_exists($folder)) {
+            if (!\is_dir($folder)) {
                 if (!\is_dir($folder) && !\mkdir($folder) && !\is_dir($folder)) {
                     throw new \RuntimeException(\sprintf('Unable to create the %s directory', $folder));
                 }
 
-                file_put_contents($folder . '/index.php', "<?php\nheader('HTTP/1.0 404 Not Found');");
+                file_put_contents($folder . '/index.php', "<?php\nheader('HTTP/1.0 404 Not Found');", LOCK_EX);
             }
         } catch (\Exception $e) {
             echo 'Caught exception: ', $e->getMessage(), '<br>';
