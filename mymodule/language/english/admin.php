@@ -15,12 +15,12 @@ declare(strict_types=1);
 /**
  * My Module module for xoops
  *
- * @copyright      2020 XOOPS Project (https://xoops.org)
+ * @copyright      2021 XOOPS Project (https://xoops.org)
  * @license        GPL 2.0 or later
  * @package        mymodule
  * @since          1.0
  * @min_xoops      2.5.9
- * @author         TDM XOOPS - Email:<info@email.com> - Website:<https://xoops.org>
+ * @author         TDM XOOPS - Email:<info@email.com> - Website:<http://xoops.org>
  */
 
 require_once __DIR__ . '/common.php';
@@ -66,12 +66,12 @@ require_once __DIR__ . '/main.php';
 \define('_AM_MYMODULE_ARTICLE_EDIT', 'Edit Article');
 // Elements of Article
 \define('_AM_MYMODULE_ARTICLE_ID', 'Id');
-\define('_AM_MYMODULE_ARTICLE_CAT', 'Cat');
+\define('_AM_MYMODULE_ARTICLE_CAT', 'Categories');
 \define('_AM_MYMODULE_ARTICLE_TITLE', 'Title');
 \define('_AM_MYMODULE_ARTICLE_DESCR', 'Descr');
 \define('_AM_MYMODULE_ARTICLE_IMG', 'Img');
 \define('_AM_MYMODULE_ARTICLE_IMG_UPLOADS', 'Img in %s :');
-\define('_AM_MYMODULE_ARTICLE_ONLINE', 'Online');
+\define('_AM_MYMODULE_ARTICLE_STATUS', 'Status');
 \define('_AM_MYMODULE_ARTICLE_FILE', 'File');
 \define('_AM_MYMODULE_ARTICLE_FILE_UPLOADS', 'File in %s :');
 \define('_AM_MYMODULE_ARTICLE_RATINGS', 'Ratings');

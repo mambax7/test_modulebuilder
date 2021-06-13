@@ -5,7 +5,7 @@
 </div>
 <div class='panel-body'>
 	<span class='col-sm-9 justify'><{$article.descr}></span>
-	<span class='col-sm-3'><img src='<{$mymodule_upload_url|default:false}>/images/articles/<{$article.img}>' alt='articles'></span>
+	<span class='col-sm-3'><img src='<{$mymodule_upload_url|default:false}>/images/articles/<{$article.img}>' alt='articles' ></span>
 </div>
 <div class='panel-foot'>
 	<span class='block-pie justify'><{$smarty.const._MA_MYMODULE_ARTICLE_FILE}>: <{$article.file}></span>

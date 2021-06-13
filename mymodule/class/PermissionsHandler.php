@@ -18,12 +18,12 @@ namespace XoopsModules\Mymodule;
 /**
  * My Module module for xoops
  *
- * @copyright      2020 XOOPS Project (https://xoops.org)
+ * @copyright      2021 XOOPS Project (https://xoops.org)
  * @license        GPL 2.0 or later
  * @package        mymodule
  * @since          1.0
  * @min_xoops      2.5.9
- * @author         TDM XOOPS - Email:<info@email.com> - Website:<https://xoops.org>
+ * @author         TDM XOOPS - Email:<info@email.com> - Website:<http://xoops.org>
  */
 
 use XoopsModules\Mymodule;
@@ -65,10 +65,10 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
 		$mid = $xoopsModule->mid();
 		$memberHandler = \xoops_getHandler('member');
 		if (0 == $currentuid) {
-			$my_group_ids = [XOOPS_GROUP_ANONYMOUS];
+			$my_group_ids = [\XOOPS_GROUP_ANONYMOUS];
 		} else {
 			$my_group_ids = $memberHandler->getGroupsByUser($currentuid);
-        }
+		}
 		if ($grouppermHandler->checkRight('mymodule_ac', 4, $my_group_ids, $mid)) {
 			return true;
 		}
@@ -96,10 +96,10 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
 		$mid = $xoopsModule->mid();
 		$memberHandler = \xoops_getHandler('member');
 		if (0 == $currentuid) {
-			$my_group_ids = [XOOPS_GROUP_ANONYMOUS];
+			$my_group_ids = [\XOOPS_GROUP_ANONYMOUS];
 		} else {
 			$my_group_ids = $memberHandler->getGroupsByUser($currentuid);
-        }
+		}
 		if ($this->getPermGlobalApprove()) {
 			return true;
 		}
@@ -130,10 +130,10 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
 		$mid = $xoopsModule->mid();
 		$memberHandler = \xoops_getHandler('member');
 		if (0 == $currentuid) {
-			$my_group_ids = [XOOPS_GROUP_ANONYMOUS];
+			$my_group_ids = [\XOOPS_GROUP_ANONYMOUS];
 		} else {
 			$my_group_ids = $memberHandler->getGroupsByUser($currentuid);
-        }
+		}
 		if ($this->getPermGlobalApprove()) {
 			return true;
 		}

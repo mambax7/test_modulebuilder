@@ -19,7 +19,7 @@
 			<td class='center'><{$article.cat}></td>
 			<td class='center'><{$article.title}></td>
 			<td class='center'><{$article.descr}></td>
-			<td class='center'><img src="<{$mymodule_upload_url|default:false}>/images/articles/<{$article.img}>" alt="articles"></td>
+			<td class='center'><img src="<{$mymodule_upload_url|default:false}>/images/articles/<{$article.img}>" alt="articles" ></td>
 			<td class='center'><{$article.file}></td>
 			<td class='center'><{$article.created}></td>
 			<td class='center'><{$article.submitter}></td>

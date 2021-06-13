@@ -15,12 +15,12 @@ declare(strict_types=1);
 /**
  * My Module module for xoops
  *
- * @copyright      2020 XOOPS Project (https://xoops.org)
+ * @copyright      2021 XOOPS Project (https://xoops.org)
  * @license        GPL 2.0 or later
  * @package        mymodule
  * @since          1.0
  * @min_xoops      2.5.9
- * @author         TDM XOOPS - Email:<info@email.com> - Website:<https://xoops.org>
+ * @author         TDM XOOPS - Email:<info@email.com> - Website:<http://xoops.org>
  */
 
 use Xmf\Request;
@@ -38,10 +38,10 @@ $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('brok
 $start = Request::getInt('startArticles', 0);
 $limit = Request::getInt('limitArticles', $helper->getConfig('adminpager'));
 $crArticles = new \CriteriaCompo();
-$crArticles->add(new \Criteria('art_online', Constants::STATUS_BROKEN));
+$crArticles->add(new \Criteria('art_status', Constants::STATUS_BROKEN));
 $articlesCount = $articlesHandler->getCount($crArticles);
 $GLOBALS['xoopsTpl']->assign('articles_count', $articlesCount);
-$GLOBALS['xoopsTpl']->assign('articles_result', \sprintf(_AM_MYMODULE_BROKEN_RESULT, 'Articles'));
+$GLOBALS['xoopsTpl']->assign('articles_result', \sprintf(\_AM_MYMODULE_BROKEN_RESULT, 'Articles'));
 $crArticles->setStart($start);
 $crArticles->setLimit($limit);
 if ($articlesCount > 0) {
@@ -55,12 +55,12 @@ if ($articlesCount > 0) {
 	}
 	// Display Navigation
 	if ($articlesCount > $limit) {
-		require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
+		require_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
 		$pagenav = new \XoopsPageNav($articlesCount, $limit, $start, 'startArticles', 'op=list&limitArticles=' . $limit);
 		$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
 	}
 } else {
-	$GLOBALS['xoopsTpl']->assign('nodataArticles', \sprintf(_AM_MYMODULE_BROKEN_NODATA, 'Articles'));
+	$GLOBALS['xoopsTpl']->assign('nodataArticles', \sprintf(\_AM_MYMODULE_BROKEN_NODATA, 'Articles'));
 }
 unset($crArticles);
 
@@ -71,7 +71,7 @@ $crTestfields = new \CriteriaCompo();
 $crTestfields->add(new \Criteria('tf_status', Constants::STATUS_BROKEN));
 $testfieldsCount = $testfieldsHandler->getCount($crTestfields);
 $GLOBALS['xoopsTpl']->assign('testfields_count', $testfieldsCount);
-$GLOBALS['xoopsTpl']->assign('testfields_result', \sprintf(_AM_MYMODULE_BROKEN_RESULT, 'Testfields'));
+$GLOBALS['xoopsTpl']->assign('testfields_result', \sprintf(\_AM_MYMODULE_BROKEN_RESULT, 'Testfields'));
 $crTestfields->setStart($start);
 $crTestfields->setLimit($limit);
 if ($testfieldsCount > 0) {
@@ -85,12 +85,12 @@ if ($testfieldsCount > 0) {
 	}
 	// Display Navigation
 	if ($testfieldsCount > $limit) {
-		require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
+		require_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
 		$pagenav = new \XoopsPageNav($testfieldsCount, $limit, $start, 'startTestfields', 'op=list&limitTestfields=' . $limit);
 		$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
 	}
 } else {
-	$GLOBALS['xoopsTpl']->assign('nodataTestfields', \sprintf(_AM_MYMODULE_BROKEN_NODATA, 'Testfields'));
+	$GLOBALS['xoopsTpl']->assign('nodataTestfields', \sprintf(\_AM_MYMODULE_BROKEN_NODATA, 'Testfields'));
 }
 unset($crTestfields);
 

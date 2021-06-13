@@ -10,7 +10,7 @@
 				<th class="center"><{$smarty.const._AM_MYMODULE_ARTICLE_TITLE}></th>
 				<th class="center"><{$smarty.const._AM_MYMODULE_ARTICLE_DESCR}></th>
 				<th class="center"><{$smarty.const._AM_MYMODULE_ARTICLE_IMG}></th>
-				<th class="center"><{$smarty.const._AM_MYMODULE_ARTICLE_ONLINE}></th>
+				<th class="center"><{$smarty.const._AM_MYMODULE_ARTICLE_STATUS}></th>
 				<th class="center"><{$smarty.const._AM_MYMODULE_ARTICLE_FILE}></th>
 				<th class="center"><{$smarty.const._AM_MYMODULE_ARTICLE_RATINGS}></th>
 				<th class="center"><{$smarty.const._AM_MYMODULE_ARTICLE_VOTES}></th>
@@ -27,16 +27,16 @@
 				<td class='center'><{$article.cat}></td>
 				<td class='center'><{$article.title}></td>
 				<td class='center'><{$article.descr_short}></td>
-				<td class='center'><img src="<{$mymodule_upload_url|default:false}>/images/articles/<{$article.img}>" alt="articles" style="max-width:100px"></td>
-				<td class='center'><img src="<{$modPathIcon16}>status<{$article.status}>.png" alt="<{$article.status_text}>" title="<{$article.status_text}>"></td>
+				<td class='center'><img src="<{$mymodule_upload_url|default:false}>/images/articles/<{$article.img}>" alt="articles" style="max-width:100px" ></td>
+				<td class='center'><img src="<{$modPathIcon16}>status<{$article.status}>.png" alt="<{$article.status_text}>" title="<{$article.status_text}>" ></td>
 				<td class='center'><{$article.file}></td>
 				<td class='center'><{$article.ratings}></td>
 				<td class='center'><{$article.votes}></td>
 				<td class='center'><{$article.created}></td>
 				<td class='center'><{$article.submitter}></td>
 				<td class="center  width5">
-					<a href="articles.php?op=edit&amp;art_id=<{$article.id}>" title="<{$smarty.const._EDIT}>"><img src="<{xoModuleIcons16 edit.png}>" alt="<{$smarty.const._EDIT}> articles"></a>
-					<a href="articles.php?op=delete&amp;art_id=<{$article.id}>" title="<{$smarty.const._DELETE}>"><img src="<{xoModuleIcons16 delete.png}>" alt="<{$smarty.const._DELETE}> articles"></a>
+					<a href="articles.php?op=edit&amp;art_id=<{$article.id}>" title="<{$smarty.const._EDIT}>"><img src="<{xoModuleIcons16 edit.png}>" alt="<{$smarty.const._EDIT}> articles" ></a>
+					<a href="articles.php?op=delete&amp;art_id=<{$article.id}>" title="<{$smarty.const._DELETE}>"><img src="<{xoModuleIcons16 delete.png}>" alt="<{$smarty.const._DELETE}> articles" ></a>
 				</td>
 			</tr>
 			<{/foreach}>

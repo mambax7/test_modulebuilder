@@ -15,12 +15,12 @@ declare(strict_types=1);
 /**
  * My Module module for xoops
  *
- * @copyright      2020 XOOPS Project (https://xoops.org)
+ * @copyright      2021 XOOPS Project (https://xoops.org)
  * @license        GPL 2.0 or later
  * @package        mymodule
  * @since          1.0
  * @min_xoops      2.5.9
- * @author         TDM XOOPS - Email:<info@email.com> - Website:<https://xoops.org>
+ * @author         TDM XOOPS - Email:<info@email.com> - Website:<http://xoops.org>
  */
 
 use Xmf\Request;
@@ -42,13 +42,13 @@ switch ($op) {
 		$limit = Request::getInt('limit', $helper->getConfig('adminpager'));
 		$templateMain = 'mymodule_admin_testfields.tpl';
 		$GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('testfields.php'));
-		$adminObject->addItemButton(_AM_MYMODULE_ADD_TESTFIELD, 'testfields.php?op=new', 'add');
+		$adminObject->addItemButton(\_AM_MYMODULE_ADD_TESTFIELD, 'testfields.php?op=new', 'add');
 		$GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
 		$testfieldsCount = $testfieldsHandler->getCountTestfields();
 		$testfieldsAll = $testfieldsHandler->getAllTestfields($start, $limit);
 		$GLOBALS['xoopsTpl']->assign('testfields_count', $testfieldsCount);
-		$GLOBALS['xoopsTpl']->assign('mymodule_url', MYMODULE_URL);
-		$GLOBALS['xoopsTpl']->assign('mymodule_upload_url', MYMODULE_UPLOAD_URL);
+		$GLOBALS['xoopsTpl']->assign('mymodule_url', \MYMODULE_URL);
+		$GLOBALS['xoopsTpl']->assign('mymodule_upload_url', \MYMODULE_UPLOAD_URL);
 		// Table view testfields
 		if ($testfieldsCount > 0) {
 			foreach (\array_keys($testfieldsAll) as $i) {
@@ -58,18 +58,18 @@ switch ($op) {
 			}
 			// Display Navigation
 			if ($testfieldsCount > $limit) {
-				require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
+				require_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
 				$pagenav = new \XoopsPageNav($testfieldsCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
 				$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
 			}
 		} else {
-			$GLOBALS['xoopsTpl']->assign('error', _AM_MYMODULE_THEREARENT_TESTFIELDS);
+			$GLOBALS['xoopsTpl']->assign('error', \_AM_MYMODULE_THEREARENT_TESTFIELDS);
 		}
 		break;
 	case 'new':
 		$templateMain = 'mymodule_admin_testfields.tpl';
 		$GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('testfields.php'));
-		$adminObject->addItemButton(_AM_MYMODULE_LIST_TESTFIELDS, 'testfields.php', 'list');
+		$adminObject->addItemButton(\_AM_MYMODULE_LIST_TESTFIELDS, 'testfields.php', 'list');
 		$GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
 		// Form Create
 		$testfieldsObj = $testfieldsHandler->create();
@@ -87,6 +87,7 @@ switch ($op) {
 			$testfieldsObj = $testfieldsHandler->create();
 		}
 		// Set Vars
+		$uploaderErrors = '';
 		$testfieldsObj->setVar('tf_text', Request::getString('tf_text', ''));
 		$testfieldsObj->setVar('tf_textarea', Request::getString('tf_textarea', ''));
 		$testfieldsObj->setVar('tf_dhtml', Request::getText('tf_dhtml', ''));
@@ -96,8 +97,8 @@ switch ($op) {
 		$testfieldsObj->setVar('tf_user', Request::getInt('tf_user', 0));
 		$testfieldsObj->setVar('tf_color', Request::getString('tf_color', ''));
 		// Set Var tf_imagelist
-		require_once XOOPS_ROOT_PATH . '/class/uploader.php';
-		$uploader = new \XoopsMediaUploader(XOOPS_ROOT_PATH . '/Frameworks/moduleclasses/icons/32', 
+		require_once \XOOPS_ROOT_PATH . '/class/uploader.php';
+		$uploader = new \XoopsMediaUploader(\XOOPS_ROOT_PATH . '/Frameworks/moduleclasses/icons/32', 
 													$helper->getConfig('mimetypes_image'), 
 													$helper->getConfig('maxsize_image'), null, null);
 		if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
@@ -106,18 +107,17 @@ switch ($op) {
 			if ($uploader->upload()) {
 				$testfieldsObj->setVar('tf_imagelist', $uploader->getSavedFileName());
 			} else {
-				$errors = $uploader->getErrors();
-				\redirect_header('javascript:history.go(-1).php', 3, $errors);
+				$uploaderErrors .= '<br>' . $uploader->getErrors();
 			}
 		} else {
 			$testfieldsObj->setVar('tf_imagelist', Request::getString('tf_imagelist'));
 		}
 		$testfieldsObj->setVar('tf_urlfile', formatURL($_REQUEST['tf_urlfile']));
 		// Set Var tf_urlfile
-		require_once XOOPS_ROOT_PATH . '/class/uploader.php';
+		require_once \XOOPS_ROOT_PATH . '/class/uploader.php';
 		$filename       = $_FILES['tf_urlfile']['name'];
 		$imgNameDef     = Request::getString('tf_text');
-		$uploader = new \XoopsMediaUploader(MYMODULE_UPLOAD_FILES_PATH . '/testfields/', 
+		$uploader = new \XoopsMediaUploader(\MYMODULE_UPLOAD_FILES_PATH . '/testfields/', 
 													$helper->getConfig('mimetypes_file'), 
 													$helper->getConfig('maxsize_file'), null, null);
 		if ($uploader->fetchMedia($_POST['xoops_upload_file'][1])) {
@@ -128,21 +128,20 @@ switch ($op) {
 			if ($uploader->upload()) {
 				$testfieldsObj->setVar('tf_urlfile', $uploader->getSavedFileName());
 			} else {
-				$errors = $uploader->getErrors();
+				$uploaderErrors .= '<br>' . $uploader->getErrors();
 			}
 		} else {
 			if ($filename > '') {
-				$uploaderErrors = $uploader->getErrors();
+				$uploaderErrors .= '<br>' . $uploader->getErrors();
 			}
 			$testfieldsObj->setVar('tf_urlfile', Request::getString('tf_urlfile'));
 		}
 		// Set Var tf_uplimage
-		require_once XOOPS_ROOT_PATH . '/class/uploader.php';
+		require_once \XOOPS_ROOT_PATH . '/class/uploader.php';
 		$filename       = $_FILES['tf_uplimage']['name'];
 		$imgMimetype    = $_FILES['tf_uplimage']['type'];
 		$imgNameDef     = Request::getString('tf_text');
-		$uploaderErrors = '';
-		$uploader = new \XoopsMediaUploader(MYMODULE_UPLOAD_IMAGE_PATH . '/testfields/', 
+		$uploader = new \XoopsMediaUploader(\MYMODULE_UPLOAD_IMAGE_PATH . '/testfields/', 
 													$helper->getConfig('mimetypes_image'), 
 													$helper->getConfig('maxsize_image'), null, null);
 		if ($uploader->fetchMedia($_POST['xoops_upload_file'][2])) {
@@ -157,8 +156,8 @@ switch ($op) {
 				if ($maxwidth > 0 && $maxheight > 0) {
 					// Resize image
 					$imgHandler                = new Mymodule\Common\Resizer();
-					$imgHandler->sourceFile    = MYMODULE_UPLOAD_IMAGE_PATH . '/testfields/' . $savedFilename;
-					$imgHandler->endFile       = MYMODULE_UPLOAD_IMAGE_PATH . '/testfields/' . $savedFilename;
+					$imgHandler->sourceFile    = \MYMODULE_UPLOAD_IMAGE_PATH . '/testfields/' . $savedFilename;
+					$imgHandler->endFile       = \MYMODULE_UPLOAD_IMAGE_PATH . '/testfields/' . $savedFilename;
 					$imgHandler->imageMimetype = $imgMimetype;
 					$imgHandler->maxWidth      = $maxwidth;
 					$imgHandler->maxHeight     = $maxheight;
@@ -166,19 +165,19 @@ switch ($op) {
 				}
 				$testfieldsObj->setVar('tf_uplimage', $savedFilename);
 			} else {
-				$uploaderErrors = $uploader->getErrors();
+				$uploaderErrors .= '<br>' . $uploader->getErrors();
 			}
 		} else {
 			if ($filename > '') {
-				$uploaderErrors = $uploader->getErrors();
+				$uploaderErrors .= '<br>' . $uploader->getErrors();
 			}
 			$testfieldsObj->setVar('tf_uplimage', Request::getString('tf_uplimage'));
 		}
 		// Set Var tf_uplfile
-		require_once XOOPS_ROOT_PATH . '/class/uploader.php';
+		require_once \XOOPS_ROOT_PATH . '/class/uploader.php';
 		$filename       = $_FILES['tf_uplfile']['name'];
 		$imgNameDef     = Request::getString('tf_text');
-		$uploader = new \XoopsMediaUploader(MYMODULE_UPLOAD_FILES_PATH . '/testfields/', 
+		$uploader = new \XoopsMediaUploader(\MYMODULE_UPLOAD_FILES_PATH . '/testfields/', 
 													$helper->getConfig('mimetypes_file'), 
 													$helper->getConfig('maxsize_file'), null, null);
 		if ($uploader->fetchMedia($_POST['xoops_upload_file'][3])) {
@@ -189,21 +188,21 @@ switch ($op) {
 			if ($uploader->upload()) {
 				$testfieldsObj->setVar('tf_uplfile', $uploader->getSavedFileName());
 			} else {
-				$errors = $uploader->getErrors();
+				$uploaderErrors .= '<br>' . $uploader->getErrors();
 			}
 		} else {
 			if ($filename > '') {
-				$uploaderErrors = $uploader->getErrors();
+				$uploaderErrors .= '<br>' . $uploader->getErrors();
 			}
 			$testfieldsObj->setVar('tf_uplfile', Request::getString('tf_uplfile'));
 		}
-		$testfieldTextdateselectObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('tf_textdateselect'));
+		$testfieldTextdateselectObj = \DateTime::createFromFormat(\_SHORTDATESTRING, Request::getString('tf_textdateselect'));
 		$testfieldsObj->setVar('tf_textdateselect', $testfieldTextdateselectObj->getTimestamp());
 		// Set Var tf_selectfile
-		require_once XOOPS_ROOT_PATH . '/class/uploader.php';
+		require_once \XOOPS_ROOT_PATH . '/class/uploader.php';
 		$filename       = $_FILES['tf_selectfile']['name'];
 		$imgNameDef     = Request::getString('tf_text');
-		$uploader = new \XoopsMediaUploader(MYMODULE_UPLOAD_FILES_PATH . '/testfields/', 
+		$uploader = new \XoopsMediaUploader(\MYMODULE_UPLOAD_FILES_PATH . '/testfields/', 
 													$helper->getConfig('mimetypes_file'), 
 													$helper->getConfig('maxsize_file'), null, null);
 		if ($uploader->fetchMedia($_POST['xoops_upload_file'][4])) {
@@ -214,11 +213,11 @@ switch ($op) {
 			if ($uploader->upload()) {
 				$testfieldsObj->setVar('tf_selectfile', $uploader->getSavedFileName());
 			} else {
-				$errors = $uploader->getErrors();
+				$uploaderErrors .= '<br>' . $uploader->getErrors();
 			}
 		} else {
 			if ($filename > '') {
-				$uploaderErrors = $uploader->getErrors();
+				$uploaderErrors .= '<br>' . $uploader->getErrors();
 			}
 			$testfieldsObj->setVar('tf_selectfile', Request::getString('tf_selectfile'));
 		}
@@ -231,7 +230,7 @@ switch ($op) {
 		$testfieldsObj->setVar('tf_radio', Request::getInt('tf_radio', 0));
 		$testfieldsObj->setVar('tf_status', Request::getInt('tf_status', 0));
 		$testfieldDatetimeArr = Request::getArray('tf_datetime');
-		$testfieldDatetimeObj = \DateTime::createFromFormat(_SHORTDATESTRING, $testfieldDatetimeArr['date']);
+		$testfieldDatetimeObj = \DateTime::createFromFormat(\_SHORTDATESTRING, $testfieldDatetimeArr['date']);
 		$testfieldDatetimeObj->setTime(0, 0, 0);
 		$testfieldDatetime = $testfieldDatetimeObj->getTimestamp() + (int)$testfieldDatetimeArr['time'];
 		$testfieldsObj->setVar('tf_datetime', $testfieldDatetime);
@@ -272,7 +271,7 @@ switch ($op) {
 			if ('' !== $uploaderErrors) {
 				\redirect_header('testfields.php?op=edit&tf_id=' . $tfId, 5, $uploaderErrors);
 			} else {
-				\redirect_header('testfields.php?op=list', 2, _AM_MYMODULE_FORM_OK);
+				\redirect_header('testfields.php?op=list', 2, \_AM_MYMODULE_FORM_OK);
 			}
 		}
 		// Get Form
@@ -283,8 +282,8 @@ switch ($op) {
 	case 'edit':
 		$templateMain = 'mymodule_admin_testfields.tpl';
 		$GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('testfields.php'));
-		$adminObject->addItemButton(_AM_MYMODULE_ADD_TESTFIELD, 'testfields.php?op=new', 'add');
-		$adminObject->addItemButton(_AM_MYMODULE_LIST_TESTFIELDS, 'testfields.php', 'list');
+		$adminObject->addItemButton(\_AM_MYMODULE_ADD_TESTFIELD, 'testfields.php?op=new', 'add');
+		$adminObject->addItemButton(\_AM_MYMODULE_LIST_TESTFIELDS, 'testfields.php', 'list');
 		$GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
 		// Get Form
 		$testfieldsObj = $testfieldsHandler->get($tfId);
@@ -301,7 +300,7 @@ switch ($op) {
 				\redirect_header('testfields.php', 3, \implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
 			}
 			if ($testfieldsHandler->delete($testfieldsObj)) {
-				\redirect_header('testfields.php', 3, _AM_MYMODULE_FORM_DELETE_OK);
+				\redirect_header('testfields.php', 3, \_AM_MYMODULE_FORM_DELETE_OK);
 			} else {
 				$GLOBALS['xoopsTpl']->assign('error', $testfieldsObj->getHtmlErrors());
 			}
@@ -309,7 +308,7 @@ switch ($op) {
 			$xoopsconfirm = new Common\XoopsConfirm(
 				['ok' => 1, 'tf_id' => $tfId, 'op' => 'delete'],
 				$_SERVER['REQUEST_URI'],
-				\sprintf(_AM_MYMODULE_FORM_SURE_DELETE, $testfieldsObj->getVar('tf_text')));
+				\sprintf(\_AM_MYMODULE_FORM_SURE_DELETE, $testfieldsObj->getVar('tf_text')));
 			$form = $xoopsconfirm->getFormXoopsConfirm();
 			$GLOBALS['xoopsTpl']->assign('form', $form->render());
 		}

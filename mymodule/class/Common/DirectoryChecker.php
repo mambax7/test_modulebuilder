@@ -23,7 +23,6 @@ namespace XoopsModules\Mymodule\Common;
 use Xmf\Request;
 use XoopsModules\Mymodule;
 
-//\defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
 require_once \dirname(__DIR__, 4) . '/mainfile.php';
 $moduleDirName      = \basename(\dirname(__DIR__, 2));
@@ -67,7 +66,7 @@ class DirectoryChecker
         } elseif (@\is_writable($path)) {
             $path_status = "<img src='$pathIcon16/1.png' >";
             $path_status .= "$path (" . \constant('CO_' . $moduleDirNameUpper . '_' . 'DC_AVAILABLE') . ') ';
-            $currentMode = mb_substr(\decoct(\fileperms($path)), 2);
+            $currentMode = \mb_substr(\decoct(\fileperms($path)), 2);
             if ($currentMode != \decoct($mode)) {
                 $path_status = "<img src='$pathIcon16/0.png' >";
                 $path_status .= $path . \sprintf(\constant('CO_' . $moduleDirNameUpper . '_' . 'DC_NOTWRITABLE'), \decoct($mode), $currentMode);
@@ -80,7 +79,7 @@ class DirectoryChecker
                 $path_status .= '</form>';
             }
         } else {
-            $currentMode = mb_substr(\decoct(\fileperms($path)), 2);
+            $currentMode = \mb_substr(\decoct(\fileperms($path)), 2);
             $path_status = "<img src='$pathIcon16/0.png' >";
             $path_status .= $path . \sprintf(\constant('CO_' . $moduleDirNameUpper . '_' . 'DC_NOTWRITABLE'), \decoct($mode), $currentMode);
             $path_status .= "<form action='" . $_SERVER['SCRIPT_NAME'] . "' method='post'>";

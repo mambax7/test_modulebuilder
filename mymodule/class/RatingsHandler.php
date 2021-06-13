@@ -121,11 +121,11 @@ class RatingsHandler extends \XoopsPersistableObjectHandler
                 $ItemRating['avg_rate_value'] = \number_format($current_rating / $count, 2);
             }
             if (1 == $count) {
-                $text      = \str_replace('%c', $ItemRating['avg_rate_value'], _MA_MYMODULE_RATING_CURRENT_1);
-                $shorttext = \str_replace('%c', $ItemRating['avg_rate_value'], _MA_MYMODULE_RATING_CURRENT_SHORT_1);
+                $text      = \str_replace('%c', $ItemRating['avg_rate_value'], \_MA_MYMODULE_RATING_CURRENT_1);
+                $shorttext = \str_replace('%c', $ItemRating['avg_rate_value'], \_MA_MYMODULE_RATING_CURRENT_SHORT_1);
             } else {
-                $text      = \str_replace('%c', $ItemRating['avg_rate_value'], _MA_MYMODULE_RATING_CURRENT_X);
-                $shorttext = \str_replace('%c', $ItemRating['avg_rate_value'], _MA_MYMODULE_RATING_CURRENT_SHORT_X);
+                $text      = \str_replace('%c', $ItemRating['avg_rate_value'], \_MA_MYMODULE_RATING_CURRENT_X);
+                $shorttext = \str_replace('%c', $ItemRating['avg_rate_value'], \_MA_MYMODULE_RATING_CURRENT_SHORT_X);
             }
             $text                    = \str_replace('%m', $max_units, $text);
             $text                    = \str_replace('%t', $ItemRating['nb_ratings'], $text);

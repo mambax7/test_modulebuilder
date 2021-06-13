@@ -16,7 +16,7 @@
  * @param null|mixed $prev_version
  * @package        Mymodule
  * @since          1.0
- * @min_xoops      2.5.9
+ * @min_xoops      2.5.11
  * @author         Wedega - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  * @version        $Id: 1.0 update.php 1 Mon 2018-03-19 10:04:53Z XOOPS Project (www.xoops.org) $
  * @copyright      module for xoops
@@ -44,7 +44,7 @@ function xoops_module_update_mymodule($module, $prev_version = null)
 
     $errors = $module->getErrors();
     if (!empty($errors)) {
-        print_r($errors);
+        \print_r($errors);
     }
 
     return $ret;
@@ -84,7 +84,7 @@ function update_mymodule_v10($module)
         return false;
     }
     $ret = [];
-    while (false !== ($myrow = $xoopsDB->fetchArray($result))) {
+    while ($myrow = $xoopsDB->fetchArray($result)) {
         $ret[] = $myrow;
     }
     if (!empty($ret)) {

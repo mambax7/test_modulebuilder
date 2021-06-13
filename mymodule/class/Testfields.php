@@ -18,12 +18,12 @@ namespace XoopsModules\Mymodule;
 /**
  * My Module module for xoops
  *
- * @copyright      2020 XOOPS Project (https://xoops.org)
+ * @copyright      2021 XOOPS Project (https://xoops.org)
  * @license        GPL 2.0 or later
  * @package        mymodule
  * @since          1.0
  * @min_xoops      2.5.9
- * @author         TDM XOOPS - Email:<info@email.com> - Website:<https://xoops.org>
+ * @author         TDM XOOPS - Email:<info@email.com> - Website:<http://xoops.org>
  */
 
 use XoopsModules\Mymodule;
@@ -109,18 +109,18 @@ class Testfields extends \XoopsObject
 		$isAdmin = $GLOBALS['xoopsUser']->isAdmin($GLOBALS['xoopsModule']->mid());
 		// Permissions for uploader
 		$grouppermHandler = \xoops_getHandler('groupperm');
-		$groups = \is_object($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser']->getGroups() : XOOPS_GROUP_ANONYMOUS;
+		$groups = \is_object($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser']->getGroups() : \XOOPS_GROUP_ANONYMOUS;
 		$permissionUpload = $grouppermHandler->checkRight('upload_groups', 32, $groups, $GLOBALS['xoopsModule']->getVar('mid')) ? true : false;
 		// Title
-		$title = $this->isNew() ? \sprintf(_AM_MYMODULE_TESTFIELD_ADD) : \sprintf(_AM_MYMODULE_TESTFIELD_EDIT);
+		$title = $this->isNew() ? \sprintf(\_AM_MYMODULE_TESTFIELD_ADD) : \sprintf(\_AM_MYMODULE_TESTFIELD_EDIT);
 		// Get Theme Form
 		\xoops_load('XoopsFormLoader');
 		$form = new \XoopsThemeForm($title, 'form', $action, 'post', true);
 		$form->setExtra('enctype="multipart/form-data"');
 		// Form Text tfText
-		$form->addElement(new \XoopsFormText(_AM_MYMODULE_TESTFIELD_TEXT, 'tf_text', 50, 255, $this->getVar('tf_text')));
+		$form->addElement(new \XoopsFormText(\_AM_MYMODULE_TESTFIELD_TEXT, 'tf_text', 50, 255, $this->getVar('tf_text')));
 		// Form Editor TextArea tfTextarea
-		$form->addElement(new \XoopsFormTextArea(_AM_MYMODULE_TESTFIELD_TEXTAREA, 'tf_textarea', $this->getVar('tf_textarea', 'e'), 4, 47));
+		$form->addElement(new \XoopsFormTextArea(\_AM_MYMODULE_TESTFIELD_TEXTAREA, 'tf_textarea', $this->getVar('tf_textarea', 'e'), 4, 47));
 		// Form Editor DhtmlTextArea tfDhtml
 		$editorConfigs = [];
 		if ($isAdmin) {
@@ -135,75 +135,75 @@ class Testfields extends \XoopsObject
 		$editorConfigs['width'] = '100%';
 		$editorConfigs['height'] = '400px';
 		$editorConfigs['editor'] = $editor;
-		$form->addElement(new \XoopsFormEditor(_AM_MYMODULE_TESTFIELD_DHTML, 'tf_dhtml', $editorConfigs));
+		$form->addElement(new \XoopsFormEditor(\_AM_MYMODULE_TESTFIELD_DHTML, 'tf_dhtml', $editorConfigs));
 		// Form Check Box tfCheckbox
 		$tfCheckbox = $this->isNew() ? 0 : $this->getVar('tf_checkbox');
-		$checkTfCheckbox = new \XoopsFormCheckBox(_AM_MYMODULE_TESTFIELD_CHECKBOX, 'tf_checkbox', $tfCheckbox);
-		$checkTfCheckbox->addOption(1, _AM_MYMODULE_TESTFIELD_CHECKBOX);
+		$checkTfCheckbox = new \XoopsFormCheckBox(\_AM_MYMODULE_TESTFIELD_CHECKBOX, 'tf_checkbox', $tfCheckbox);
+		$checkTfCheckbox->addOption(1, \_AM_MYMODULE_TESTFIELD_CHECKBOX);
 		$form->addElement($checkTfCheckbox);
 		// Form Radio Yes/No tfYesno
 		$tfYesno = $this->isNew() ? 0 : $this->getVar('tf_yesno');
-		$form->addElement(new \XoopsFormRadioYN(_AM_MYMODULE_TESTFIELD_YESNO, 'tf_yesno', $tfYesno));
+		$form->addElement(new \XoopsFormRadioYN(\_AM_MYMODULE_TESTFIELD_YESNO, 'tf_yesno', $tfYesno));
 		// Testfields Handler
 		$testfieldsHandler = $helper->getHandler('Testfields');
 		// Form Select tfSelectbox
-		$tfSelectboxSelect = new \XoopsFormSelect(_AM_MYMODULE_TESTFIELD_SELECTBOX, 'tf_selectbox', $this->getVar('tf_selectbox'));
+		$tfSelectboxSelect = new \XoopsFormSelect(\_AM_MYMODULE_TESTFIELD_SELECTBOX, 'tf_selectbox', $this->getVar('tf_selectbox'));
 		$tfSelectboxSelect->addOption('Empty');
 		$tfSelectboxSelect->addOptionArray($testfieldsHandler->getList());
 		$form->addElement($tfSelectboxSelect);
 		// Form Select User tfUser
 		$tfUser = $this->isNew() ? $GLOBALS['xoopsUser']->uid() : $this->getVar('tf_user');
-		$form->addElement(new \XoopsFormSelectUser(_AM_MYMODULE_TESTFIELD_USER, 'tf_user', false, $tfUser));
+		$form->addElement(new \XoopsFormSelectUser(\_AM_MYMODULE_TESTFIELD_USER, 'tf_user', false, $tfUser));
 		// Form Color Picker tfColor
-		$form->addElement(new \XoopsFormColorPicker(_AM_MYMODULE_TESTFIELD_COLOR, 'tf_color', $this->getVar('tf_color')));
+		$form->addElement(new \XoopsFormColorPicker(\_AM_MYMODULE_TESTFIELD_COLOR, 'tf_color', $this->getVar('tf_color')));
 		// Form Frameworks Images Files tfImagelist
 		// Form Frameworks Images tfImagelist: Select Uploaded Image
 		$getTfImagelist = $this->getVar('tf_imagelist');
 		$tfImagelist = $getTfImagelist ?: 'blank.gif';
 		$imageDirectory = '/Frameworks/moduleclasses/icons/32';
-		$imageTray = new \XoopsFormElementTray(_AM_MYMODULE_TESTFIELD_IMAGELIST, '<br>');
-		$imageSelect = new \XoopsFormSelect(\sprintf(_AM_MYMODULE_TESTFIELD_IMAGELIST_UPLOADS, ".{$imageDirectory}/"), 'tf_imagelist', $tfImagelist, 5);
-		$imageArray = \XoopsLists::getImgListAsArray( XOOPS_ROOT_PATH . $imageDirectory );
+		$imageTray = new \XoopsFormElementTray(\_AM_MYMODULE_TESTFIELD_IMAGELIST, '<br>');
+		$imageSelect = new \XoopsFormSelect(\sprintf(\_AM_MYMODULE_TESTFIELD_IMAGELIST_UPLOADS, ".{$imageDirectory}/"), 'tf_imagelist', $tfImagelist, 5);
+		$imageArray = \XoopsLists::getImgListAsArray( \XOOPS_ROOT_PATH . $imageDirectory );
 		foreach ($imageArray as $image1) {
 			$imageSelect->addOption(($image1), $image1);
 		}
-		$imageSelect->setExtra("onchange='showImgSelected(\"imglabel_tf_imagelist\", \"tf_imagelist\", \"" . $imageDirectory . '", "", "' . XOOPS_URL . "\")'");
+		$imageSelect->setExtra("onchange='showImgSelected(\"imglabel_tf_imagelist\", \"tf_imagelist\", \"" . $imageDirectory . '", "", "' . \XOOPS_URL . "\")'");
 		$imageTray->addElement($imageSelect, false);
-		$imageTray->addElement(new \XoopsFormLabel('', "<br><img src='" . XOOPS_URL . '/' . $imageDirectory . '/' . $tfImagelist . "' id='imglabel_tf_imagelist' alt='' style='max-width:100px'>"));
+		$imageTray->addElement(new \XoopsFormLabel('', "<br><img src='" . \XOOPS_URL . '/' . $imageDirectory . '/' . $tfImagelist . "' id='imglabel_tf_imagelist' alt='' style='max-width:100px' >"));
 		// Form Frameworks Images tfImagelist: Upload new image
 		$fileSelectTray = new \XoopsFormElementTray('', '<br>');
-		$fileSelectTray->addElement(new \XoopsFormFile(_AM_MYMODULE_FORM_UPLOAD_NEW, 'tf_imagelist', $helper->getConfig('maxsize_image')));
+		$fileSelectTray->addElement(new \XoopsFormFile(\_AM_MYMODULE_FORM_UPLOAD_NEW, 'tf_imagelist', $helper->getConfig('maxsize_image')));
 		$fileSelectTray->addElement(new \XoopsFormLabel(''));
 		$imageTray->addElement($fileSelectTray);
 		$form->addElement($imageTray);
 		// Form Url Text File tfUrlfile
-		$formUrlFile = new \XoopsFormElementTray(_AM_MYMODULE_TESTFIELD_URLFILE, '<br><br>');
+		$formUrlFile = new \XoopsFormElementTray(\_AM_MYMODULE_TESTFIELD_URLFILE, '<br><br>');
 		$formUrl = $this->isNew() ? '' : $this->getVar('tf_urlfile');
-		$formText = new \XoopsFormText(_AM_MYMODULE_TESTFIELD_URLFILE_UPLOADS, 'tf_urlfile', 75, 255, $formUrl);
+		$formText = new \XoopsFormText(\_AM_MYMODULE_TESTFIELD_URLFILE_UPLOADS, 'tf_urlfile', 75, 255, $formUrl);
 		$formUrlFile->addElement($formText);
-		$formUrlFile->addElement(new \XoopsFormFile(_AM_MYMODULE_FORM_UPLOAD, 'tf_urlfile', $helper->getConfig('maxsize_file')));
+		$formUrlFile->addElement(new \XoopsFormFile(\_AM_MYMODULE_FORM_UPLOAD, 'tf_urlfile', $helper->getConfig('maxsize_file')));
 		$form->addElement($formUrlFile);
 		// Form Image tfUplimage
 		// Form Image tfUplimage: Select Uploaded Image 
 		$getTfUplimage = $this->getVar('tf_uplimage');
 		$tfUplimage = $getTfUplimage ?: 'blank.gif';
 		$imageDirectory = '/uploads/mymodule/images/testfields';
-		$imageTray = new \XoopsFormElementTray(_AM_MYMODULE_TESTFIELD_UPLIMAGE, '<br>');
-		$imageSelect = new \XoopsFormSelect(\sprintf(_AM_MYMODULE_TESTFIELD_UPLIMAGE_UPLOADS, ".{$imageDirectory}/"), 'tf_uplimage', $tfUplimage, 5);
-		$imageArray = \XoopsLists::getImgListAsArray( XOOPS_ROOT_PATH . $imageDirectory );
+		$imageTray = new \XoopsFormElementTray(\_AM_MYMODULE_TESTFIELD_UPLIMAGE, '<br>');
+		$imageSelect = new \XoopsFormSelect(\sprintf(\_AM_MYMODULE_TESTFIELD_UPLIMAGE_UPLOADS, ".{$imageDirectory}/"), 'tf_uplimage', $tfUplimage, 5);
+		$imageArray = \XoopsLists::getImgListAsArray( \XOOPS_ROOT_PATH . $imageDirectory );
 		foreach ($imageArray as $image1) {
 			$imageSelect->addOption(($image1), $image1);
 		}
-		$imageSelect->setExtra("onchange='showImgSelected(\"imglabel_tf_uplimage\", \"tf_uplimage\", \"" . $imageDirectory . '", "", "' . XOOPS_URL . "\")'");
+		$imageSelect->setExtra("onchange='showImgSelected(\"imglabel_tf_uplimage\", \"tf_uplimage\", \"" . $imageDirectory . '", "", "' . \XOOPS_URL . "\")'");
 		$imageTray->addElement($imageSelect, false);
-		$imageTray->addElement(new \XoopsFormLabel('', "<br><img src='" . XOOPS_URL . '/' . $imageDirectory . '/' . $tfUplimage . "' id='imglabel_tf_uplimage' alt='' style='max-width:100px'>"));
+		$imageTray->addElement(new \XoopsFormLabel('', "<br><img src='" . \XOOPS_URL . '/' . $imageDirectory . '/' . $tfUplimage . "' id='imglabel_tf_uplimage' alt='' style='max-width:100px' >"));
 		// Form Image tfUplimage: Upload new image
 		if ($permissionUpload) {
 			$maxsize = $helper->getConfig('maxsize_image');
-			$imageTray->addElement(new \XoopsFormFile('<br>' . _AM_MYMODULE_FORM_UPLOAD_NEW, 'tf_uplimage', $maxsize));
-			$imageTray->addElement(new \XoopsFormLabel(_AM_MYMODULE_FORM_UPLOAD_SIZE, ($maxsize / 1048576) . ' '  . _AM_MYMODULE_FORM_UPLOAD_SIZE_MB));
-			$imageTray->addElement(new \XoopsFormLabel(_AM_MYMODULE_FORM_UPLOAD_IMG_WIDTH, $helper->getConfig('maxwidth_image') . ' px'));
-			$imageTray->addElement(new \XoopsFormLabel(_AM_MYMODULE_FORM_UPLOAD_IMG_HEIGHT, $helper->getConfig('maxheight_image') . ' px'));
+			$imageTray->addElement(new \XoopsFormFile('<br>' . \_AM_MYMODULE_FORM_UPLOAD_NEW, 'tf_uplimage', $maxsize));
+			$imageTray->addElement(new \XoopsFormLabel(\_AM_MYMODULE_FORM_UPLOAD_SIZE, ($maxsize / 1048576) . ' '  . \_AM_MYMODULE_FORM_UPLOAD_SIZE_MB));
+			$imageTray->addElement(new \XoopsFormLabel(\_AM_MYMODULE_FORM_UPLOAD_IMG_WIDTH, $helper->getConfig('maxwidth_image') . ' px'));
+			$imageTray->addElement(new \XoopsFormLabel(\_AM_MYMODULE_FORM_UPLOAD_IMG_HEIGHT, $helper->getConfig('maxheight_image') . ' px'));
 		} else {
 			$imageTray->addElement(new \XoopsFormHidden('tf_uplimage', $tfUplimage));
 		}
@@ -211,29 +211,29 @@ class Testfields extends \XoopsObject
 		// Form File: Upload tfUplfile
 		$tfUplfile = $this->isNew() ? '' : $this->getVar('tf_uplfile');
 		if ($permissionUpload) {
-			$fileUploadTray = new \XoopsFormElementTray(_AM_MYMODULE_TESTFIELD_UPLFILE, '<br>');
+			$fileUploadTray = new \XoopsFormElementTray(\_AM_MYMODULE_TESTFIELD_UPLFILE, '<br>');
 			$fileDirectory = '/uploads/mymodule/files/testfields';
 			if (!$this->isNew()) {
-				$fileUploadTray->addElement(new \XoopsFormLabel(\sprintf(_AM_MYMODULE_TESTFIELD_UPLFILE_UPLOADS, ".{$fileDirectory}/"), $tfUplfile));
+				$fileUploadTray->addElement(new \XoopsFormLabel(\sprintf(\_AM_MYMODULE_TESTFIELD_UPLFILE_UPLOADS, ".{$fileDirectory}/"), $tfUplfile));
 			}
 			$maxsize = $helper->getConfig('maxsize_file');
 			$fileUploadTray->addElement(new \XoopsFormFile('', 'tf_uplfile', $maxsize));
-			$fileUploadTray->addElement(new \XoopsFormLabel(_AM_MYMODULE_FORM_UPLOAD_SIZE, ($maxsize / 1048576) . ' '  . _AM_MYMODULE_FORM_UPLOAD_SIZE_MB));
+			$fileUploadTray->addElement(new \XoopsFormLabel(\_AM_MYMODULE_FORM_UPLOAD_SIZE, ($maxsize / 1048576) . ' '  . \_AM_MYMODULE_FORM_UPLOAD_SIZE_MB));
 			$form->addElement($fileUploadTray);
 		} else {
 			$form->addElement(new \XoopsFormHidden('tf_uplfile', $tfUplfile));
 		}
 		// Form Text Date Select tfTextdateselect
 		$tfTextdateselect = $this->isNew() ? \time() : $this->getVar('tf_textdateselect');
-		$form->addElement(new \XoopsFormTextDateSelect(_AM_MYMODULE_TESTFIELD_TEXTDATESELECT, 'tf_textdateselect', '', $tfTextdateselect));
+		$form->addElement(new \XoopsFormTextDateSelect(\_AM_MYMODULE_TESTFIELD_TEXTDATESELECT, 'tf_textdateselect', '', $tfTextdateselect));
 		// Form File tfSelectfile
 		// Form File tfSelectfile: Select Uploaded File 
 		$getTfSelectfile = $this->getVar('tf_selectfile');
 		$tfSelectfile = $getTfSelectfile ?: 'blank.gif';
 		$fileDirectory = '/uploads/mymodule/files/testfields';
-		$fileTray = new \XoopsFormElementTray(_AM_MYMODULE_TESTFIELD_SELECTFILE, '<br>');
-		$fileSelect = new \XoopsFormSelect(\sprintf(_AM_MYMODULE_TESTFIELD_SELECTFILE_UPLOADS, ".{$fileDirectory}/"), 'tf_selectfile', $tfSelectfile, 5);
-		$fileArray = \XoopsLists::getImgListAsArray( XOOPS_ROOT_PATH . $fileDirectory );
+		$fileTray = new \XoopsFormElementTray(\_AM_MYMODULE_TESTFIELD_SELECTFILE, '<br>');
+		$fileSelect = new \XoopsFormSelect(\sprintf(\_AM_MYMODULE_TESTFIELD_SELECTFILE_UPLOADS, ".{$fileDirectory}/"), 'tf_selectfile', $tfSelectfile, 5);
+		$fileArray = \XoopsLists::getImgListAsArray( \XOOPS_ROOT_PATH . $fileDirectory );
 		foreach ($fileArray as $file1) {
 			$fileSelect->addOption(($file1), $file1);
 		}
@@ -241,92 +241,92 @@ class Testfields extends \XoopsObject
 		// Form File tfSelectfile: Upload new file
 		if ($permissionUpload) {
 			$maxsize = $helper->getConfig('maxsize_file');
-			$fileTray->addElement(new \XoopsFormFile('<br>' . _AM_MYMODULE_FORM_UPLOAD_NEW, 'tf_selectfile', $maxsize));
-			$fileTray->addElement(new \XoopsFormLabel(_AM_MYMODULE_FORM_UPLOAD_SIZE, ($maxsize / 1048576) . ' '  . _AM_MYMODULE_FORM_UPLOAD_SIZE_MB));
+			$fileTray->addElement(new \XoopsFormFile('<br>' . \_AM_MYMODULE_FORM_UPLOAD_NEW, 'tf_selectfile', $maxsize));
+			$fileTray->addElement(new \XoopsFormLabel(\_AM_MYMODULE_FORM_UPLOAD_SIZE, ($maxsize / 1048576) . ' '  . \_AM_MYMODULE_FORM_UPLOAD_SIZE_MB));
 		} else {
 			$fileTray->addElement(new \XoopsFormHidden('tf_selectfile', $tfSelectfile));
 		}
 		$form->addElement($fileTray);
 		// Form Text Enter Password tfPassword
-		$form->addElement(new \XoopsFormPassword(_AM_MYMODULE_TESTFIELD_PASSWORD, 'tf_password', 10, 32));
+		$form->addElement(new \XoopsFormPassword(\_AM_MYMODULE_TESTFIELD_PASSWORD, 'tf_password', 10, 32));
 		// Form Select Country tfCountry_list
-		$tfCountry_listSelect = new \XoopsFormSelect(_AM_MYMODULE_TESTFIELD_COUNTRY_LIST, 'tf_country_list', $this->getVar('tf_country_list'));
-		$tfCountry_listSelect->addOption('', _NONE);
+		$tfCountry_listSelect = new \XoopsFormSelect(\_AM_MYMODULE_TESTFIELD_COUNTRY_LIST, 'tf_country_list', $this->getVar('tf_country_list'));
+		$tfCountry_listSelect->addOption('', \_NONE);
 		$countryArray = \XoopsLists::getCountryList();
 		$tfCountry_listSelect->addOptionArray($countryArray);
 		$form->addElement($tfCountry_listSelect);
 		// Form Select Lang tfLanguage
-		$tfLanguageSelect = new \XoopsFormSelect(_AM_MYMODULE_TESTFIELD_LANGUAGE, 'tf_language', $this->getVar('tf_language'));
-		$tfLanguageSelect->addOption('', _NONE);
+		$tfLanguageSelect = new \XoopsFormSelect(\_AM_MYMODULE_TESTFIELD_LANGUAGE, 'tf_language', $this->getVar('tf_language'));
+		$tfLanguageSelect->addOption('', \_NONE);
 		$langArray = \XoopsLists::getLangList();
 		$tfLanguageSelect->addOptionArray($langArray);
 		$form->addElement($tfLanguageSelect);
 		// Form Radio tfRadio
 		$tfRadio = $this->isNew() ? 0 : $this->getVar('tf_radio');
-		$tfRadioSelect = new \XoopsFormRadio(_AM_MYMODULE_TESTFIELD_RADIO, 'tf_radio', $tfRadio);
-		$tfRadioSelect->addOption('0', _NONE);
-		$tfRadioSelect->addOption('1', _AM_MYMODULE_LIST_1);
-		$tfRadioSelect->addOption('2', _AM_MYMODULE_LIST_2);
-		$tfRadioSelect->addOption('3', _AM_MYMODULE_LIST_3);
+		$tfRadioSelect = new \XoopsFormRadio(\_AM_MYMODULE_TESTFIELD_RADIO, 'tf_radio', $tfRadio);
+		$tfRadioSelect->addOption('0', \_NONE);
+		$tfRadioSelect->addOption('1', \_AM_MYMODULE_LIST_1);
+		$tfRadioSelect->addOption('2', \_AM_MYMODULE_LIST_2);
+		$tfRadioSelect->addOption('3', \_AM_MYMODULE_LIST_3);
 		$form->addElement($tfRadioSelect);
 		// Form Select Status tfStatus
 		$permissionsHandler = $helper->getHandler('Permissions');
-		$tfStatusSelect = new \XoopsFormSelect(_AM_MYMODULE_TESTFIELD_STATUS, 'tf_status', $this->getVar('tf_status'));
-		$tfStatusSelect->addOption(Constants::STATUS_NONE, _AM_MYMODULE_STATUS_NONE);
-		$tfStatusSelect->addOption(Constants::STATUS_OFFLINE, _AM_MYMODULE_STATUS_OFFLINE);
-		$tfStatusSelect->addOption(Constants::STATUS_SUBMITTED, _AM_MYMODULE_STATUS_SUBMITTED);
+		$tfStatusSelect = new \XoopsFormSelect(\_AM_MYMODULE_TESTFIELD_STATUS, 'tf_status', $this->getVar('tf_status'));
+		$tfStatusSelect->addOption(Constants::STATUS_NONE, \_AM_MYMODULE_STATUS_NONE);
+		$tfStatusSelect->addOption(Constants::STATUS_OFFLINE, \_AM_MYMODULE_STATUS_OFFLINE);
+		$tfStatusSelect->addOption(Constants::STATUS_SUBMITTED, \_AM_MYMODULE_STATUS_SUBMITTED);
 		if ($permissionsHandler->getPermGlobalApprove()) {
-			$tfStatusSelect->addOption(Constants::STATUS_APPROVED, _AM_MYMODULE_STATUS_APPROVED);
+			$tfStatusSelect->addOption(Constants::STATUS_APPROVED, \_AM_MYMODULE_STATUS_APPROVED);
 		}
-		$tfStatusSelect->addOption(Constants::STATUS_BROKEN, _AM_MYMODULE_STATUS_BROKEN);
+		$tfStatusSelect->addOption(Constants::STATUS_BROKEN, \_AM_MYMODULE_STATUS_BROKEN);
 		$form->addElement($tfStatusSelect, true);
 		// Form Text Date Select tfDatetime
 		$tfDatetime = $this->isNew() ? \time() : $this->getVar('tf_datetime');
-		$form->addElement(new \XoopsFormDateTime(_AM_MYMODULE_TESTFIELD_DATETIME, 'tf_datetime', '', $tfDatetime));
+		$form->addElement(new \XoopsFormDateTime(\_AM_MYMODULE_TESTFIELD_DATETIME, 'tf_datetime', '', $tfDatetime));
 		// Testfields Handler
 		$testfieldsHandler = $helper->getHandler('Testfields');
 		// Form Select tfCombobox
-		$tfComboboxSelect = new \XoopsFormSelect(_AM_MYMODULE_TESTFIELD_COMBOBOX, 'tf_combobox', $this->getVar('tf_combobox'), 5);
-		$tfComboboxSelect->addOption('0', _NONE);
-		$tfComboboxSelect->addOption('1', _AM_MYMODULE_LIST_1);
-		$tfComboboxSelect->addOption('2', _AM_MYMODULE_LIST_2);
-		$tfComboboxSelect->addOption('3', _AM_MYMODULE_LIST_3);
+		$tfComboboxSelect = new \XoopsFormSelect(\_AM_MYMODULE_TESTFIELD_COMBOBOX, 'tf_combobox', $this->getVar('tf_combobox'), 5);
+		$tfComboboxSelect->addOption('0', \_NONE);
+		$tfComboboxSelect->addOption('1', \_AM_MYMODULE_LIST_1);
+		$tfComboboxSelect->addOption('2', \_AM_MYMODULE_LIST_2);
+		$tfComboboxSelect->addOption('3', \_AM_MYMODULE_LIST_3);
 		$form->addElement($tfComboboxSelect);
 		// Form Text tfComments
-		$form->addElement(new \XoopsFormText(_AM_MYMODULE_TESTFIELD_COMMENTS, 'tf_comments', 50, 255, $this->getVar('tf_comments')));
+		$form->addElement(new \XoopsFormText(\_AM_MYMODULE_TESTFIELD_COMMENTS, 'tf_comments', 50, 255, $this->getVar('tf_comments')));
 		// Form Text tfRatings
 		$tfRatings = $this->isNew() ? '0.00' : $this->getVar('tf_ratings');
-		$form->addElement(new \XoopsFormText(_AM_MYMODULE_TESTFIELD_RATINGS, 'tf_ratings', 20, 150, $tfRatings));
+		$form->addElement(new \XoopsFormText(\_AM_MYMODULE_TESTFIELD_RATINGS, 'tf_ratings', 20, 150, $tfRatings));
 		// Form Text tfVotes
 		$tfVotes = $this->isNew() ? '0' : $this->getVar('tf_votes');
-		$form->addElement(new \XoopsFormText(_AM_MYMODULE_TESTFIELD_VOTES, 'tf_votes', 20, 150, $tfVotes));
+		$form->addElement(new \XoopsFormText(\_AM_MYMODULE_TESTFIELD_VOTES, 'tf_votes', 20, 150, $tfVotes));
 		// Form Text Uuid tfUuid
 		$tfUuid = $this->isNew() ? \Xmf\Uuid::generate() : $this->getVar('tf_uuid');
-		$form->addElement(new \XoopsFormText(_AM_MYMODULE_TESTFIELD_UUID, 'tf_uuid', 50, 150, $tfUuid), true);
+		$form->addElement(new \XoopsFormText(\_AM_MYMODULE_TESTFIELD_UUID, 'tf_uuid', 50, 150, $tfUuid), true);
 		// Form Text IP tfIp
 		$tfIp = $_SERVER['REMOTE_ADDR'];
-		$form->addElement(new \XoopsFormText(_AM_MYMODULE_TESTFIELD_IP, 'tf_ip', 20, 150, $tfIp));
+		$form->addElement(new \XoopsFormText(\_AM_MYMODULE_TESTFIELD_IP, 'tf_ip', 20, 150, $tfIp));
 		// Form Text tfReads
-		$form->addElement(new \XoopsFormText(_AM_MYMODULE_TESTFIELD_READS, 'tf_reads', 50, 255, $this->getVar('tf_reads')));
+		$form->addElement(new \XoopsFormText(\_AM_MYMODULE_TESTFIELD_READS, 'tf_reads', 50, 255, $this->getVar('tf_reads')));
 		// Permissions
 		$memberHandler = \xoops_getHandler('member');
 		$groupList = $memberHandler->getGroupList();
 		$grouppermHandler = \xoops_getHandler('groupperm');
 		$fullList[] = \array_keys($groupList);
 		if ($this->isNew()) {
-			$groupsCanApproveCheckbox = new \XoopsFormCheckBox(_AM_MYMODULE_PERMISSIONS_APPROVE, 'groups_approve_testfields[]', $fullList);
-			$groupsCanSubmitCheckbox = new \XoopsFormCheckBox(_AM_MYMODULE_PERMISSIONS_SUBMIT, 'groups_submit_testfields[]', $fullList);
-			$groupsCanViewCheckbox = new \XoopsFormCheckBox(_AM_MYMODULE_PERMISSIONS_VIEW, 'groups_view_testfields[]', $fullList);
+			$groupsCanApproveCheckbox = new \XoopsFormCheckBox(\_AM_MYMODULE_PERMISSIONS_APPROVE, 'groups_approve_testfields[]', $fullList);
+			$groupsCanSubmitCheckbox = new \XoopsFormCheckBox(\_AM_MYMODULE_PERMISSIONS_SUBMIT, 'groups_submit_testfields[]', $fullList);
+			$groupsCanViewCheckbox = new \XoopsFormCheckBox(\_AM_MYMODULE_PERMISSIONS_VIEW, 'groups_view_testfields[]', $fullList);
 		} else {
 			$groupsIdsApprove = $grouppermHandler->getGroupIds('mymodule_approve_testfields', $this->getVar('tf_id'), $GLOBALS['xoopsModule']->getVar('mid'));
 			$groupsIdsApprove[] = \array_values($groupsIdsApprove);
-			$groupsCanApproveCheckbox = new \XoopsFormCheckBox(_AM_MYMODULE_PERMISSIONS_APPROVE, 'groups_approve_testfields[]', $groupsIdsApprove);
+			$groupsCanApproveCheckbox = new \XoopsFormCheckBox(\_AM_MYMODULE_PERMISSIONS_APPROVE, 'groups_approve_testfields[]', $groupsIdsApprove);
 			$groupsIdsSubmit = $grouppermHandler->getGroupIds('mymodule_submit_testfields', $this->getVar('tf_id'), $GLOBALS['xoopsModule']->getVar('mid'));
 			$groupsIdsSubmit[] = \array_values($groupsIdsSubmit);
-			$groupsCanSubmitCheckbox = new \XoopsFormCheckBox(_AM_MYMODULE_PERMISSIONS_SUBMIT, 'groups_submit_testfields[]', $groupsIdsSubmit);
+			$groupsCanSubmitCheckbox = new \XoopsFormCheckBox(\_AM_MYMODULE_PERMISSIONS_SUBMIT, 'groups_submit_testfields[]', $groupsIdsSubmit);
 			$groupsIdsView = $grouppermHandler->getGroupIds('mymodule_view_testfields', $this->getVar('tf_id'), $GLOBALS['xoopsModule']->getVar('mid'));
 			$groupsIdsView[] = \array_values($groupsIdsView);
-			$groupsCanViewCheckbox = new \XoopsFormCheckBox(_AM_MYMODULE_PERMISSIONS_VIEW, 'groups_view_testfields[]', $groupsIdsView);
+			$groupsCanViewCheckbox = new \XoopsFormCheckBox(\_AM_MYMODULE_PERMISSIONS_VIEW, 'groups_view_testfields[]', $groupsIdsView);
 		}
 		// To Approve
 		$groupsCanApproveCheckbox->addOptionArray($groupList);
@@ -339,7 +339,7 @@ class Testfields extends \XoopsObject
 		$form->addElement($groupsCanViewCheckbox);
 		// To Save
 		$form->addElement(new \XoopsFormHidden('op', 'save'));
-		$form->addElement(new \XoopsFormButtonTray('', _SUBMIT, 'submit', '', false));
+		$form->addElement(new \XoopsFormButtonTray('', \_SUBMIT, 'submit', '', false));
 		return $form;
 	}
 
@@ -382,19 +382,19 @@ class Testfields extends \XoopsObject
 		switch ($status) {
 			case Constants::STATUS_NONE:
 			default:
-				$status_text = _AM_MYMODULE_STATUS_NONE;
+				$status_text = \_AM_MYMODULE_STATUS_NONE;
 				break;
 			case Constants::STATUS_OFFLINE:
-				$status_text = _AM_MYMODULE_STATUS_OFFLINE;
+				$status_text = \_AM_MYMODULE_STATUS_OFFLINE;
 				break;
 			case Constants::STATUS_SUBMITTED:
-				$status_text = _AM_MYMODULE_STATUS_SUBMITTED;
+				$status_text = \_AM_MYMODULE_STATUS_SUBMITTED;
 				break;
 			case Constants::STATUS_APPROVED:
-				$status_text = _AM_MYMODULE_STATUS_APPROVED;
+				$status_text = \_AM_MYMODULE_STATUS_APPROVED;
 				break;
 			case Constants::STATUS_BROKEN:
-				$status_text = _AM_MYMODULE_STATUS_BROKEN;
+				$status_text = \_AM_MYMODULE_STATUS_BROKEN;
 				break;
 		}
 		$ret['status_text']    = $status_text;

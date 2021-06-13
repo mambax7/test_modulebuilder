@@ -37,20 +37,20 @@
 			<td class='center'><{$testfield.text}></td>
 			<td class='center'><{$testfield.textarea_short}></td>
 			<td class='center'><{$testfield.dhtml_short}></td>
-			<td class='center'><img src="<{xoModuleIcons16}><{$testfield.checkbox}>.png" alt="testfields"></td>
+			<td class='center'><img src="<{xoModuleIcons16}><{$testfield.checkbox}>.png" alt="testfields" ></td>
 			<td class='center'><{$testfield.yesno}></td>
 			<td class='center'><{$testfield.selectbox}></td>
 			<td class='center'><{$testfield.user}></td>
 			<td class='center'><span style='background-color:<{$testfield.color}>;'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td>
-			<td class='center'><img src="<{xoModuleIcons32}><{$testfield.imagelist}>" alt="testfields"></td>
+			<td class='center'><img src="<{xoModuleIcons32}><{$testfield.imagelist}>" alt="testfields" ></td>
 			<td class='center'><{$testfield.urlfile}></td>
-			<td class='center'><img src="<{$mymodule_upload_url|default:false}>/images/testfields/<{$testfield.uplimage}>" alt="testfields" style="max-width:100px"></td>
+			<td class='center'><img src="<{$mymodule_upload_url|default:false}>/images/testfields/<{$testfield.uplimage}>" alt="testfields" style="max-width:100px" ></td>
 			<td class='center'><{$testfield.uplfile}></td>
 			<td class='center'><{$testfield.textdateselect}></td>
 			<td class='center'><{$testfield.selectfile}></td>
 			<td class='center'><{$testfield.country_list}></td>
 			<td class='center'><{$testfield.radio}></td>
-			<td class='center'><img src="<{$modPathIcon16}>status<{$testfield.status}>.png" alt="<{$testfield.status_text}>" title="<{$testfield.status_text}>"></td>
+			<td class='center'><img src="<{$modPathIcon16}>status<{$testfield.status}>.png" alt="<{$testfield.status_text}>" title="<{$testfield.status_text}>" ></td>
 			<td class='center'><{$testfield.datetime}></td>
 			<td class='center'><{$testfield.combobox}></td>
 			<td class='center'><{$testfield.comments}></td>

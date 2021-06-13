@@ -15,12 +15,12 @@ declare(strict_types=1);
 /**
  * My Module module for xoops
  *
- * @copyright      2020 XOOPS Project (https://xoops.org)
+ * @copyright      2021 XOOPS Project (https://xoops.org)
  * @license        GPL 2.0 or later
  * @package        mymodule
  * @since          1.0
  * @min_xoops      2.5.9
- * @author         TDM XOOPS - Email:<info@email.com> - Website:<https://xoops.org>
+ * @author         TDM XOOPS - Email:<info@email.com> - Website:<http://xoops.org>
  */
 
 use Xmf\Request;
@@ -34,7 +34,7 @@ switch ($op) {
 	case 'list':
 	default:
 		// default should not happen
-		\redirect_header('index.php', 3, _NOPERM);
+		\redirect_header('index.php', 3, \_NOPERM);
 		break;
 	case 'save':
 		// Security Check
@@ -55,40 +55,40 @@ switch ($op) {
 
 		// Check permissions
 		$rate_allowed = false;
-		$groups = (isset($GLOBALS['xoopsUser']) && \is_object($GLOBALS['xoopsUser'])) ? $GLOBALS['xoopsUser']->getGroups() : XOOPS_GROUP_ANONYMOUS;
+		$groups = (isset($GLOBALS['xoopsUser']) && \is_object($GLOBALS['xoopsUser'])) ? $GLOBALS['xoopsUser']->getGroups() : \XOOPS_GROUP_ANONYMOUS;
 		foreach ($groups as $group) {
-			if (XOOPS_GROUP_ADMIN == $group || \in_array($group, $helper->getConfig('ratingbar_groups'))) {
+			if (\XOOPS_GROUP_ADMIN == $group || \in_array($group, $helper->getConfig('ratingbar_groups'))) {
 				$rate_allowed = true;
 				break;
 			}
 		}
 		if (!$rate_allowed) {
-			\redirect_header('index.php', 3, _MA_MYMODULE_RATING_NOPERM);
+			\redirect_header('index.php', 3, \_MA_MYMODULE_RATING_NOPERM);
 		}
 
 		// Check rating value
 		switch ((int)$helper->getConfig('ratingbars')) {
 			case Constants::RATING_NONE:
 			default:
-				\redirect_header('index.php', 3, _MA_MYMODULE_RATING_VOTE_BAD);
+				\redirect_header('index.php', 3, \_MA_MYMODULE_RATING_VOTE_BAD);
 				exit;
 				break;
 			case Constants::RATING_LIKES:
 				if ($rating > 1 || $rating < -1) {
-					\redirect_header('index.php', 3, _MA_MYMODULE_RATING_VOTE_BAD);
+					\redirect_header('index.php', 3, \_MA_MYMODULE_RATING_VOTE_BAD);
 					exit;
 				}
 				break;
 			case Constants::RATING_5STARS:
 				if ($rating > 5 || $rating < 1) {
-					\redirect_header('index.php', 3, _MA_MYMODULE_RATING_VOTE_BAD);
+					\redirect_header('index.php', 3, \_MA_MYMODULE_RATING_VOTE_BAD);
 					exit;
 				}
 				break;
 			case Constants::RATING_10STARS:
 			case Constants::RATING_10NUM:
 				if ($rating > 10 || $rating < 1) {
-					\redirect_header('index.php', 3, _MA_MYMODULE_RATING_VOTE_BAD);
+					\redirect_header('index.php', 3, \_MA_MYMODULE_RATING_VOTE_BAD);
 					exit;
 				}
 				break;
@@ -100,7 +100,7 @@ switch ($op) {
 		// Set data rating
 		if ($itemrating['voted']) {
 			// If yo want to avoid revoting then activate next line
-			//\redirect_header('index.php', 3, _MA_MYMODULE_RATING_VOTE_BAD);
+			//\redirect_header('index.php', 3, \_MA_MYMODULE_RATING_VOTE_BAD);
 			$ratingsObj = $ratingsHandler->get($itemrating['id']);
 		} else {
 			$ratingsObj = $ratingsHandler->create();
@@ -136,9 +136,9 @@ switch ($op) {
 				$articlesObj->setVar('art_ratings', $avg_rate_value);
 				$articlesObj->setVar('art_votes', $ratingsCount);
 				if ($articlesHandler->insert($articlesObj)) {
-					\redirect_header($redir, 2, _MA_MYMODULE_RATING_VOTE_THANKS);
+					\redirect_header($redir, 2, \_MA_MYMODULE_RATING_VOTE_THANKS);
 				} else {
-					\redirect_header('articles.php', 3, _MA_MYMODULE_RATING_ERROR1);
+					\redirect_header('articles.php', 3, \_MA_MYMODULE_RATING_ERROR1);
 				}
 				unset($articlesObj);
 			}
@@ -147,14 +147,14 @@ switch ($op) {
 				$testfieldsObj->setVar('tf_ratings', $avg_rate_value);
 				$testfieldsObj->setVar('tf_votes', $ratingsCount);
 				if ($testfieldsHandler->insert($testfieldsObj)) {
-					\redirect_header($redir, 2, _MA_MYMODULE_RATING_VOTE_THANKS);
+					\redirect_header($redir, 2, \_MA_MYMODULE_RATING_VOTE_THANKS);
 				} else {
-					\redirect_header('testfields.php', 3, _MA_MYMODULE_RATING_ERROR1);
+					\redirect_header('testfields.php', 3, \_MA_MYMODULE_RATING_ERROR1);
 				}
 				unset($testfieldsObj);
 			}
 
-			\redirect_header('index.php', 2, _MA_MYMODULE_RATING_VOTE_THANKS);
+			\redirect_header('index.php', 2, \_MA_MYMODULE_RATING_VOTE_THANKS);
 		}
 		// Get Error
 		echo 'Error: ' . $ratingsObj->getHtmlErrors();

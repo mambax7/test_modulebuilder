@@ -15,12 +15,12 @@ declare(strict_types=1);
 /**
  * My Module module for xoops
  *
- * @copyright      2020 XOOPS Project (https://xoops.org)
+ * @copyright      2021 XOOPS Project (https://xoops.org)
  * @license        GPL 2.0 or later
  * @package        mymodule
  * @since          1.0
  * @min_xoops      2.5.9
- * @author         TDM XOOPS - Email:<info@email.com> - Website:<https://xoops.org>
+ * @author         TDM XOOPS - Email:<info@email.com> - Website:<http://xoops.org>
  */
 
 // 
@@ -28,22 +28,22 @@ $moduleDirName      = \basename(__DIR__);
 $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
 // ------------------- Informations ------------------- //
 $modversion = [
-	'name'                => _MI_MYMODULE_NAME,
+	'name'                => \_MI_MYMODULE_NAME,
 	'version'             => 1.0,
-	'description'         => _MI_MYMODULE_DESC,
+	'description'         => \_MI_MYMODULE_DESC,
 	'author'              => 'TDM XOOPS',
 	'author_mail'         => 'info@email.com',
-	'author_website_url'  => 'https://xoops.org',
+	'author_website_url'  => 'http://xoops.org',
 	'author_website_name' => 'XOOPS Project',
 	'credits'             => 'XOOPS Development Team',
 	'license'             => 'GPL 2.0 or later',
 	'license_url'         => 'http://www.gnu.org/licenses/gpl-3.0.en.html',
 	'help'                => 'page=help',
 	'release_info'        => 'release_info',
-	'release_file'        => XOOPS_URL . '/modules/mymodule/docs/release_info file',
-	'release_date'        => '2021/06/05',
+	'release_file'        => \XOOPS_URL . '/modules/mymodule/docs/release_info file',
+	'release_date'        => '2021/06/09',
 	'manual'              => 'link to manual file',
-	'manual_file'         => XOOPS_URL . '/modules/mymodule/docs/install.txt',
+	'manual_file'         => \XOOPS_URL . '/modules/mymodule/docs/install.txt',
 	'min_php'             => '7.0',
 	'min_xoops'           => '2.5.9',
 	'min_admin'           => '1.2',
@@ -133,27 +133,27 @@ $modversion['comments']['callback'] = [
 $currdirname  = isset($GLOBALS['xoopsModule']) && \is_object($GLOBALS['xoopsModule']) ? $GLOBALS['xoopsModule']->getVar('dirname') : 'system';
 if ($currdirname == $moduleDirName) {
 	$modversion['sub'][] = [
-		'name' => _MI_MYMODULE_SMNAME1,
+		'name' => \_MI_MYMODULE_SMNAME1,
 		'url'  => 'index.php',
 	];
 	// Sub articles
 	$modversion['sub'][] = [
-		'name' => _MI_MYMODULE_SMNAME3,
+		'name' => \_MI_MYMODULE_SMNAME3,
 		'url'  => 'articles.php',
 	];
 	// Sub Submit
 	$modversion['sub'][] = [
-		'name' => _MI_MYMODULE_SMNAME4,
+		'name' => \_MI_MYMODULE_SMNAME4,
 		'url'  => 'articles.php?op=new',
 	];
 	// Sub testfields
 	$modversion['sub'][] = [
-		'name' => _MI_MYMODULE_SMNAME5,
+		'name' => \_MI_MYMODULE_SMNAME5,
 		'url'  => 'testfields.php',
 	];
 	// Sub Submit
 	$modversion['sub'][] = [
-		'name' => _MI_MYMODULE_SMNAME6,
+		'name' => \_MI_MYMODULE_SMNAME6,
 		'url'  => 'testfields.php?op=new',
 	];
 }
@@ -161,8 +161,8 @@ if ($currdirname == $moduleDirName) {
 // Articles last
 $modversion['blocks'][] = [
 	'file'        => 'articles.php',
-	'name'        => _MI_MYMODULE_ARTICLES_BLOCK_LAST,
-	'description' => _MI_MYMODULE_ARTICLES_BLOCK_LAST_DESC,
+	'name'        => \_MI_MYMODULE_ARTICLES_BLOCK_LAST,
+	'description' => \_MI_MYMODULE_ARTICLES_BLOCK_LAST_DESC,
 	'show_func'   => 'b_mymodule_articles_show',
 	'edit_func'   => 'b_mymodule_articles_edit',
 	'template'    => 'mymodule_block_articles.tpl',
@@ -171,8 +171,8 @@ $modversion['blocks'][] = [
 // Articles new
 $modversion['blocks'][] = [
 	'file'        => 'articles.php',
-	'name'        => _MI_MYMODULE_ARTICLES_BLOCK_NEW,
-	'description' => _MI_MYMODULE_ARTICLES_BLOCK_NEW_DESC,
+	'name'        => \_MI_MYMODULE_ARTICLES_BLOCK_NEW,
+	'description' => \_MI_MYMODULE_ARTICLES_BLOCK_NEW_DESC,
 	'show_func'   => 'b_mymodule_articles_show',
 	'edit_func'   => 'b_mymodule_articles_edit',
 	'template'    => 'mymodule_block_articles.tpl',
@@ -181,8 +181,8 @@ $modversion['blocks'][] = [
 // Articles hits
 $modversion['blocks'][] = [
 	'file'        => 'articles.php',
-	'name'        => _MI_MYMODULE_ARTICLES_BLOCK_HITS,
-	'description' => _MI_MYMODULE_ARTICLES_BLOCK_HITS_DESC,
+	'name'        => \_MI_MYMODULE_ARTICLES_BLOCK_HITS,
+	'description' => \_MI_MYMODULE_ARTICLES_BLOCK_HITS_DESC,
 	'show_func'   => 'b_mymodule_articles_show',
 	'edit_func'   => 'b_mymodule_articles_edit',
 	'template'    => 'mymodule_block_articles.tpl',
@@ -191,8 +191,8 @@ $modversion['blocks'][] = [
 // Articles top
 $modversion['blocks'][] = [
 	'file'        => 'articles.php',
-	'name'        => _MI_MYMODULE_ARTICLES_BLOCK_TOP,
-	'description' => _MI_MYMODULE_ARTICLES_BLOCK_TOP_DESC,
+	'name'        => \_MI_MYMODULE_ARTICLES_BLOCK_TOP,
+	'description' => \_MI_MYMODULE_ARTICLES_BLOCK_TOP_DESC,
 	'show_func'   => 'b_mymodule_articles_show',
 	'edit_func'   => 'b_mymodule_articles_edit',
 	'template'    => 'mymodule_block_articles.tpl',
@@ -201,8 +201,8 @@ $modversion['blocks'][] = [
 // Articles random
 $modversion['blocks'][] = [
 	'file'        => 'articles.php',
-	'name'        => _MI_MYMODULE_ARTICLES_BLOCK_RANDOM,
-	'description' => _MI_MYMODULE_ARTICLES_BLOCK_RANDOM_DESC,
+	'name'        => \_MI_MYMODULE_ARTICLES_BLOCK_RANDOM,
+	'description' => \_MI_MYMODULE_ARTICLES_BLOCK_RANDOM_DESC,
 	'show_func'   => 'b_mymodule_articles_show',
 	'edit_func'   => 'b_mymodule_articles_edit',
 	'template'    => 'mymodule_block_articles.tpl',
@@ -211,8 +211,8 @@ $modversion['blocks'][] = [
 // Testfields last
 $modversion['blocks'][] = [
 	'file'        => 'testfields.php',
-	'name'        => _MI_MYMODULE_TESTFIELDS_BLOCK_LAST,
-	'description' => _MI_MYMODULE_TESTFIELDS_BLOCK_LAST_DESC,
+	'name'        => \_MI_MYMODULE_TESTFIELDS_BLOCK_LAST,
+	'description' => \_MI_MYMODULE_TESTFIELDS_BLOCK_LAST_DESC,
 	'show_func'   => 'b_mymodule_testfields_show',
 	'edit_func'   => 'b_mymodule_testfields_edit',
 	'template'    => 'mymodule_block_testfields.tpl',
@@ -221,8 +221,8 @@ $modversion['blocks'][] = [
 // Testfields new
 $modversion['blocks'][] = [
 	'file'        => 'testfields.php',
-	'name'        => _MI_MYMODULE_TESTFIELDS_BLOCK_NEW,
-	'description' => _MI_MYMODULE_TESTFIELDS_BLOCK_NEW_DESC,
+	'name'        => \_MI_MYMODULE_TESTFIELDS_BLOCK_NEW,
+	'description' => \_MI_MYMODULE_TESTFIELDS_BLOCK_NEW_DESC,
 	'show_func'   => 'b_mymodule_testfields_show',
 	'edit_func'   => 'b_mymodule_testfields_edit',
 	'template'    => 'mymodule_block_testfields.tpl',
@@ -231,8 +231,8 @@ $modversion['blocks'][] = [
 // Testfields hits
 $modversion['blocks'][] = [
 	'file'        => 'testfields.php',
-	'name'        => _MI_MYMODULE_TESTFIELDS_BLOCK_HITS,
-	'description' => _MI_MYMODULE_TESTFIELDS_BLOCK_HITS_DESC,
+	'name'        => \_MI_MYMODULE_TESTFIELDS_BLOCK_HITS,
+	'description' => \_MI_MYMODULE_TESTFIELDS_BLOCK_HITS_DESC,
 	'show_func'   => 'b_mymodule_testfields_show',
 	'edit_func'   => 'b_mymodule_testfields_edit',
 	'template'    => 'mymodule_block_testfields.tpl',
@@ -241,8 +241,8 @@ $modversion['blocks'][] = [
 // Testfields top
 $modversion['blocks'][] = [
 	'file'        => 'testfields.php',
-	'name'        => _MI_MYMODULE_TESTFIELDS_BLOCK_TOP,
-	'description' => _MI_MYMODULE_TESTFIELDS_BLOCK_TOP_DESC,
+	'name'        => \_MI_MYMODULE_TESTFIELDS_BLOCK_TOP,
+	'description' => \_MI_MYMODULE_TESTFIELDS_BLOCK_TOP_DESC,
 	'show_func'   => 'b_mymodule_testfields_show',
 	'edit_func'   => 'b_mymodule_testfields_edit',
 	'template'    => 'mymodule_block_testfields.tpl',
@@ -251,8 +251,8 @@ $modversion['blocks'][] = [
 // Testfields random
 $modversion['blocks'][] = [
 	'file'        => 'testfields.php',
-	'name'        => _MI_MYMODULE_TESTFIELDS_BLOCK_RANDOM,
-	'description' => _MI_MYMODULE_TESTFIELDS_BLOCK_RANDOM_DESC,
+	'name'        => \_MI_MYMODULE_TESTFIELDS_BLOCK_RANDOM,
+	'description' => \_MI_MYMODULE_TESTFIELDS_BLOCK_RANDOM_DESC,
 	'show_func'   => 'b_mymodule_testfields_show',
 	'edit_func'   => 'b_mymodule_testfields_edit',
 	'template'    => 'mymodule_block_testfields.tpl',
@@ -264,8 +264,8 @@ $modversion['blocks'][] = [
 $editorHandler = XoopsEditorHandler::getInstance();
 $modversion['config'][] = [
 	'name'        => 'editor_admin',
-	'title'       => '_MI_MYMODULE_EDITOR_ADMIN',
-	'description' => '_MI_MYMODULE_EDITOR_ADMIN_DESC',
+	'title'       => '\_MI_MYMODULE_EDITOR_ADMIN',
+	'description' => '\_MI_MYMODULE_EDITOR_ADMIN_DESC',
 	'formtype'    => 'select',
 	'valuetype'   => 'text',
 	'default'     => 'dhtml',
@@ -276,8 +276,8 @@ $modversion['config'][] = [
 $editorHandler = XoopsEditorHandler::getInstance();
 $modversion['config'][] = [
 	'name'        => 'editor_user',
-	'title'       => '_MI_MYMODULE_EDITOR_USER',
-	'description' => '_MI_MYMODULE_EDITOR_USER_DESC',
+	'title'       => '\_MI_MYMODULE_EDITOR_USER',
+	'description' => '\_MI_MYMODULE_EDITOR_USER_DESC',
 	'formtype'    => 'select',
 	'valuetype'   => 'text',
 	'default'     => 'dhtml',
@@ -286,8 +286,8 @@ $modversion['config'][] = [
 // Editor : max characters admin area
 $modversion['config'][] = [
 	'name'        => 'editor_maxchar',
-	'title'       => '_MI_MYMODULE_EDITOR_MAXCHAR',
-	'description' => '_MI_MYMODULE_EDITOR_MAXCHAR_DESC',
+	'title'       => '\_MI_MYMODULE_EDITOR_MAXCHAR',
+	'description' => '\_MI_MYMODULE_EDITOR_MAXCHAR_DESC',
 	'formtype'    => 'textbox',
 	'valuetype'   => 'int',
 	'default'     => 50,
@@ -302,8 +302,8 @@ foreach ($xoopsGroups as $key => $group) {
 // General access groups
 $modversion['config'][] = [
 	'name'        => 'groups',
-	'title'       => '_MI_MYMODULE_GROUPS',
-	'description' => '_MI_MYMODULE_GROUPS_DESC',
+	'title'       => '\_MI_MYMODULE_GROUPS',
+	'description' => '\_MI_MYMODULE_GROUPS_DESC',
 	'formtype'    => 'select_multi',
 	'valuetype'   => 'array',
 	'default'     => $groups,
@@ -312,8 +312,8 @@ $modversion['config'][] = [
 // Upload groups
 $modversion['config'][] = [
 	'name'        => 'upload_groups',
-	'title'       => '_MI_MYMODULE_UPLOAD_GROUPS',
-	'description' => '_MI_MYMODULE_UPLOAD_GROUPS_DESC',
+	'title'       => '\_MI_MYMODULE_UPLOAD_GROUPS',
+	'description' => '\_MI_MYMODULE_UPLOAD_GROUPS_DESC',
 	'formtype'    => 'select_multi',
 	'valuetype'   => 'array',
 	'default'     => $groups,
@@ -330,8 +330,8 @@ foreach ($adminXoopsGroups as $key => $adminGroup) {
 }
 $modversion['config'][] = [
 	'name'        => 'admin_groups',
-	'title'       => '_MI_MYMODULE_ADMIN_GROUPS',
-	'description' => '_MI_MYMODULE_ADMIN_GROUPS_DESC',
+	'title'       => '\_MI_MYMODULE_ADMIN_GROUPS',
+	'description' => '\_MI_MYMODULE_ADMIN_GROUPS_DESC',
 	'formtype'    => 'select_multi',
 	'valuetype'   => 'array',
 	'default'     => $adminGroups,
@@ -348,8 +348,8 @@ foreach ($xoopsGroups as $key => $group) {
 // Rating: Groups with rating permissions
 $modversion['config'][] = [
 	'name'        => 'ratingbar_groups',
-	'title'       => '_MI_MYMODULE_RATINGBAR_GROUPS',
-	'description' => '_MI_MYMODULE_RATINGBAR_GROUPS_DESC',
+	'title'       => '\_MI_MYMODULE_RATINGBAR_GROUPS',
+	'description' => '\_MI_MYMODULE_RATINGBAR_GROUPS_DESC',
 	'formtype'    => 'select_multi',
 	'valuetype'   => 'array',
 	'default'     => [1],
@@ -358,18 +358,18 @@ $modversion['config'][] = [
 // Rating : used ratingbar
 $modversion['config'][] = [
 	'name'        => 'ratingbars',
-	'title'       => '_MI_MYMODULE_RATINGBARS',
-	'description' => '_MI_MYMODULE_RATINGBARS_DESC',
+	'title'       => '\_MI_MYMODULE_RATINGBARS',
+	'description' => '\_MI_MYMODULE_RATINGBARS_DESC',
 	'formtype'    => 'select',
 	'valuetype'   => 'int',
 	'default'     => 0,
-	'options'     => ['_MI_MYMODULE_RATING_NONE' => 0, '_MI_MYMODULE_RATING_5STARS' => 1, '_MI_MYMODULE_RATING_10STARS' => 2, '_MI_MYMODULE_RATING_LIKES' => 3, '_MI_MYMODULE_RATING_10NUM' => 4],
+	'options'     => ['\_MI_MYMODULE_RATING_NONE' => 0, '\_MI_MYMODULE_RATING_5STARS' => 1, '\_MI_MYMODULE_RATING_10STARS' => 2, '\_MI_MYMODULE_RATING_LIKES' => 3, '\_MI_MYMODULE_RATING_10NUM' => 4],
 ];
 // Keywords
 $modversion['config'][] = [
 	'name'        => 'keywords',
-	'title'       => '_MI_MYMODULE_KEYWORDS',
-	'description' => '_MI_MYMODULE_KEYWORDS_DESC',
+	'title'       => '\_MI_MYMODULE_KEYWORDS',
+	'description' => '\_MI_MYMODULE_KEYWORDS_DESC',
 	'formtype'    => 'textbox',
 	'valuetype'   => 'text',
 	'default'     => 'mymodule, categories, articles, testfields',
@@ -415,8 +415,8 @@ while ($i * 1048576 <= $maxSize) {
 // Uploads : maxsize of image
 $modversion['config'][] = [
 	'name'        => 'maxsize_image',
-	'title'       => '_MI_MYMODULE_MAXSIZE_IMAGE',
-	'description' => '_MI_MYMODULE_MAXSIZE_IMAGE_DESC',
+	'title'       => '\_MI_MYMODULE_MAXSIZE_IMAGE',
+	'description' => '\_MI_MYMODULE_MAXSIZE_IMAGE_DESC',
 	'formtype'    => 'select',
 	'valuetype'   => 'int',
 	'default'     => 3145728,
@@ -425,8 +425,8 @@ $modversion['config'][] = [
 // Uploads : mimetypes of image
 $modversion['config'][] = [
 	'name'        => 'mimetypes_image',
-	'title'       => '_MI_MYMODULE_MIMETYPES_IMAGE',
-	'description' => '_MI_MYMODULE_MIMETYPES_IMAGE_DESC',
+	'title'       => '\_MI_MYMODULE_MIMETYPES_IMAGE',
+	'description' => '\_MI_MYMODULE_MIMETYPES_IMAGE_DESC',
 	'formtype'    => 'select_multi',
 	'valuetype'   => 'array',
 	'default'     => ['image/gif', 'image/jpeg', 'image/png'],
@@ -434,16 +434,16 @@ $modversion['config'][] = [
 ];
 $modversion['config'][] = [
 	'name'        => 'maxwidth_image',
-	'title'       => '_MI_MYMODULE_MAXWIDTH_IMAGE',
-	'description' => '_MI_MYMODULE_MAXWIDTH_IMAGE_DESC',
+	'title'       => '\_MI_MYMODULE_MAXWIDTH_IMAGE',
+	'description' => '\_MI_MYMODULE_MAXWIDTH_IMAGE_DESC',
 	'formtype'    => 'textbox',
 	'valuetype'   => 'int',
 	'default'     => 800,
 ];
 $modversion['config'][] = [
 	'name'        => 'maxheight_image',
-	'title'       => '_MI_MYMODULE_MAXHEIGHT_IMAGE',
-	'description' => '_MI_MYMODULE_MAXHEIGHT_IMAGE_DESC',
+	'title'       => '\_MI_MYMODULE_MAXHEIGHT_IMAGE',
+	'description' => '\_MI_MYMODULE_MAXHEIGHT_IMAGE_DESC',
 	'formtype'    => 'textbox',
 	'valuetype'   => 'int',
 	'default'     => 800,
@@ -451,8 +451,8 @@ $modversion['config'][] = [
 // Uploads : maxsize of file
 $modversion['config'][] = [
 	'name'        => 'maxsize_file',
-	'title'       => '_MI_MYMODULE_MAXSIZE_FILE',
-	'description' => '_MI_MYMODULE_MAXSIZE_FILE_DESC',
+	'title'       => '\_MI_MYMODULE_MAXSIZE_FILE',
+	'description' => '\_MI_MYMODULE_MAXSIZE_FILE_DESC',
 	'formtype'    => 'select',
 	'valuetype'   => 'int',
 	'default'     => 3145728,
@@ -461,8 +461,8 @@ $modversion['config'][] = [
 // Uploads : mimetypes of file
 $modversion['config'][] = [
 	'name'        => 'mimetypes_file',
-	'title'       => '_MI_MYMODULE_MIMETYPES_FILE',
-	'description' => '_MI_MYMODULE_MIMETYPES_FILE_DESC',
+	'title'       => '\_MI_MYMODULE_MIMETYPES_FILE',
+	'description' => '\_MI_MYMODULE_MIMETYPES_FILE_DESC',
 	'formtype'    => 'select_multi',
 	'valuetype'   => 'array',
 	'default'     => ['application/pdf', 'application/zip', 'text/comma-separated-values', 'text/plain', 'image/gif', 'image/jpeg', 'image/png'],
@@ -471,8 +471,8 @@ $modversion['config'][] = [
 // Admin pager
 $modversion['config'][] = [
 	'name'        => 'adminpager',
-	'title'       => '_MI_MYMODULE_ADMIN_PAGER',
-	'description' => '_MI_MYMODULE_ADMIN_PAGER_DESC',
+	'title'       => '\_MI_MYMODULE_ADMIN_PAGER',
+	'description' => '\_MI_MYMODULE_ADMIN_PAGER_DESC',
 	'formtype'    => 'textbox',
 	'valuetype'   => 'int',
 	'default'     => 10,
@@ -480,8 +480,8 @@ $modversion['config'][] = [
 // User pager
 $modversion['config'][] = [
 	'name'        => 'userpager',
-	'title'       => '_MI_MYMODULE_USER_PAGER',
-	'description' => '_MI_MYMODULE_USER_PAGER_DESC',
+	'title'       => '\_MI_MYMODULE_USER_PAGER',
+	'description' => '\_MI_MYMODULE_USER_PAGER_DESC',
 	'formtype'    => 'textbox',
 	'valuetype'   => 'int',
 	'default'     => 10,
@@ -489,8 +489,8 @@ $modversion['config'][] = [
 // Use tag
 $modversion['config'][] = [
 	'name'        => 'usetag',
-	'title'       => '_MI_MYMODULE_USE_TAG',
-	'description' => '_MI_MYMODULE_USE_TAG_DESC',
+	'title'       => '\_MI_MYMODULE_USE_TAG',
+	'description' => '\_MI_MYMODULE_USE_TAG_DESC',
 	'formtype'    => 'yesno',
 	'valuetype'   => 'int',
 	'default'     => 0,
@@ -498,8 +498,8 @@ $modversion['config'][] = [
 // Number column
 $modversion['config'][] = [
 	'name'        => 'numb_col',
-	'title'       => '_MI_MYMODULE_NUMB_COL',
-	'description' => '_MI_MYMODULE_NUMB_COL_DESC',
+	'title'       => '\_MI_MYMODULE_NUMB_COL',
+	'description' => '\_MI_MYMODULE_NUMB_COL_DESC',
 	'formtype'    => 'select',
 	'valuetype'   => 'int',
 	'default'     => 1,
@@ -508,8 +508,8 @@ $modversion['config'][] = [
 // Divide by
 $modversion['config'][] = [
 	'name'        => 'divideby',
-	'title'       => '_MI_MYMODULE_DIVIDEBY',
-	'description' => '_MI_MYMODULE_DIVIDEBY_DESC',
+	'title'       => '\_MI_MYMODULE_DIVIDEBY',
+	'description' => '\_MI_MYMODULE_DIVIDEBY_DESC',
 	'formtype'    => 'select',
 	'valuetype'   => 'int',
 	'default'     => 1,
@@ -518,8 +518,8 @@ $modversion['config'][] = [
 // Table type
 $modversion['config'][] = [
 	'name'        => 'table_type',
-	'title'       => '_MI_MYMODULE_TABLE_TYPE',
-	'description' => '_MI_MYMODULE_DIVIDEBY_DESC',
+	'title'       => '\_MI_MYMODULE_TABLE_TYPE',
+	'description' => '\_MI_MYMODULE_DIVIDEBY_DESC',
 	'formtype'    => 'select',
 	'valuetype'   => 'int',
 	'default'     => 'bordered',
@@ -528,8 +528,8 @@ $modversion['config'][] = [
 // Panel by
 $modversion['config'][] = [
 	'name'        => 'panel_type',
-	'title'       => '_MI_MYMODULE_PANEL_TYPE',
-	'description' => '_MI_MYMODULE_PANEL_TYPE_DESC',
+	'title'       => '\_MI_MYMODULE_PANEL_TYPE',
+	'description' => '\_MI_MYMODULE_PANEL_TYPE_DESC',
 	'formtype'    => 'select',
 	'valuetype'   => 'text',
 	'default'     => 'default',
@@ -538,8 +538,8 @@ $modversion['config'][] = [
 // Paypal ID
 $modversion['config'][] = [
 	'name'        => 'donations',
-	'title'       => '_MI_MYMODULE_IDPAYPAL',
-	'description' => '_MI_MYMODULE_IDPAYPAL_DESC',
+	'title'       => '\_MI_MYMODULE_IDPAYPAL',
+	'description' => '\_MI_MYMODULE_IDPAYPAL_DESC',
 	'formtype'    => 'textbox',
 	'valuetype'   => 'textbox',
 	'default'     => 'XYZ123',
@@ -547,8 +547,8 @@ $modversion['config'][] = [
 // Show Breadcrumbs
 $modversion['config'][] = [
 	'name'        => 'show_breadcrumbs',
-	'title'       => '_MI_MYMODULE_SHOW_BREADCRUMBS',
-	'description' => '_MI_MYMODULE_SHOW_BREADCRUMBS_DESC',
+	'title'       => '\_MI_MYMODULE_SHOW_BREADCRUMBS',
+	'description' => '\_MI_MYMODULE_SHOW_BREADCRUMBS_DESC',
 	'formtype'    => 'yesno',
 	'valuetype'   => 'int',
 	'default'     => 1,
@@ -556,8 +556,8 @@ $modversion['config'][] = [
 // Advertise
 $modversion['config'][] = [
 	'name'        => 'advertise',
-	'title'       => '_MI_MYMODULE_ADVERTISE',
-	'description' => '_MI_MYMODULE_ADVERTISE_DESC',
+	'title'       => '\_MI_MYMODULE_ADVERTISE',
+	'description' => '\_MI_MYMODULE_ADVERTISE_DESC',
 	'formtype'    => 'textarea',
 	'valuetype'   => 'text',
 	'default'     => '',
@@ -565,8 +565,8 @@ $modversion['config'][] = [
 // Bookmarks
 $modversion['config'][] = [
 	'name'        => 'bookmarks',
-	'title'       => '_MI_MYMODULE_BOOKMARKS',
-	'description' => '_MI_MYMODULE_BOOKMARKS_DESC',
+	'title'       => '\_MI_MYMODULE_BOOKMARKS',
+	'description' => '\_MI_MYMODULE_BOOKMARKS_DESC',
 	'formtype'    => 'yesno',
 	'valuetype'   => 'int',
 	'default'     => 0,
@@ -583,8 +583,8 @@ $modversion['config'][] = [
 // Maintained by
 $modversion['config'][] = [
 	'name'        => 'maintainedby',
-	'title'       => '_MI_MYMODULE_MAINTAINEDBY',
-	'description' => '_MI_MYMODULE_MAINTAINEDBY_DESC',
+	'title'       => '\_MI_MYMODULE_MAINTAINEDBY',
+	'description' => '\_MI_MYMODULE_MAINTAINEDBY_DESC',
 	'formtype'    => 'textbox',
 	'valuetype'   => 'text',
 	'default'     => 'https://xoops.org/modules/newbb',
@@ -599,14 +599,14 @@ $modversion['notification'] = [
 // Global Notify
 $modversion['notification']['category'][] = [
 	'name'           => 'global',
-	'title'          => _MI_MYMODULE_NOTIFY_GLOBAL,
+	'title'          => \_MI_MYMODULE_NOTIFY_GLOBAL,
 	'description'    => '',
 	'subscribe_from' => ['index.php', 'articles.php', 'testfields.php'],
 ];
 // Article Notify
 $modversion['notification']['category'][] = [
 	'name'           => 'articles',
-	'title'          => _MI_MYMODULE_NOTIFY_ARTICLE,
+	'title'          => \_MI_MYMODULE_NOTIFY_ARTICLE,
 	'description'    => '',
 	'subscribe_from' => 'articles.php',
 	'item_name'      => 'art_id',
@@ -615,7 +615,7 @@ $modversion['notification']['category'][] = [
 // Testfield Notify
 $modversion['notification']['category'][] = [
 	'name'           => 'testfields',
-	'title'          => _MI_MYMODULE_NOTIFY_TESTFIELD,
+	'title'          => \_MI_MYMODULE_NOTIFY_TESTFIELD,
 	'description'    => '',
 	'subscribe_from' => 'testfields.php',
 	'item_name'      => 'tf_id',
@@ -627,66 +627,66 @@ $modversion['notification']['event'][] = [
 	'name'          => 'global_new',
 	'category'      => 'global',
 	'admin_only'    => 0,
-	'title'         => _MI_MYMODULE_NOTIFY_GLOBAL_NEW,
-	'caption'       => _MI_MYMODULE_NOTIFY_GLOBAL_NEW_CAPTION,
+	'title'         => \_MI_MYMODULE_NOTIFY_GLOBAL_NEW,
+	'caption'       => \_MI_MYMODULE_NOTIFY_GLOBAL_NEW_CAPTION,
 	'description'   => '',
 	'mail_template' => 'global_new_notify',
-	'mail_subject'  => _MI_MYMODULE_NOTIFY_GLOBAL_NEW_SUBJECT,
+	'mail_subject'  => \_MI_MYMODULE_NOTIFY_GLOBAL_NEW_SUBJECT,
 ];
 // GLOBAL_MODIFY Notify
 $modversion['notification']['event'][] = [
 	'name'          => 'global_modify',
 	'category'      => 'global',
 	'admin_only'    => 0,
-	'title'         => _MI_MYMODULE_NOTIFY_GLOBAL_MODIFY,
-	'caption'       => _MI_MYMODULE_NOTIFY_GLOBAL_MODIFY_CAPTION,
+	'title'         => \_MI_MYMODULE_NOTIFY_GLOBAL_MODIFY,
+	'caption'       => \_MI_MYMODULE_NOTIFY_GLOBAL_MODIFY_CAPTION,
 	'description'   => '',
 	'mail_template' => 'global_modify_notify',
-	'mail_subject'  => _MI_MYMODULE_NOTIFY_GLOBAL_MODIFY_SUBJECT,
+	'mail_subject'  => \_MI_MYMODULE_NOTIFY_GLOBAL_MODIFY_SUBJECT,
 ];
 // GLOBAL_DELETE Notify
 $modversion['notification']['event'][] = [
 	'name'          => 'global_delete',
 	'category'      => 'global',
 	'admin_only'    => 0,
-	'title'         => _MI_MYMODULE_NOTIFY_GLOBAL_DELETE,
-	'caption'       => _MI_MYMODULE_NOTIFY_GLOBAL_DELETE_CAPTION,
+	'title'         => \_MI_MYMODULE_NOTIFY_GLOBAL_DELETE,
+	'caption'       => \_MI_MYMODULE_NOTIFY_GLOBAL_DELETE_CAPTION,
 	'description'   => '',
 	'mail_template' => 'global_delete_notify',
-	'mail_subject'  => _MI_MYMODULE_NOTIFY_GLOBAL_DELETE_SUBJECT,
+	'mail_subject'  => \_MI_MYMODULE_NOTIFY_GLOBAL_DELETE_SUBJECT,
 ];
 // GLOBAL_APPROVE Notify
 $modversion['notification']['event'][] = [
 	'name'          => 'global_approve',
 	'category'      => 'global',
 	'admin_only'    => 1,
-	'title'         => _MI_MYMODULE_NOTIFY_GLOBAL_APPROVE,
-	'caption'       => _MI_MYMODULE_NOTIFY_GLOBAL_APPROVE_CAPTION,
+	'title'         => \_MI_MYMODULE_NOTIFY_GLOBAL_APPROVE,
+	'caption'       => \_MI_MYMODULE_NOTIFY_GLOBAL_APPROVE_CAPTION,
 	'description'   => '',
 	'mail_template' => 'global_approve_notify',
-	'mail_subject'  => _MI_MYMODULE_NOTIFY_GLOBAL_APPROVE_SUBJECT,
+	'mail_subject'  => \_MI_MYMODULE_NOTIFY_GLOBAL_APPROVE_SUBJECT,
 ];
 // GLOBAL_BROKEN Notify
 $modversion['notification']['event'][] = [
 	'name'          => 'global_broken',
 	'category'      => 'global',
 	'admin_only'    => 1,
-	'title'         => _MI_MYMODULE_NOTIFY_GLOBAL_BROKEN,
-	'caption'       => _MI_MYMODULE_NOTIFY_GLOBAL_BROKEN_CAPTION,
+	'title'         => \_MI_MYMODULE_NOTIFY_GLOBAL_BROKEN,
+	'caption'       => \_MI_MYMODULE_NOTIFY_GLOBAL_BROKEN_CAPTION,
 	'description'   => '',
 	'mail_template' => 'global_broken_notify',
-	'mail_subject'  => _MI_MYMODULE_NOTIFY_GLOBAL_BROKEN_SUBJECT,
+	'mail_subject'  => \_MI_MYMODULE_NOTIFY_GLOBAL_BROKEN_SUBJECT,
 ];
 // GLOBAL_COMMENT Notify
 $modversion['notification']['event'][] = [
 	'name'          => 'global_comment',
 	'category'      => 'global',
 	'admin_only'    => 0,
-	'title'         => _MI_MYMODULE_NOTIFY_GLOBAL_COMMENT,
-	'caption'       => _MI_MYMODULE_NOTIFY_GLOBAL_COMMENT_CAPTION,
+	'title'         => \_MI_MYMODULE_NOTIFY_GLOBAL_COMMENT,
+	'caption'       => \_MI_MYMODULE_NOTIFY_GLOBAL_COMMENT_CAPTION,
 	'description'   => '',
 	'mail_template' => 'global_comment_notify',
-	'mail_subject'  => _MI_MYMODULE_NOTIFY_GLOBAL_COMMENT_SUBJECT,
+	'mail_subject'  => \_MI_MYMODULE_NOTIFY_GLOBAL_COMMENT_SUBJECT,
 ];
 // Event notifications for items
 // ARTICLE_MODIFY Notify
@@ -694,86 +694,86 @@ $modversion['notification']['event'][] = [
 	'name'          => 'article_modify',
 	'category'      => 'articles',
 	'admin_only'    => 0,
-	'title'         => _MI_MYMODULE_NOTIFY_ARTICLE_MODIFY,
-	'caption'       => _MI_MYMODULE_NOTIFY_ARTICLE_MODIFY_CAPTION,
+	'title'         => \_MI_MYMODULE_NOTIFY_ARTICLE_MODIFY,
+	'caption'       => \_MI_MYMODULE_NOTIFY_ARTICLE_MODIFY_CAPTION,
 	'description'   => '',
 	'mail_template' => 'article_modify_notify',
-	'mail_subject'  => _MI_MYMODULE_NOTIFY_ARTICLE_MODIFY_SUBJECT,
+	'mail_subject'  => \_MI_MYMODULE_NOTIFY_ARTICLE_MODIFY_SUBJECT,
 ];
 // ARTICLE_DELETE Notify
 $modversion['notification']['event'][] = [
 	'name'          => 'article_delete',
 	'category'      => 'articles',
 	'admin_only'    => 0,
-	'title'         => _MI_MYMODULE_NOTIFY_ARTICLE_DELETE,
-	'caption'       => _MI_MYMODULE_NOTIFY_ARTICLE_DELETE_CAPTION,
+	'title'         => \_MI_MYMODULE_NOTIFY_ARTICLE_DELETE,
+	'caption'       => \_MI_MYMODULE_NOTIFY_ARTICLE_DELETE_CAPTION,
 	'description'   => '',
 	'mail_template' => 'article_delete_notify',
-	'mail_subject'  => _MI_MYMODULE_NOTIFY_ARTICLE_DELETE_SUBJECT,
+	'mail_subject'  => \_MI_MYMODULE_NOTIFY_ARTICLE_DELETE_SUBJECT,
 ];
 // ARTICLE_APPROVE Notify
 $modversion['notification']['event'][] = [
 	'name'          => 'article_approve',
 	'category'      => 'articles',
 	'admin_only'    => 0,
-	'title'         => _MI_MYMODULE_NOTIFY_ARTICLE_APPROVE,
-	'caption'       => _MI_MYMODULE_NOTIFY_ARTICLE_APPROVE_CAPTION,
+	'title'         => \_MI_MYMODULE_NOTIFY_ARTICLE_APPROVE,
+	'caption'       => \_MI_MYMODULE_NOTIFY_ARTICLE_APPROVE_CAPTION,
 	'description'   => '',
 	'mail_template' => 'article_approve_notify',
-	'mail_subject'  => _MI_MYMODULE_NOTIFY_ARTICLE_APPROVE_SUBJECT,
+	'mail_subject'  => \_MI_MYMODULE_NOTIFY_ARTICLE_APPROVE_SUBJECT,
 ];
 // ARTICLE_BROKEN Notify
 $modversion['notification']['event'][] = [
 	'name'          => 'article_broken',
 	'category'      => 'articles',
 	'admin_only'    => 0,
-	'title'         => _MI_MYMODULE_NOTIFY_ARTICLE_BROKEN,
-	'caption'       => _MI_MYMODULE_NOTIFY_ARTICLE_BROKEN_CAPTION,
+	'title'         => \_MI_MYMODULE_NOTIFY_ARTICLE_BROKEN,
+	'caption'       => \_MI_MYMODULE_NOTIFY_ARTICLE_BROKEN_CAPTION,
 	'description'   => '',
 	'mail_template' => 'article_broken_notify',
-	'mail_subject'  => _MI_MYMODULE_NOTIFY_ARTICLE_BROKEN_SUBJECT,
+	'mail_subject'  => \_MI_MYMODULE_NOTIFY_ARTICLE_BROKEN_SUBJECT,
 ];
 // TESTFIELD_MODIFY Notify
 $modversion['notification']['event'][] = [
 	'name'          => 'testfield_modify',
 	'category'      => 'testfields',
 	'admin_only'    => 0,
-	'title'         => _MI_MYMODULE_NOTIFY_TESTFIELD_MODIFY,
-	'caption'       => _MI_MYMODULE_NOTIFY_TESTFIELD_MODIFY_CAPTION,
+	'title'         => \_MI_MYMODULE_NOTIFY_TESTFIELD_MODIFY,
+	'caption'       => \_MI_MYMODULE_NOTIFY_TESTFIELD_MODIFY_CAPTION,
 	'description'   => '',
 	'mail_template' => 'testfield_modify_notify',
-	'mail_subject'  => _MI_MYMODULE_NOTIFY_TESTFIELD_MODIFY_SUBJECT,
+	'mail_subject'  => \_MI_MYMODULE_NOTIFY_TESTFIELD_MODIFY_SUBJECT,
 ];
 // TESTFIELD_DELETE Notify
 $modversion['notification']['event'][] = [
 	'name'          => 'testfield_delete',
 	'category'      => 'testfields',
 	'admin_only'    => 0,
-	'title'         => _MI_MYMODULE_NOTIFY_TESTFIELD_DELETE,
-	'caption'       => _MI_MYMODULE_NOTIFY_TESTFIELD_DELETE_CAPTION,
+	'title'         => \_MI_MYMODULE_NOTIFY_TESTFIELD_DELETE,
+	'caption'       => \_MI_MYMODULE_NOTIFY_TESTFIELD_DELETE_CAPTION,
 	'description'   => '',
 	'mail_template' => 'testfield_delete_notify',
-	'mail_subject'  => _MI_MYMODULE_NOTIFY_TESTFIELD_DELETE_SUBJECT,
+	'mail_subject'  => \_MI_MYMODULE_NOTIFY_TESTFIELD_DELETE_SUBJECT,
 ];
 // TESTFIELD_APPROVE Notify
 $modversion['notification']['event'][] = [
 	'name'          => 'testfield_approve',
 	'category'      => 'testfields',
 	'admin_only'    => 0,
-	'title'         => _MI_MYMODULE_NOTIFY_TESTFIELD_APPROVE,
-	'caption'       => _MI_MYMODULE_NOTIFY_TESTFIELD_APPROVE_CAPTION,
+	'title'         => \_MI_MYMODULE_NOTIFY_TESTFIELD_APPROVE,
+	'caption'       => \_MI_MYMODULE_NOTIFY_TESTFIELD_APPROVE_CAPTION,
 	'description'   => '',
 	'mail_template' => 'testfield_approve_notify',
-	'mail_subject'  => _MI_MYMODULE_NOTIFY_TESTFIELD_APPROVE_SUBJECT,
+	'mail_subject'  => \_MI_MYMODULE_NOTIFY_TESTFIELD_APPROVE_SUBJECT,
 ];
 // TESTFIELD_BROKEN Notify
 $modversion['notification']['event'][] = [
 	'name'          => 'testfield_broken',
 	'category'      => 'testfields',
 	'admin_only'    => 0,
-	'title'         => _MI_MYMODULE_NOTIFY_TESTFIELD_BROKEN,
-	'caption'       => _MI_MYMODULE_NOTIFY_TESTFIELD_BROKEN_CAPTION,
+	'title'         => \_MI_MYMODULE_NOTIFY_TESTFIELD_BROKEN,
+	'caption'       => \_MI_MYMODULE_NOTIFY_TESTFIELD_BROKEN_CAPTION,
 	'description'   => '',
 	'mail_template' => 'testfield_broken_notify',
-	'mail_subject'  => _MI_MYMODULE_NOTIFY_TESTFIELD_BROKEN_SUBJECT,
+	'mail_subject'  => \_MI_MYMODULE_NOTIFY_TESTFIELD_BROKEN_SUBJECT,
 ];

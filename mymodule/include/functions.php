@@ -15,12 +15,12 @@ declare(strict_types=1);
 /**
  * My Module module for xoops
  *
- * @copyright      2020 XOOPS Project (https://xoops.org)
+ * @copyright      2021 XOOPS Project (https://xoops.org)
  * @license        GPL 2.0 or later
  * @package        mymodule
  * @since          1.0
  * @min_xoops      2.5.9
- * @author         TDM XOOPS - Email:<info@email.com> - Website:<https://xoops.org>
+ * @author         TDM XOOPS - Email:<info@email.com> - Website:<http://xoops.org>
  */
 
 /**
@@ -59,7 +59,7 @@ function mymoduleGetMyItemIds($permtype, $dirname)
 	}
 	$moduleHandler = \xoops_getHandler('module');
 	$mymoduleModule = $moduleHandler->getByDirname($dirname);
-	$groups = \is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
+	$groups = \is_object($xoopsUser) ? $xoopsUser->getGroups() : \XOOPS_GROUP_ANONYMOUS;
 	$grouppermHandler = \xoops_getHandler('groupperm');
 	$itemIds = $grouppermHandler->getItemIds($permtype, $groups, $mymoduleModule->getVar('mid'));
 	return $itemIds;
@@ -167,7 +167,7 @@ function mymodule_RewriteUrl($module, $array, $type = 'content')
             }
             $rewrite_base = '/modules/';
             $page = 'page=' . $array['content_alias'];
-            return XOOPS_URL . $rewrite_base . $module . '/' . $type . '.php?' . $topic_name . 'id=' . $id . '&amp;' . $page . $comment;
+            return \XOOPS_URL . $rewrite_base . $module . '/' . $type . '.php?' . $topic_name . 'id=' . $id . '&amp;' . $page . $comment;
             break;
 
         case 'rewrite':
@@ -187,10 +187,10 @@ function mymodule_RewriteUrl($module, $array, $type = 'content')
                 $type = '';
             }
             if ('comment-edit/' === $type || 'comment-reply/' === $type || 'comment-delete/' === $type) {
-                return XOOPS_URL . $rewrite_base . $module_name . $type . $id . '/';
+                return \XOOPS_URL . $rewrite_base . $module_name . $type . $id . '/';
             }
 
-            return XOOPS_URL . $rewrite_base . $module_name . $type . $topic_name  . $id . $page . $rewrite_ext;
+            return \XOOPS_URL . $rewrite_base . $module_name . $type . $topic_name  . $id . $page . $rewrite_ext;
             break;
 
          case 'short':
@@ -209,10 +209,10 @@ function mymodule_RewriteUrl($module, $array, $type = 'content')
                 $type = '';
             }
             if ('comment-edit/' === $type || 'comment-reply/' === $type || 'comment-delete/' === $type) {
-                return XOOPS_URL . $rewrite_base . $module_name . $type . $id . '/';
+                return \XOOPS_URL . $rewrite_base . $module_name . $type . $id . '/';
             }
 
-            return XOOPS_URL . $rewrite_base . $module_name . $type . $topic_name . $page . $rewrite_ext;
+            return \XOOPS_URL . $rewrite_base . $module_name . $type . $topic_name . $page . $rewrite_ext;
             break;
     }
     return null;
@@ -234,9 +234,9 @@ function mymodule_Filter($url, $type = '') {
     $url = \strip_tags($url);
     $url .= \preg_replace('`\[.*\]`U', '', $url);
     $url .= \preg_replace('`&(amp;)?#?[a-z0-9]+;`i', '-', $url);
-    $url .= htmlentities($url, ENT_COMPAT, 'utf-8');
+    $url .= \htmlentities($url, ENT_COMPAT, 'utf-8');
     $url .= \preg_replace('`&([a-z])(acute|uml|circ|grave|ring|cedil|slash|tilde|caron|lig);`i', "\1", $url);
     $url .= \preg_replace([$regular_expression, '`[-]+`'], '-', $url);
-    $url = ('' == $url) ? $type : strtolower(rim($url, '-'));
+    $url = ('' == $url) ? $type : \strtolower(\trim($url, '-'));
     return $url;
 }
